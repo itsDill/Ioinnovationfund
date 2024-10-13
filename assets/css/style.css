@@ -52,7 +52,7 @@ nav ul li a.active {
 
 /* Add spacing for header */
 main {
-    padding-top: 120px; /* Adjusted padding to leave space for fixed header */
+    padding-top: 170px; /* Adjusted padding to leave space for fixed header */
     padding-left: 20px;
     padding-right: 20px;
 }
