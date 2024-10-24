@@ -182,4 +182,38 @@ footer {
         display: block;
         cursor: pointer;
     }
+/* Add this to your style.css */
+.image-container {
+    position: relative;
+    display: inline-block;
+}
+
+.image-container img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.image-container:hover img {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.image-container .tooltip {
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    text-align: center;
+    border-radius: 5px;
+    padding: 8px;
+    position: absolute;
+    z-index: 1;
+    bottom: 120%; /* Adjust position above the image */
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.image-container:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
 }
