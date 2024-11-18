@@ -5,6 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Basic styling for the sales data table */
+        .sales-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .sales-table th, .sales-table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        .sales-table th {
+            background-color: #f4f4f4;
+        }
+        .sales-table tr:hover {
+            background-color: #f1f1f1;
+        }
+        /* Button styling */
+        #logoutButton {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        #logoutButton:hover {
+            background-color: #ff4444;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -12,18 +43,81 @@
     </header>
     <main>
         <p>Only logged-in users can see this content.</p>
+
+        <!-- Sales Data Section -->
+        <section id="affiliateSales" style="display: none;">
+            <h2>Affiliate Sales Data</h2>
+            <table class="sales-table">
+                <thead>
+                    <tr>
+                        <th>Affiliate ID</th>
+                        <th>Product Name</th>
+                        <th>Sales Amount</th>
+                        <th>Commission Earned</th>
+                        <th>Sale Date</th>
+                    </tr>
+                </thead>
+                <tbody id="salesData">
+                    <!-- Sales data will be dynamically loaded here -->
+                </tbody>
+            </table>
+        </section>
+
         <button id="logoutButton">Logout</button>
     </main>
+
     <script>
         // Check if the user is logged in
         if (!localStorage.getItem('loggedIn')) {
-            window.location.href = 'login.html';
+            window.location.href = 'login.html'; // Redirect if not logged in
+        } else {
+            // Show the affiliate sales section if logged in
+            document.getElementById("affiliateSales").style.display = "block";
         }
+
+        // Sample Affiliate Sales Data
+        const affiliateSales = [
+            {
+                affiliateId: "AFF123",
+                productName: "Product A",
+                salesAmount: "$1000",
+                commissionEarned: "$100",
+                saleDate: "2024-11-01"
+            },
+            {
+                affiliateId: "AFF124",
+                productName: "Product B",
+                salesAmount: "$1500",
+                commissionEarned: "$150",
+                saleDate: "2024-11-05"
+            },
+            {
+                affiliateId: "AFF125",
+                productName: "Product C",
+                salesAmount: "$2000",
+                commissionEarned: "$200",
+                saleDate: "2024-11-07"
+            }
+        ];
+
+        // Dynamically Add Affiliate Sales Data to the Table
+        const salesDataContainer = document.getElementById("salesData");
+        affiliateSales.forEach(sale => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${sale.affiliateId}</td>
+                <td>${sale.productName}</td>
+                <td>${sale.salesAmount}</td>
+                <td>${sale.commissionEarned}</td>
+                <td>${sale.saleDate}</td>
+            `;
+            salesDataContainer.appendChild(row);
+        });
 
         // Logout functionality
         document.getElementById('logoutButton').addEventListener('click', () => {
             localStorage.removeItem('loggedIn');
-            window.location.href = 'login.html';
+            window.location.href = 'login.html'; // Redirect to login page after logout
         });
     </script>
 </body>
