@@ -12,38 +12,85 @@ body {
     line-height: 1.6;
 }
 
-/* Header Styling */
 header {
+    position: fixed; /* Keep the header fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensure the header spans the full width */
+    height: auto; /* Adjust height dynamically */
+    padding: 10px 20px; /* Reduce padding */
+    background-color: #f8f8f8; /* Light background */
+    z-index: 1000; /* Keep it above other elements */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
-    background-color: #1f1f1f;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
 }
 
-.logo img {
-    width: 150px;
+header .logo img {
+    max-height: 50px; /* Adjust logo height */
+    width: auto; /* Maintain aspect ratio */
 }
 
-nav ul {
-    list-style: none;
+header nav ul {
     display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
-nav ul li {
-    margin-left: 20px;
+header nav ul li {
+    margin: 0 10px;
 }
 
-nav ul li a {
-    color: #ffffff;
+header nav ul li a {
+    font-size: 16px;
+    padding: 5px 10px;
     text-decoration: none;
-    font-weight: 500;
+    color: #333; /* Default text color */
     transition: color 0.3s ease;
 }
+
+header nav ul li a:hover,
+header nav ul li a.active {
+    color: #ff6b6b; /* Highlight on hover/active */
+}
+
+/* Toggle menu button for mobile */
+.menu-toggle {
+    display: none; /* Hide by default */
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        position: absolute;
+        top: 70px; /* Position below header */
+        right: 20px;
+        background-color: #1f1f1f;
+        padding: 10px;
+        border-radius: 5px;
+        display: none; /* Hidden by default */
+    }
+
+    nav ul.active {
+        display: flex; /* Show when toggled */
+    }
+
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    .menu-toggle {
+        display: block; /* Show toggle on mobile */
+    }
+}
+
+
 
 nav ul li a:hover,
 nav ul li a.active {
@@ -216,4 +263,9 @@ footer {
 .image-container:hover .tooltip {
     visibility: visible;
     opacity: 1;
+}
+main {
+    padding-top: 80px; /* Adjust this based on the height of the header */
+    padding-left: 20px;
+    padding-right: 20px;
 }
