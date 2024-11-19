@@ -1,4 +1,6 @@
+const questionsAndAnswers =
 {
+
     "greetings": {
         "questions": ["hello", "heyy", "hi", "hey", "hiya", "hey you", "hii", "good morning", "good afternoon", "good evening", "greetings"],
         "responses": [
@@ -125,21 +127,5 @@
             {"type": "text", "content": "hmm, im not sure"},
             {"type": "text", "content": "im busy"}
         ]
-    },
-    "Pictures": {
-        "questions": ["can you send me a pic", "please send me a pic"],
-        "responses": [
-            {"type": "text", "content": "sure, what do you want to see?"},
-            {"type": "text", "content": "can we do it later?"},
-            {"type": "text", "content": "hmm, im not sure... what about just my feet?"},
-            {"type": "text", "content": "im busy"}
-        ]
-    },
-    "picture1": {
-        "questions": ["send a pic", "pic", "send a picture"],
-        "responses": [
-            {"type": "image", "content": "/Users/dillchalisas/Desktop/Dill/Coding/Chat bot/GSMHzTKbEAAufjJ.jpeg"},
-            {"type": "image", "content": "/Users/dillchalisas/Desktop/Dill/Coding/Chat bot/GYJnvIUasAEezDk.jpeg"}
-        ]
-    }
+
 }

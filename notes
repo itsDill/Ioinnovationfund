@@ -1,0 +1,201 @@
+<script>
+
+
+        // Check if the user is logged in
+        if (!localStorage.getItem('loggedIn')) {
+            window.location.href = 'login.html'; // Redirect if not logged in
+        } else {
+            document.getElementById("affiliateSales").style.display = "block";
+        }
+
+        // Populate sales data
+        const affiliateSales = [
+            { affiliateId: "AFF123", productName: "Product A", salesAmount: "$1000", commissionEarned: "$100", saleDate: "2024-11-01" },
+            { affiliateId: "AFF124", productName: "Product B", salesAmount: "$1500", commissionEarned: "$150", saleDate: "2024-11-05" },
+            { affiliateId: "AFF125", productName: "Product C", salesAmount: "$2000", commissionEarned: "$200", saleDate: "2024-11-07" }
+        ];
+        const salesDataContainer = document.getElementById("salesData");
+        affiliateSales.forEach(sale => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td>${sale.affiliateId}</td>
+                <td>${sale.productName}</td>
+                <td>${sale.salesAmount}</td>
+                <td>${sale.commissionEarned}</td>
+                <td>${sale.saleDate}</td>
+            `;
+            salesDataContainer.appendChild(row);
+        });
+
+        // Logout button
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            localStorage.removeItem('loggedIn');
+            window.location.href = 'login.html';
+        });
+
+        // Chatbot functionality
+        const chatMessages = document.getElementById('chatbot-messages');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessageButton = document.getElementById('sendMessage');
+
+        function appendMessage(message, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.className = 'chat-message ' + (sender === 'user' ? 'user-message' : 'bot-message');
+
+            // Create avatar image
+            const avatarImg = document.createElement('img');
+            avatarImg.src = sender === 'user' ? 'path/to/user-avatar.jpg' : 'path/to/bot-avatar.jpg';
+
+            const messageText = document.createElement('div');
+            messageText.className = 'chat-text';
+            messageText.innerText = message;
+
+            messageElement.appendChild(avatarImg);
+            messageElement.appendChild(messageText);
+            chatMessages.appendChild(messageElement);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+        }
+
+        function handleUserMessage() {
+            const userMessage = chatInput.value.trim();
+            if (userMessage) {
+                appendMessage(userMessage, 'user'); // Display user message
+                chatInput.value = ''; // Clear input
+
+                // Simulated bot response
+                setTimeout(() => {
+                    appendMessage("I'm sorry, I don't have an answer for that right now.", 'bot');
+                }, 500);
+            }
+        }
+
+        sendMessageButton.addEventListener('click', handleUserMessage);
+        chatInput.addEventListener('keypress', event => {
+            if (event.key === 'Enter') {
+                handleUserMessage();
+            }
+        });
+
+        // Mock login check
+        let isLoggedIn = true; // Change this to `false` to simulate logged-out state
+        if (isLoggedIn) {
+            document.getElementById('affiliateSales').style.display = "block";
+        }
+
+        // Handle message sending
+        function addMessage(content, isUser = true) {
+            const messageDiv = document.createElement("div");
+            messageDiv.classList.add("chat-message", isUser ? "user-message" : "bot-message");
+
+            const avatarImg = document.createElement("img");
+            avatarImg.src = isUser
+                ? "path/to/user-avatar.jpg" // Replace with actual path
+                : "path/to/bot-avatar.jpg"; // Replace with actual path
+
+            const messageText = document.createElement("div");
+            messageText.yesclassList.add("chat-text");
+            messageText.textContent = content;
+
+            messageDiv.appendChild(avatarImg);
+            messageDiv.appendChild(messageText);
+            chatMessages.appendChild(messageDiv);
+
+            // Auto-scroll to the bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Send message on button click
+        sendMessageButton.addEventListener("click", () => {
+            const userMessage = chatInput.value.trim();
+            if (userMessage) {
+                addMessage(userMessage, true);
+                chatInput.value = "";
+                botResponse(userMessage);
+            }
+        });
+
+        // Simulate bot response
+        function botResponse(userMessage) {
+            setTimeout(() => {
+                addMessage("Bot response to: " + userMessage, false);
+            }, 1000); // Simulate delay
+        }
+
+        // Logout button functionality
+        document.getElementById('logoutButton').addEventListener('click', () => {
+            isLoggedIn = false;
+            document.getElementById('affiliateSales').style.display = "none";
+            alert("Logged out successfully!");
+        });
+    </script>
+
+
+
+
+
+    <script>
+    const chatMessages = document.getElementById('chatbot-messages');
+    const chatInput = document.getElementById('chatInput');
+    const sendMessageButton = document.getElementById('sendMessage');
+
+    const botData = {
+        "greetings": {
+            "questions": ["hello", "heyy", "hi", "hey", "hiya", "hey you", "hii", "good morning", "good afternoon", "good evening", "greetings"],
+            "responses": [
+                {"type": "text", "content": "Hi there!"},
+                {"type": "text", "content": "Hello! How can I assist you today?"}
+            ]
+        },
+        "how_are_you": {
+            "questions": ["how are you", "how are you doing", "how's it going", "how have you been", "how's life", "what's up", "how's everything"],
+            "responses": [
+                {"type": "text", "content": "I'm just a program, but I'm here to help! How about you?"}
+            ]
+        },
+        // Add more intents and responses here...
+    };
+
+    function appendMessage(message, sender) {
+        const messageElement = document.createElement('div');
+        messageElement.className = 'chat-message ' + (sender === 'user' ? 'user-message' : 'bot-message');
+
+        const messageText = document.createElement('div');
+        messageText.className = 'chat-text';
+        messageText.innerText = message;
+
+        messageElement.appendChild(messageText);
+        chatMessages.appendChild(messageElement);
+        chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to the bottom
+    }
+
+    function getBotResponse(userMessage) {
+        for (const intent in botData) {
+            const { questions, responses } = botData[intent];
+            if (questions.includes(userMessage.toLowerCase())) {
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                return randomResponse.content;
+            }
+        }
+        return "I'm sorry, I don't understand that.";
+    }
+
+    function handleUserMessage() {
+        const userMessage = chatInput.value.trim();
+        if (userMessage) {
+            appendMessage(userMessage, 'user'); // Display user message
+            chatInput.value = ''; // Clear input
+
+            const botResponse = getBotResponse(userMessage);
+            setTimeout(() => {
+                appendMessage(botResponse, 'bot'); // Display bot response
+            }, 500);
+        }
+    }
+
+    sendMessageButton.addEventListener('click', handleUserMessage);
+    chatInput.addEventListener('keypress', event => {
+        if (event.key === 'Enter') {
+            handleUserMessage();
+        }
+    });
+</script>
