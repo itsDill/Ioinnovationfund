@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trading Dashboard</title>
+
+
     <style>
         body {
             font-family: Arial, sans-serif;
             padding: 20px;
-            background-color: #f9f9f9;
+            background-color: #000000;
             color: #333;
         }
 
@@ -53,6 +55,11 @@
             align-items: center;
             color: white;
             border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .calendar-grid div:hover {
+            opacity: 0.8;
         }
 
         .profit {
@@ -73,19 +80,73 @@
             font-size: 14px;
             color: #333;
         }
+
+        .tooltip {
+            position: absolute;
+            background: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            pointer-events: none;
+            display: none;
+        }
+        header {
+    position: fixed; /* Keep the header fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensure the header spans the full width */
+    height: auto; /* Adjust height dynamically */
+    padding: 10px 20px; /* Reduce padding */
+    background-color: #f8f8f8; /* Light background */
+    z-index: 1000; /* Keep it above other elements */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+header .logo img {
+    max-height: 50px; /* Adjust logo height */
+    width: auto; /* Maintain aspect ratio */
+}
+
+header nav ul {
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    font-size: 16px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333; /* Default text color */
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active {
+    color: #ff6b6b; /* Highlight on hover/active */
+}
+
+/* Toggle menu button for mobile */
+.menu-toggle {
+    display: none; /* Hide by default */
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
     </style>
 
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IO Innovation Fund - Home</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Google Fonts (Customize as needed) -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-</head>
 
+</head>
 <body>
     <header>
         <div class="logo">
@@ -93,67 +154,563 @@
         </div>
         <nav>
             <ul>
-                <li><a href="index.html" class="active">Trading Dashboard</a></li>
-                <li><a href="Affiliate.html">Affiliates</a></li>
+                <li><a href="dashboard.html" class="active">Home</a></li>
+                <li><a href="Affiliate.html">Affiliate</a></li>
                 <li><a href="analytics.html">Analytics</a></li>
-                <li><a href="index.html">log out</a></li>
+                <li><a href="index.html">Log out</a></li>
             </ul>
         </nav>
     </header>
-
-</head>
 <body>
+    <h1>.          .          .          ./h1>
     <h1>Trading Dashboard</h1>
     <div class="calendar"></div>
+    <div class="tooltip" id="tooltip"></div>
 
     <script>
         const data = [
             {
-                month: "November 2024",
+                month: "November",
                 year: 2024,
                 dailyData: [
-                    { day: 1, total: 10000, color: "neutral" },
-                    { day: 2, total: 10000, color: "neutral" },
-                    { day: 3, total: 10000, color: "neutral" },
-                    { day: 4, total: 10000, color: "neutral" },
-                    { day: 5, total: 10000, color: "neutral" },
-                    { day: 6, total: 10000, color: "neutral" },
-                    { day: 7, total: 10000, color: "neutral" },
-                    { day: 8, total: 10000, color: "neutral" },
-                    { day: 9, total: 10000, color: "neutral" },
-                    { day: 10, total: 10000, color: "neutral" },
-                    { day: 11, total: 10000, color: "neutral" },
-                    { day: 12, total: 10010, color: "profit" },
-                    { day: 13, total: 10051, color: "profit" },
-                    { day: 14, total: 10074, color: "profit" },
-                    { day: 15, total: 10082, color: "profit" },
-                    { day: 16, total: 10082, color: "neutral" },
-                    { day: 17, total: 10082, color: "neutral" },
-                    { day: 18, total: 10106, color: "profit" },
-                    { day: 19, total: 10093, color: "loss" },
-                    { day: 20, total: 10131, color: "profit" },
-                    { day: 21, total: 10150, color: "profit" },
-                    { day: 22, total: 10175, color: "profit" },
-                    { day: 23, total: 10175, color: "neutral" },
-                    { day: 24, total: 10175, color: "neutral" },
-                    { day: 25, total: 10212, color: "profit" },
-                    { day: 26, total: 10000, color: "neutral" },
-                    { day: 27, total: 10000, color: "neutral" },
-                    { day: 28, total: 10000, color: "neutral" },
-                    { day: 29, total: 10000, color: "neutral" },
-                    { day: 30, total: 10000, color: "neutral" },
-                    { day: 31, total: 10000, color: "neutral" },
-
-                    // Add more days here
-                ],
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10010 },
+                    { day: 13, total: 10051 },
+                    { day: 14, total: 10074 },
+                    { day: 15, total: 10082 },
+                    { day: 16, total: 10082 },
+                    { day: 17, total: 10082 },
+                    { day: 18, total: 10106 },
+                    { day: 19, total: 10093 },
+                    { day: 20, total: 10131 },
+                    { day: 21, total: 10150 },
+                    { day: 22, total: 10175 },
+                    { day: 23, total: 10175 },
+                    { day: 24, total: 10175 },
+                    { day: 25, total: 10212 },
+                    { day: 26, total: 10212 },
+                    { day: 27, total: 10212 },
+                    { day: 28, total: 10212 },
+                    { day: 29, total: 10212 },
+                    { day: 30, total: 10212 },
+                    { day: 31, total: 10212 },
+                ]
             },
-
-            // Add more months here
+            {
+                month: "December",
+                year: 2024,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "January",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "February",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "March",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "April",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "May",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "June",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "July",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "August",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "September",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "October",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "November",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "December",
+                year: 2025,
+                dailyData: [
+                    { day: 1, total: 10000 },
+                    { day: 2, total: 10000 },
+                    { day: 3, total: 10000 },
+                    { day: 4, total: 10000 },
+                    { day: 5, total: 10000 },
+                    { day: 6, total: 10000 },
+                    { day: 7, total: 10000 },
+                    { day: 8, total: 10000 },
+                    { day: 9, total: 10000 },
+                    { day: 10, total: 10000 },
+                    { day: 11, total: 10000 },
+                    { day: 12, total: 10000 },
+                    { day: 13, total: 10000 },
+                    { day: 14, total: 10000 },
+                    { day: 15, total: 10000 },
+                    { day: 16, total: 10000 },
+                    { day: 17, total: 10000 },
+                    { day: 18, total: 10000 },
+                    { day: 19, total: 10000 },
+                    { day: 20, total: 10000 },
+                    { day: 21, total: 10000 },
+                    { day: 22, total: 10000 },
+                    { day: 23, total: 10000 },
+                    { day: 24, total: 10000 },
+                    { day: 25, total: 10000 },
+                    { day: 26, total: 10000 },
+                    { day: 27, total: 10000 },
+                    { day: 28, total: 10000 },
+                    { day: 29, total: 10000 },
+                    { day: 30, total: 10000 },
+                    { day: 31, total: 10000 },
+                ]
+            },
+            {
+                month: "Overview",
+                year: 2025,
+                dailyData: [
+                    { Jan: 1, total: 10000 },
+                    { Feb: 2, total: 10000 },
+                    { Mar: 3, total: 10000 },
+                    { Apr: 4, total: 10000 },
+                    { May: 5, total: 10000 },
+                    { Jun: 6, total: 10000 },
+                    { Jul: 7, total: 10000 },
+                    { Aug: 8, total: 10000 },
+                    { Sep: 9, total: 10000 },
+                    { Oct: 10, total: 10000 },
+                    { Nov: 11, total: 10000 },
+                    { Dec: 12, total: 10000 },
+                ]
+            },
+            // Add more months up to December 2025 here
         ];
 
         const calendarDiv = document.querySelector('.calendar');
+        const tooltip = document.getElementById('tooltip');
 
-        // Generate calendars for each month
         data.forEach(({ month, year, dailyData }) => {
             const monthDiv = document.createElement('div');
             monthDiv.classList.add('month');
@@ -164,58 +721,47 @@
             const grid = monthDiv.querySelector('.calendar-grid');
             const summary = monthDiv.querySelector('.summary');
 
-            // Fill calendar with data
-            dailyData.forEach(({ day, total, color }, index) => {
+            let dailyReturns = [];
+            let weeklyStart = dailyData[0]?.total || 0;
+            let monthlyStart = dailyData[0]?.total || 0;
+
+            dailyData.forEach(({ day, total }, index) => {
                 const dayDiv = document.createElement('div');
                 dayDiv.textContent = day;
-                dayDiv.classList.add(color);
+                const prevTotal = index > 0 ? dailyData[index - 1].total : total;
+                const change = total - prevTotal;
+                const changePercent = prevTotal > 0 ? ((change / prevTotal) * 100).toFixed(2) : 0;
+
+                dailyReturns.push(changePercent);
+                dayDiv.classList.add(change > 0 ? 'profit' : change < 0 ? 'loss' : 'neutral');
                 dayDiv.dataset.total = total;
-                dayDiv.title = `Day ${day}: $${total}`;
+                dayDiv.dataset.change = change.toFixed(2);
+                dayDiv.dataset.percent = changePercent;
+
+                dayDiv.addEventListener('mouseover', (e) => {
+                    tooltip.style.display = 'block';
+                    tooltip.textContent = `Day ${day}: $${total} (${change >= 0 ? '+' : ''}${change} / ${changePercent}%)`;
+                    tooltip.style.top = `${e.clientY + 10}px`;
+                    tooltip.style.left = `${e.clientX + 10}px`;
+                });
+
+                dayDiv.addEventListener('mouseout', () => {
+                    tooltip.style.display = 'none';
+                });
+
                 grid.appendChild(dayDiv);
             });
 
-            // Calculate daily, weekly, and monthly returns
-            const { dailyReturns, weeklyReturn, monthlyReturn } = calculateReturns(dailyData);
+            const weeklyReturn = ((dailyData[dailyData.length - 1].total - weeklyStart) / weeklyStart) * 100;
+            const monthlyReturn = ((dailyData[dailyData.length - 1].total - monthlyStart) / monthlyStart) * 100;
 
-            // Display summary
             summary.innerHTML = `
-                Daily Returns: ${dailyReturns.join(', ')}%<br>
                 Weekly Return: ${weeklyReturn.toFixed(2)}%<br>
                 Monthly Return: ${monthlyReturn.toFixed(2)}%
             `;
 
             calendarDiv.appendChild(monthDiv);
         });
-
-        function calculateReturns(dailyData) {
-            const dailyReturns = [];
-            let weeklyStart = dailyData[0]?.total || 0;
-            let monthlyStart = dailyData[0]?.total || 0;
-            let weeklyEnd = weeklyStart;
-            let monthlyEnd = monthlyStart;
-
-            dailyData.forEach((entry, index) => {
-                if (index > 0) {
-                    const prevTotal = dailyData[index - 1].total;
-                    const returnPercent = ((entry.total - prevTotal) / prevTotal) * 100;
-                    dailyReturns.push(returnPercent.toFixed(2));
-                }
-                weeklyEnd = entry.total;
-                monthlyEnd = entry.total;
-
-                // Reset weekly tracking every 7 days
-                if ((index + 1) % 7 === 0) {
-                    weeklyStart = entry.total;
-                }
-            });
-
-            const weeklyReturn =
-                weeklyStart > 0 ? ((weeklyEnd - weeklyStart) / weeklyStart) * 100 : 0;
-            const monthlyReturn =
-                monthlyStart > 0 ? ((monthlyEnd - monthlyStart) / monthlyStart) * 100 : 0;
-
-            return { dailyReturns, weeklyReturn, monthlyReturn };
-        }
     </script>
 </body>
 </html>

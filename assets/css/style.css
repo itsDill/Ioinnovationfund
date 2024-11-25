@@ -19,7 +19,7 @@ header {
     width: 100%; /* Ensure the header spans the full width */
     height: auto; /* Adjust height dynamically */
     padding: 10px 20px; /* Reduce padding */
-    background-color: #f8f8f8; /* Light background */
+    background-color: #1D3956; /* Light background */
     z-index: 1000; /* Keep it above other elements */
     display: flex;
     justify-content: space-between;
@@ -48,7 +48,7 @@ header nav ul li a {
     font-size: 16px;
     padding: 5px 10px;
     text-decoration: none;
-    color: #333; /* Default text color */
+    color: #FFFFFF; /* Default text color */
     transition: color 0.3s ease;
 }
 

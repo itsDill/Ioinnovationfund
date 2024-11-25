@@ -3,12 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IO Innovation Fund - Home</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Google Fonts (Customize as needed) -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-</head>
+    <title>Analytics Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #000000;
+            color: #333;
+        }
 
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .dashboard {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .chart-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container h3 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        canvas {
+            max-width: 100%;
+        }
+        header {
+    position: fixed; /* Keep the header fixed at the top */
+    top: 0;
+    left: 0;
+    width: 100%; /* Ensure the header spans the full width */
+    height: auto; /* Adjust height dynamically */
+    padding: 10px 20px; /* Reduce padding */
+    background-color: #f8f8f8; /* Light background */
+    z-index: 1000; /* Keep it above other elements */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow */
+}
+
+header .logo img {
+    max-height: 50px; /* Adjust logo height */
+    width: auto; /* Maintain aspect ratio */
+}
+
+header nav ul {
+    display: flex;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+header nav ul li {
+    margin: 0 10px;
+}
+
+header nav ul li a {
+    font-size: 16px;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333; /* Default text color */
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active {
+    color: #ff6b6b; /* Highlight on hover/active */
+}
+
+/* Toggle menu button for mobile */
+.menu-toggle {
+    display: none; /* Hide by default */
+    font-size: 24px;
+    cursor: pointer;
+    color: #333;
+}
+    </style>
+</head>
 <body>
     <header>
         <div class="logo">
@@ -16,10 +105,174 @@
         </div>
         <nav>
             <ul>
-                <li><a href="dashboard.html">Trading Dashboard</a></li>
-                <li><a href="Affiliate.html">Affiliates</a></li>
-                <li><a href="analytics.html">Analytics</a></li>
-                <li><a href="index.html">log out</a></li>
+                <li><a href="dashboard.html">Home</a></li>
+                <li><a href="Affiliate.html">Affiliate</a></li>
+                <li><a href="analytics.html" class="active">Analytics</a></li>
+                <li><a href="index.html">Log out</a></li>
             </ul>
         </nav>
     </header>
+<body>
+
+    <h1>Analytics Dashboard</h1>
+
+    <div class="dashboard">
+        <!-- Trading Analytics -->
+        <div class="chart-container">
+            <h3>Profit/Loss Over Time</h3>
+            <canvas id="tradingPerformanceChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h3>Risk-Reward Ratio Distribution</h3>
+            <canvas id="riskRewardChart"></canvas>
+        </div>
+
+        <!-- Affiliate Analytics -->
+        <div class="chart-container">
+            <h3>Clicks vs Earnings</h3>
+            <canvas id="clicksEarningsChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h3>Affiliate Goal Progress</h3>
+            <canvas id="affiliateProgressChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Mock Data
+        const tradingData = {
+            labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5'],
+            profits: [200, -100, 300, 150, 400],
+            riskRewardRatios: [1.5, 0.8, 2.0, 1.2, 1.8]
+        };
+
+        const affiliateData = {
+            affiliates: ['Exness', 'FundedNext', 'Redbubble'],
+            clicks: [100, 5, 50],
+            earnings: [0, 0, 0],
+            clicksGoal: [1000, 800, 600],
+            earningsGoal: [500, 400, 300]
+        };
+
+        // Trading Performance Chart
+        const tradingPerformanceChart = new Chart(
+            document.getElementById('tradingPerformanceChart'),
+            {
+                type: 'line',
+                data: {
+                    labels: tradingData.labels,
+                    datasets: [
+                        {
+                            label: 'Profit/Loss ($)',
+                            data: tradingData.profits,
+                            borderColor: '#27ae60',
+                            backgroundColor: 'rgba(39, 174, 96, 0.2)',
+                            fill: true,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            }
+        );
+
+        // Risk-Reward Ratio Distribution Chart
+        const riskRewardChart = new Chart(
+            document.getElementById('riskRewardChart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: tradingData.labels,
+                    datasets: [
+                        {
+                            label: 'Risk-Reward Ratio',
+                            data: tradingData.riskRewardRatios,
+                            backgroundColor: '#3498db',
+                            borderColor: '#2980b9',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            }
+        );
+
+        // Clicks vs Earnings Chart
+        const clicksEarningsChart = new Chart(
+            document.getElementById('clicksEarningsChart'),
+            {
+                type: 'bar',
+                data: {
+                    labels: affiliateData.affiliates,
+                    datasets: [
+                        {
+                            label: 'Clicks',
+                            data: affiliateData.clicks,
+                            backgroundColor: 'rgba(52, 152, 219, 0.5)',
+                            borderColor: '#3498db',
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Earnings ($)',
+                            data: affiliateData.earnings,
+                            backgroundColor: 'rgba(39, 174, 96, 0.5)',
+                            borderColor: '#27ae60',
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true }
+                    },
+                    scales: {
+                        y: { beginAtZero: true }
+                    }
+                }
+            }
+        );
+
+        // Affiliate Goal Progress Chart
+        const affiliateProgressChart = new Chart(
+            document.getElementById('affiliateProgressChart'),
+            {
+                type: 'doughnut',
+                data: {
+                    labels: affiliateData.affiliates,
+                    datasets: [
+                        {
+                            label: 'Progress (%)',
+                            data: affiliateData.affiliates.map((_, i) =>
+                                Math.min((affiliateData.clicks[i] / affiliateData.clicksGoal[i]) * 100, 100)
+                            ),
+                            backgroundColor: ['#27ae60', '#3498db', '#e67e22']
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: { display: true }
+                    }
+                }
+            }
+        );
+    </script>
+
+</body>
+</html>
