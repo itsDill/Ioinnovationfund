@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enhanced Trading Calendar</title>
+    <title>Trading Dashboard</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@
             border: 1px solid #ccc;
             padding: 10px;
             background-color: #ffffff;
-            width: 22%;
+            width: 30%;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
@@ -51,132 +51,143 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
-            background-color: #ecf0f1;
-            border: 1px solid #ddd;
+            color: white;
             border-radius: 4px;
-            position: relative;
-        }
-
-        .calendar-grid div:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: #fff;
-            padding: 5px;
-            border-radius: 4px;
-            font-size: 12px;
-            white-space: nowrap;
         }
 
         .profit {
             background-color: #27ae60;
-            color: white;
         }
 
         .loss {
             background-color: #e74c3c;
-            color: white;
         }
 
         .neutral {
             background-color: #ecf0f1;
             color: #333;
         }
+
+        .summary {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
-    <h1>Enhanced Trading Calendar</h1>
+    <h1>Trading Dashboard</h1>
     <div class="calendar"></div>
 
     <script>
-        const months = [
-            { name: "November 2024", gridId: "calendar-grid1", year: 2024, month: 11 },
-            { name: "December 2024", gridId: "calendar-grid2", year: 2024, month: 12 },
-            ...Array.from({ length: 12 }, (_, i) => ({
-                name: new Date(2025, i).toLocaleString("en", { month: "long", year: "numeric" }),
-                gridId: `calendar-grid${i + 3}`,
-                year: 2025,
-                month: i + 1,
-            })),
+        const data = [
+            {
+                month: "November 2024",
+                year: 2024,
+                dailyData: [
+                    { day: 1, total: 10000, color: "neutral" },
+                    { day: 2, total: 10000, color: "neutral" },
+                    { day: 3, total: 10000, color: "neutral" },
+                    { day: 4, total: 10000, color: "neutral" },
+                    { day: 5, total: 10000, color: "neutral" },
+                    { day: 6, total: 10000, color: "neutral" },
+                    { day: 7, total: 10000, color: "neutral" },
+                    { day: 8, total: 10000, color: "neutral" },
+                    { day: 9, total: 10000, color: "neutral" },
+                    { day: 10, total: 10000, color: "neutral" },
+                    { day: 11, total: 10000, color: "neutral" },
+                    { day: 12, total: 10010, color: "profit" },
+                    { day: 13, total: 10051, color: "profit" },
+                    { day: 14, total: 10074, color: "profit" },
+                    { day: 15, total: 10082, color: "profit" },
+                    { day: 16, total: 10082, color: "neutral" },
+                    { day: 17, total: 10082, color: "neutral" },
+                    { day: 18, total: 10106, color: "profit" },
+                    { day: 19, total: 10093, color: "loss" },
+                    { day: 20, total: 10131, color: "profit" },
+                    { day: 21, total: 10150, color: "profit" },
+                    { day: 22, total: 10175, color: "profit" },
+                    { day: 23, total: 10175, color: "neutral" },
+                    { day: 24, total: 10175, color: "neutral" },
+                    { day: 25, total: 10212, color: "profit" },
+                    { day: 26, total: 10000, color: "neutral" },
+                    { day: 27, total: 10000, color: "neutral" },
+                    { day: 28, total: 10000, color: "neutral" },
+                    { day: 29, total: 10000, color: "neutral" },
+                    { day: 30, total: 10000, color: "neutral" },
+                    { day: 31, total: 10000, color: "neutral" },
+
+                    // Add more days here
+                ],
+            },
+
+            // Add more months here
         ];
 
-        const dailyTotals = {}; // Store daily totals
         const calendarDiv = document.querySelector('.calendar');
 
         // Generate calendars for each month
-        months.forEach(({ name, gridId, year, month }) => {
+        data.forEach(({ month, year, dailyData }) => {
             const monthDiv = document.createElement('div');
             monthDiv.classList.add('month');
-            monthDiv.innerHTML = `<h3>${name}</h3><div class="calendar-grid" id="${gridId}"></div>`;
-            calendarDiv.appendChild(monthDiv);
+            monthDiv.innerHTML = `
+                <h3>${month} ${year}</h3>
+                <div class="calendar-grid"></div>
+                <div class="summary"></div>`;
+            const grid = monthDiv.querySelector('.calendar-grid');
+            const summary = monthDiv.querySelector('.summary');
 
-            generateCalendar(month, year, gridId);
+            // Fill calendar with data
+            dailyData.forEach(({ day, total, color }, index) => {
+                const dayDiv = document.createElement('div');
+                dayDiv.textContent = day;
+                dayDiv.classList.add(color);
+                dayDiv.dataset.total = total;
+                dayDiv.title = `Day ${day}: $${total}`;
+                grid.appendChild(dayDiv);
+            });
+
+            // Calculate daily, weekly, and monthly returns
+            const { dailyReturns, weeklyReturn, monthlyReturn } = calculateReturns(dailyData);
+
+            // Display summary
+            summary.innerHTML = `
+                Daily Returns: ${dailyReturns.join(', ')}%<br>
+                Weekly Return: ${weeklyReturn.toFixed(2)}%<br>
+                Monthly Return: ${monthlyReturn.toFixed(2)}%
+            `;
+
+            calendarDiv.appendChild(monthDiv);
         });
 
-        function generateCalendar(month, year, gridId) {
-            const daysInMonth = new Date(year, month, 0).getDate();
-            const firstDayOfMonth = new Date(year, month - 1, 1).getDay();
-            const grid = document.getElementById(gridId);
-            grid.innerHTML = '';
+        function calculateReturns(dailyData) {
+            const dailyReturns = [];
+            let weeklyStart = dailyData[0]?.total || 0;
+            let monthlyStart = dailyData[0]?.total || 0;
+            let weeklyEnd = weeklyStart;
+            let monthlyEnd = monthlyStart;
 
-            for (let i = 0; i < firstDayOfMonth; i++) {
-                grid.appendChild(document.createElement('div')); // Empty space
-            }
-
-            for (let day = 1; day <= daysInMonth; day++) {
-                const dayDiv = document.createElement('div');
-                const key = `${year}-${month}-${day}`;
-                dayDiv.textContent = day;
-                dayDiv.classList.add('neutral');
-                dayDiv.dataset.tooltip = `Date: ${key}`;
-                dayDiv.onclick = () => handleDayClick(dayDiv, key);
-                grid.appendChild(dayDiv);
-            }
-        }
-
-        function handleDayClick(dayDiv, key) {
-            const dailyInput = parseFloat(prompt(`Enter the final total for ${key}`));
-            if (!isNaN(dailyInput)) {
-                const prevKey = getPreviousKey(key);
-                const prevTotal = dailyTotals[prevKey] || 0;
-
-                // Store the current total
-                dailyTotals[key] = dailyInput;
-
-                // Calculate profit/loss and percentages
-                const dailyPL = dailyInput - prevTotal;
-                const dailyPercent = prevTotal > 0 ? ((dailyPL / prevTotal) * 100).toFixed(2) : 0;
-
-                // Update hover tooltip
-                dayDiv.dataset.tooltip = `
-                    Date: ${key}
-                    Total: ${dailyInput}
-                    P/L: ${dailyPL}
-                    Daily %: ${dailyPercent}%
-                `.trim();
-
-                // Update colors
-                if (dailyPL > 0) {
-                    dayDiv.classList.add('profit');
-                    dayDiv.classList.remove('loss');
-                } else if (dailyPL < 0) {
-                    dayDiv.classList.add('loss');
-                    dayDiv.classList.remove('profit');
-                } else {
-                    dayDiv.classList.remove('profit', 'loss');
-                    dayDiv.classList.add('neutral');
+            dailyData.forEach((entry, index) => {
+                if (index > 0) {
+                    const prevTotal = dailyData[index - 1].total;
+                    const returnPercent = ((entry.total - prevTotal) / prevTotal) * 100;
+                    dailyReturns.push(returnPercent.toFixed(2));
                 }
-            }
-        }
+                weeklyEnd = entry.total;
+                monthlyEnd = entry.total;
 
-        function getPreviousKey(key) {
-            const [year, month, day] = key.split('-').map(Number);
-            const prevDate = new Date(year, month - 1, day - 1);
-            return `${prevDate.getFullYear()}-${prevDate.getMonth() + 1}-${prevDate.getDate()}`;
+                // Reset weekly tracking every 7 days
+                if ((index + 1) % 7 === 0) {
+                    weeklyStart = entry.total;
+                }
+            });
+
+            const weeklyReturn =
+                weeklyStart > 0 ? ((weeklyEnd - weeklyStart) / weeklyStart) * 100 : 0;
+            const monthlyReturn =
+                monthlyStart > 0 ? ((monthlyEnd - monthlyStart) / monthlyStart) * 100 : 0;
+
+            return { dailyReturns, weeklyReturn, monthlyReturn };
         }
     </script>
 </body>
