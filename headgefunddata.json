@@ -1,0 +1,21 @@
+{
+  "1": {
+    "name": "Bridgewater Associates",
+    "data": {
+      "2022": [
+        { "ticker": "AAPL", "companyName": "Apple Inc.", "size": 1200000000, "sector": "Technology", "shares": 5000000, "dateBought": "2022-01-15", "dateSold": "2022-12-01" },
+        { "ticker": "MSFT", "companyName": "Microsoft", "size": 900000000, "sector": "Technology", "shares": 3000000, "dateBought": "2022-02-10", "dateSold": "2022-11-15" },
+        { "ticker": "GOOGL", "companyName": "Alphabet", "size": 700000000, "sector": "Technology", "shares": 2000000, "dateBought": "2022-03-05", "dateSold": "2022-09-30" },
+        { "ticker": "AMZN", "companyName": "Amazon", "size": 600000000, "sector": "Consumer Discretionary", "shares": 1500000, "dateBought": "2022-04-01", "dateSold": "2022-10-20" },
+        { "ticker": "TSLA", "companyName": "Tesla", "size": 500000000, "sector": "Automotive", "shares": 1000000, "dateBought": "2022-05-10", "dateSold": "2022-12-15" }
+      ],
+      "2021": [
+        { "ticker": "AAPL", "companyName": "Apple Inc.", "size": 1100000000, "sector": "Technology", "shares": 4800000, "dateBought": "2021-01-10", "dateSold": "2021-12-01" },
+        { "ticker": "MSFT", "companyName": "Microsoft", "size": 850000000, "sector": "Technology", "shares": 2900000, "dateBought": "2021-02-20", "dateSold": "2021-11-10" },
+        { "ticker": "GOOGL", "companyName": "Alphabet", "size": 650000000, "sector": "Technology", "shares": 1900000, "dateBought": "2021-03-15", "dateSold": "2021-08-10" },
+        { "ticker": "AMZN", "companyName": "Amazon", "size": 550000000, "sector": "Consumer Discretionary", "shares": 1400000, "dateBought": "2021-04-01", "dateSold": "2021-09-15" },
+        { "ticker": "TSLA", "companyName": "Tesla", "size": 450000000, "sector": "Automotive", "shares": 950000, "dateBought": "2021-05-05", "dateSold": "2021-12-10" }
+      ]
+    }
+  }
+}

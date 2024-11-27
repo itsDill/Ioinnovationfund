@@ -19,7 +19,7 @@ header {
     width: 100%; /* Ensure the header spans the full width */
     height: auto; /* Adjust height dynamically */
     padding: 10px 20px; /* Reduce padding */
-    background-color: #1D3956; /* Light background */
+    background-color: #000000; /* Light background */
     z-index: 1000; /* Keep it above other elements */
     display: flex;
     justify-content: space-between;
@@ -99,7 +99,7 @@ nav ul li a.active {
 
 /* Add spacing for header */
 main {
-    padding-top: 170px; /* Adjusted padding to leave space for fixed header */
+    padding-top: 100px; /* Adjusted padding to leave space for fixed header */
     padding-left: 20px;
     padding-right: 20px;
 }
