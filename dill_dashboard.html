@@ -20,7 +20,6 @@
                 <li><a href="dill_dashboard.html" class="active">Dashboard</a></li>
                 <li><a href="dill_analytics.html">Analytics</a></li>
                 <li><a href="dill_affiliate.html">Affiliate</a></li>
-                <li><a href="dill_reports.html">Risk</a></li>
                 <li><a href="index.html">Log out</a></li>
             </ul>
         </nav>
@@ -40,117 +39,143 @@
 
     </div>
 
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Trading Journal</h1>
+    </header>
+    </div>
+    <div class="calendar">
+        <!-- Months will populate here -->
+    </div>
+    <div class="schedule-popup" id="schedule-popup">
+        <button onclick="closePopup()">Close</button>
+    </div>
+    <div class="overlay" id="overlay" onclick="closePopup()"></div>
+
     <script>
         // Load and connect JSON data
-async function loadScheduleData() {
-    try {
-        const response = await fetch('trading.json');
-        const data = await response.json();
-        populateCalendar(data);
-        calculateTotals(data);
-    } catch (error) {
-        console.error('Error loading schedule data:', error);
-    }
-}
-
-// Populate calendar with days and add click functionality
-function populateCalendar(scheduleData) {
-    const calendarContainer = document.querySelector('.calendar');
-    calendarContainer.innerHTML = '';
-
-    for (const monthName in scheduleData) {
-        const monthElement = document.createElement('div');
-        monthElement.classList.add('month');
-
-        const monthTitle = document.createElement('h3');
-        monthTitle.textContent = monthName;
-        monthElement.appendChild(monthTitle);
-
-        const calendarGrid = document.createElement('div');
-        calendarGrid.classList.add('calendar-grid');
-
-        const [monthStr, year] = monthName.split(' ');
-        const monthIndex = new Date(`${monthStr} 1, ${year}`).getMonth();
-        const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
-
-        let monthlyProfit = 0;
-
-        for (let day = 1; day <= daysInMonth; day++) {
-            const dayElement = document.createElement('div');
-            dayElement.textContent = day;
-            dayElement.classList.add('day');
-
-            const dayData = scheduleData[monthName][day];
-            if (dayData) {
-                monthlyProfit += dayData.profit;
-                dayElement.style.backgroundColor = dayData.profit > 0 ? 'green' : 'red';
-                dayElement.dataset.details = JSON.stringify(dayData); // Attach day details
-            } else {
-                dayElement.style.backgroundColor = 'gray';
+        async function loadScheduleData() {
+            try {
+                const response = await fetch('trading.json'); // JSON file path
+                const data = await response.json();
+                populateCalendar(data);
+                calculateTotals(data);
+            } catch (error) {
+                console.error('Error loading schedule data:', error);
             }
-
-            dayElement.addEventListener('click', () => showSchedulePopup(dayData, monthName, day));
-            calendarGrid.appendChild(dayElement);
         }
 
-        const monthProfit = document.createElement('div');
-        monthProfit.textContent = `Monthly Profit: ${monthlyProfit.toFixed(2)}%`;
-        monthProfit.classList.add('month-profit');
+        // Populate calendar and calculate profits
+        function populateCalendar(scheduleData) {
+            const calendarContainer = document.querySelector('.calendar');
+            calendarContainer.innerHTML = '';
 
-        monthElement.appendChild(calendarGrid);
-        monthElement.appendChild(monthProfit);
-        calendarContainer.appendChild(monthElement);
-    }
-}
+            for (const monthName in scheduleData) {
+                const monthElement = document.createElement('div');
+                monthElement.classList.add('month');
 
-// Show popup with detailed schedule information
-function showSchedulePopup(dayData, monthName, day) {
-    const popup = document.querySelector('.schedule-popup');
-    const scheduleDetails = popup.querySelector('.schedule-details');
+                const monthTitle = document.createElement('h3');
+                monthTitle.textContent = monthName;
+                monthElement.appendChild(monthTitle);
 
-    if (dayData) {
-        scheduleDetails.innerHTML = `
-            <strong>Date: ${monthName} ${day}</strong><br>
-            Profit: ${dayData.profit}<br>
-            Trades: ${dayData.trades}<br>
-            Risk: ${dayData.risk}<br>
-        `;
-    } else {
-        scheduleDetails.textContent = `No data available for ${monthName} ${day}`;
-    }
+                const calendarGrid = document.createElement('div');
+                calendarGrid.classList.add('calendar-grid');
 
-    popup.style.display = 'block';
-}
+                const [monthStr, year] = monthName.split(' ');
+                const monthIndex = new Date(`${monthStr} 1, ${year}`).getMonth();
+                const daysInMonth = new Date(year, monthIndex + 1, 0).getDate();
 
-// Close popup
-function closePopup() {
-    document.querySelector('.schedule-popup').style.display = 'none';
-}
+                let monthlyProfit = 0;
+                let previousTotal = 0;
 
-// Calculate cumulative totals
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.textContent = day;
+                    dayElement.classList.add('day');
+
+                    const dayData = scheduleData[monthName][day];
+                    if (dayData && 'total' in dayData) {
+                        const currentTotal = dayData.total;
+                        const dailyProfit = currentTotal - previousTotal;
+                        monthlyProfit += dailyProfit;
+
+                        dayElement.style.backgroundColor = dailyProfit > 0 ? 'green' : 'red';
+                        dayElement.dataset.details = JSON.stringify({
+                            ...dayData,
+                            profit: dailyProfit,
+                        });
+
+                        previousTotal = currentTotal;
+                    } else {
+                        dayElement.style.backgroundColor = 'gray';
+                    }
+
+                    dayElement.addEventListener('click', () => showSchedulePopup(dayData, monthName, day));
+                    calendarGrid.appendChild(dayElement);
+                }
+
+                const monthProfit = document.createElement('div');
+                monthProfit.textContent = `Monthly Profit: ${monthlyProfit.toFixed(2)}%`;
+                monthProfit.classList.add('month-profit');
+
+                monthElement.appendChild(calendarGrid);
+                monthElement.appendChild(monthProfit);
+                calendarContainer.appendChild(monthElement);
+            }
+        }
+
+        // Show popup
+        function showSchedulePopup(dayData, monthName, day) {
+            const popup = document.getElementById('schedule-popup');
+            const overlay = document.getElementById('overlay');
+            const scheduleDetails = popup.querySelector('.schedule-details');
+
+            if (dayData) {
+                scheduleDetails.innerHTML = `
+                    <strong>Date: ${monthName} ${day}</strong><br>
+                    Total: ${dayData.total}<br>
+                    Trades: ${dayData.trades}<br>
+                    Risk: ${dayData.risk}<br>
+                `;
+            } else {
+                scheduleDetails.textContent = `No data available for ${monthName} ${day}`;
+            }
+
+            popup.style.display = 'block';
+            overlay.style.display = 'block';
+        }
+
+        // Close popup
+        function closePopup() {
+            document.getElementById('schedule-popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Calculate cumulative percentage profit
 function calculateTotals(scheduleData) {
-    let totalProfit = 0;
+    let startingTotal = null; // Track the first day's total
+    let cumulativeProfitPercent = 0;
 
     for (const monthName in scheduleData) {
         for (const day in scheduleData[monthName]) {
             const dayData = scheduleData[monthName][day];
-            if (dayData) {
-                totalProfit += dayData.profit;
+            if (dayData && 'total' in dayData) {
+                if (startingTotal === null) {
+                    startingTotal = dayData.total; // Initialize starting total
+                }
+                // Update cumulative profit percentage
+                cumulativeProfitPercent = ((dayData.total - startingTotal) / startingTotal) * 100;
             }
         }
     }
-
-    const totalProfitElement = document.querySelector('.total-profit');
-    totalProfitElement.textContent = `Total Profit: ${totalProfit.toFixed(2)}%`;
+    document.getElementById('accumulative-total').textContent = `${cumulativeProfitPercent.toFixed(2)}%`;
 }
 
-// Event listener for popup close button
-document.querySelector('.schedule-popup button').addEventListener('click', closePopup);
 
-// Initialize calendar
-loadScheduleData();
-
-
+        // Initialize
+        loadScheduleData();
     </script>
 </body>
 </html>

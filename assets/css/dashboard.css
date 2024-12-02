@@ -25,7 +25,7 @@ header h1 {
 .calendar {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Four columns per row */
-    gap: 20px; /* Space between boxes */
+    gap: 30px; /* Space between boxes */
     justify-items: center; /* Center align items within grid cells */
     margin: 0 auto; /* Center the calendar on the page */
     max-width: 1600px; /* Ensure the calendar doesn't stretch too much */
@@ -308,3 +308,69 @@ header nav ul li a.active {
     cursor: pointer;
     color: #333;
 }
+.tracker-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .affiliate {
+            border-bottom: 1px solid #ccc;
+            padding: 15px 0;
+        }
+
+        .affiliate:last-child {
+            border-bottom: none;
+        }
+
+        .affiliate h3 {
+            margin: 0 0 10px;
+            color: #2c3e50;
+        }
+
+        .metrics {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .metric {
+            width: 48%;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin-top: 5px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: #27ae60;
+        }
+
+        .buttons {
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin-right: 10px;
+            font-size: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #3498db;
+            color: white;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }

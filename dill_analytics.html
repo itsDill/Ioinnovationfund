@@ -17,7 +17,6 @@
                 <li><a href="dill_dashboard.html">Dashboard</a></li>
                 <li><a href="dill_analytics.html" class="active">Analytics</a></li>
                 <li><a href="dill_affiliate.html">Affiliate</a></li>
-                <li><a href="dill_reports.html">Risk</a></li>
                 <li><a href="index.html">Log out</a></li>
             </ul>
         </nav>
@@ -50,61 +49,61 @@
                 console.error('There was a problem fetching the JSON data:', error);
             });
 
-        // Parse JSON into chart-compatible format
         function parseTradingData(data) {
-            const labels = [];
-            const profits = [];
+    const labels = [];
+    const totals = []; // Update variable name to match the new JSON structure
 
-            // Loop through the months and days
-            for (const [month, days] of Object.entries(data)) {
-                for (const [day, metrics] of Object.entries(days)) {
-                    labels.push(`${month} Day ${day}`);
-                    profits.push(metrics.profit || 0);
-                }
-            }
-
-            return { labels, profits };
+    // Loop through the months and days
+    for (const [month, days] of Object.entries(data)) {
+        for (const [day, metrics] of Object.entries(days)) {
+            labels.push(`${month} Day ${day}`);
+            totals.push(metrics.total || 0); // Use 'total' instead of 'profit'
         }
+    }
 
-        // Render the chart using Chart.js
+    return { labels, totals };
+}
+
+
         function renderChart(tradingData) {
-            const ctx = document.getElementById('tradingPerformanceChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: tradingData.labels,
-                    datasets: [
-                        {
-                            label: 'Profit/Loss ($)',
-                            data: tradingData.profits,
-                            borderColor: '#27ae60',
-                            backgroundColor: 'rgba(39, 174, 96, 0.2)',
-                            fill: true,
-                        }
-                    ]
+    const ctx = document.getElementById('tradingPerformanceChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: tradingData.labels,
+            datasets: [
+                {
+                    label: 'Total Profit/Loss ($)', // Adjust the label if needed
+                    data: tradingData.totals, // Use 'totals' instead of 'profits'
+                    borderColor: '#27ae60',
+                    backgroundColor: 'rgba(39, 174, 96, 0.2)',
+                    fill: true,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: true }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Time'
+                    }
                 },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: { display: true }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Time'
-                            }
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Profit/Loss ($)'
-                            }
-                        }
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Total ($)' // Update the axis label
                     }
                 }
-            });
+            }
         }
+    });
+}
+
     </script>
 </body>
 </html>
