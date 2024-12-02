@@ -39,9 +39,7 @@
       text-align: center;
       fill: white;
     }
-    .circle:hover {
-      transform: scale(1.2);
-    }
+
     .tooltip {
       position: absolute;
       background: rgba(0, 0, 0, 0.7);
@@ -56,6 +54,18 @@
     .tooltip .company-name {
       font-weight: bold;
     }
+    .tooltip {
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+  pointer-events: none;
+  font-size: 12px;
+  opacity: 0; /* Ensure it's hidden initially */
+  transition: opacity 0.2s ease; /* Smooth fade-in/out */
+}
+
   </style>
 </head>
 <body>
@@ -78,101 +88,83 @@
   <div id="visualization"></div>
 
   <script>
-    // Load the data from the JSON file
-    d3.json('headgefunddata.json').then(function(hedgeFundsData) {
+  d3.json('headgefunddata.json').then(function (hedgeFundsData) {
+    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+    const dropdown = document.getElementById("hedgeFundSelect");
+    const dataFilter = document.getElementById("dataFilterSelect");
+    const yearSelect = document.getElementById("yearSelect");
+    const visualization = d3.select("#visualization");
+    const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
-      const colorScale = d3.scaleOrdinal(d3.schemeCategory10); // Color scale for sectors
+    dropdown.addEventListener("change", updateVisualization);
+    dataFilter.addEventListener("change", updateVisualization);
+    yearSelect.addEventListener("change", updateVisualization);
 
-      // Set up the dropdowns and SVG
-      const dropdown = document.getElementById("hedgeFundSelect");
-      const dataFilter = document.getElementById("dataFilterSelect");
-      const yearSelect = document.getElementById("yearSelect");
-      const visualization = d3.select("#visualization");
-      const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
-      dropdown.addEventListener("change", updateVisualization);
-      dataFilter.addEventListener("change", updateVisualization);
-      yearSelect.addEventListener("change", updateVisualization);
+    function updateVisualization() {
+      const hedgeFundId = dropdown.value;
+      const filter = dataFilter.value;
+      const year = yearSelect.value;
+      const holdingsData = hedgeFundsData[hedgeFundId].data[year];
+      renderVisual(holdingsData, filter);
+    }
 
-      // Function to update the visualization based on the selections
-      function updateVisualization() {
-        const hedgeFundId = dropdown.value;
-        const filter = dataFilter.value;
-        const year = yearSelect.value;
-        const holdingsData = hedgeFundsData[hedgeFundId].data[year];
-        renderVisual(holdingsData, filter);
+    function renderVisual(data, filter) {
+      let filteredData = filter === "top5" ? data.slice(0, 5) : data.slice(0, 10);
+      visualization.html(""); // Clear previous visualization
+
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const svg = visualization.append("svg").attr("width", width).attr("height", height);
+
+      const maxSize = Math.max(...filteredData.map(d => d.size));
+      const sizeScale = d3.scaleSqrt().domain([0, maxSize]).range([20, 100]);
+
+      const simulation = d3.forceSimulation(filteredData)
+        .force("x", d3.forceX(width / 2).strength(0.05))
+        .force("y", d3.forceY(height / 2).strength(0.05))
+        .force("collide", d3.forceCollide(d => sizeScale(d.size) + 5))
+        .on("tick", ticked);
+
+      const nodes = svg.selectAll(".circle")
+        .data(filteredData)
+        .enter().append("g")
+        .attr("class", "circle")
+        .on("mouseover", (event, d) => {
+          tooltip.style("opacity", 1)
+            .html(`
+              <div class="company-name">${d.companyName}</div>
+              <div>Ticker: ${d.ticker}</div>
+              <div>Sector: ${d.sector}</div>
+              <div>Shares: ${d.shares}</div>
+              <div>Size: $${d.size.toLocaleString()}</div>
+              <div>Date Bought: ${d.dateBought}</div>
+              <div>Date Sold: ${d.dateSold}</div>
+            `)
+            .style("left", `${event.pageX + 10}px`)
+            .style("top", `${event.pageY + 10}px`);
+        })
+        .on("mouseout", () => tooltip.style("opacity", 0));
+
+      nodes.append("circle")
+        .attr("r", d => sizeScale(d.size))
+        .style("fill", d => colorScale(d.sector));
+
+      nodes.append("text")
+        .attr("text-anchor", "middle")
+        .attr("dy", 5)
+        .text(d => d.companyName)
+        .style("fill", "white")
+        .style("font-size", "12px");
+
+      function ticked() {
+        nodes.attr("transform", d => `translate(${d.x}, ${d.y})`);
       }
+    }
 
-      // Function to render the visualization
-      function renderVisual(data, filter) {
-        // Filter the top holdings based on the selection
-        let filteredData;
-        if (filter === "top5") {
-          filteredData = data.slice(0, 5);
-        } else if (filter === "top10") {
-          filteredData = data.slice(0, 10);
-        }
+    updateVisualization();
+  });
+</script>
 
-        // Clear any previous visualization
-        visualization.html("");
-
-        // Set up the scale for circle size (based on market value)
-        const maxSize = Math.max(...filteredData.map(d => d.size));
-        const sizeScale = d3.scaleSqrt()
-          .domain([0, maxSize])
-          .range([20, 100]); // Circle size range
-
-        // Create SVG container for the circles
-        const width = window.innerWidth;
-        const height = window.innerHeight;
-        const svg = visualization.append("svg")
-          .attr("width", width)
-          .attr("height", height);
-
-        // Create the circles
-        const circles = svg.selectAll(".circle")
-          .data(filteredData)
-          .enter().append("g")
-          .attr("class", "circle")
-          .attr("transform", () => {
-            // Randomly position each circle within the SVG
-            const xPos = Math.random() * (width - 100);  // Random X within the screen width
-            const yPos = Math.random() * (height - 100); // Random Y within the screen height
-            return `translate(${xPos}, ${yPos})`;
-          });
-
-        circles.append("circle")
-          .attr("r", d => sizeScale(d.size))
-          .style("fill", d => colorScale(d.sector))
-          .on("mouseover", (event, d) => {
-            tooltip.style("opacity", 1)
-              .html(`
-                <div class="company-name">${d.companyName}</div>
-                <div>Ticker: ${d.ticker}</div>
-                <div>Sector: ${d.sector}</div>
-                <div>Shares: ${d.shares}</div>
-                <div>Size: $${d.size.toLocaleString()}</div>
-                <div>Date Bought: ${d.dateBought}</div>
-                <div>Date Sold: ${d.dateSold}</div>
-              `)
-              .style("left", `${event.pageX + 10}px`)
-              .style("top", `${event.pageY + 10}px`);
-          })
-          .on("mouseout", () => tooltip.style("opacity", 0));
-
-        circles.append("text")
-          .attr("x", 0)
-          .attr("y", 0)
-          .attr("text-anchor", "middle")
-          .attr("dy", 5) // Adjusts vertical positioning of text inside circle
-          .text(d => d.companyName)
-          .style("fill", "white")
-          .style("font-size", "12px");
-      }
-
-      // Initialize the first visualization
-      updateVisualization();
-    });
-  </script>
 </body>
 </html>
