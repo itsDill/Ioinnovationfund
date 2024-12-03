@@ -15,12 +15,12 @@
         <nav>
             <ul>
                 <li><a href="dill_dashboard.html">Dashboard</a></li>
-                <li><a href="dill_analytics.html" class="active">Analytics</a></li>
+                <li><a href="dill_analytics.html">Analytics</a></li>
                 <li><a href="chalisa_dashboard.html">Pro Dash</a></li>
                 <li><a href="chalisa_analytics.html">Pro Analytics</a></li>
                 <li><a href="dill_affiliate.html">Client Analytics</a></li>
                 <li><a href="dillyn_dashboard.html">Client Dash</a></li>
-                <li><a href="dillyn_analytics.html">Client Analytics</a></li>
+                <li><a href="dillyn_analytics.html" class="active">Client Analytics</a></li>
                 <li><a href="index.html">Log out</a></li>
             </ul>
         </nav>
@@ -38,7 +38,7 @@
 
     <script>
         // Fetch the JSON data
-        fetch('trading.json')
+        fetch('trading1.json')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

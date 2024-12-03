@@ -17,12 +17,12 @@
         </div>
         <nav>
             <ul>
-                <li><a href="dill_dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="dill_dashboard.html">Dashboard</a></li>
                 <li><a href="dill_analytics.html">Analytics</a></li>
                 <li><a href="chalisa_dashboard.html">Pro Dash</a></li>
                 <li><a href="chalisa_analytics.html">Pro Analytics</a></li>
                 <li><a href="dill_affiliate.html">Client Analytics</a></li>
-                <li><a href="dillyn_dashboard.html">Client Dash</a></li>
+                <li><a href="dillyn_dashboard.html" class="active">Client Dash</a></li>
                 <li><a href="dillyn_analytics.html">Client Analytics</a></li>
                 <li><a href="index.html">Log out</a></li>
             </ul>
@@ -62,7 +62,7 @@
     // Load and connect JSON data
     async function loadScheduleData() {
         try {
-            const response = await fetch('trading.json'); // JSON file path
+            const response = await fetch('trading1.json'); // JSON file path
             const data = await response.json();
             populateCalendar(data);
             calculateTotals(data);

@@ -6,9 +6,8 @@ document.getElementById('loginForm').addEventListener('submit', function (e) {
 
     // Example: Replace this with a real backend API or secure data storage
     const users = {
-        'jay': '#73jf9g494jfkf84hfy7ewf934623gyf87t497y4fh',
-        'dill': '#nbblakjhfesof38498tg743b98f3hy98yf8gg43g',
-        'chalisa': '#bkhbuekwhfyr3478762386t843gfy487834ry7824'
+        'dill': 'jupiter',
+        'chalisa': 'jupiter'
     };
 
     if (users[username] && users[username] === password) {
