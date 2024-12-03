@@ -19,6 +19,7 @@
     },
 
     "December 2024": {
+        "1": {"total": 10035, "trades": 0, "risk": "Level 1"},
         "2": {"total": 10045, "trades": 0, "risk": "Level 1"}
     },
     "January 2025": {
