@@ -1,0 +1,57 @@
+{
+  "1": {
+    "name": "Scion Asset Management, LLC",
+    "data": {
+      "2023": {
+        "Q1": [
+          { "ticker": "JD", "companyName": "JD.COM INC", "size": 10972, "sector": "Technology", "shares": 250000 },
+          { "ticker": "BABA", "companyName": "ALIBABA GROUP HLDG LTD", "size": 10218, "sector": "Technology", "shares": 100000 },
+          { "ticker": "SIG", "companyName": "SIGNET JEWELERS LIMITED", "size": 9722, "sector": "Consumer Discretionary", "shares": 125000 },
+          { "ticker": "NYCB", "companyName": "NEW YORK CMNTY BANCORP INC", "size": 7684, "sector": "Financials", "shares": 850000 },
+          { "ticker": "ZM", "companyName": "ZOOM VIDEO COMMUNICATIONS INC", "size": 7384, "sector": "Technology", "shares": 100000 },
+          { "ticker": "COF", "companyName": "CAPITAL ONE FINL CORP", "size": 7212, "sector": "Financials", "shares": 75000 },
+          { "ticker": "SSW", "companyName": "SIBANYE STILLWATER LTD", "size": 6656, "sector": "Materials", "shares": 800000 },
+          { "ticker": "LILAK", "companyName": "LIBERTY LATIN AMERICA LTD", "size": 6608, "sector": "Communication Services", "shares": 800000 },
+          { "ticker": "CI", "companyName": "THE CIGNA GROUP", "size": 6388, "sector": "Healthcare", "shares": 25000 },
+          { "ticker": "COHR", "companyName": "COHERENT CORP", "size": 4760, "sector": "Technology", "shares": 125000 }
+        ],
+        "Q2": [
+          { "ticker": "SPY", "companyName": "SPDR S&P 500 ETF TR", "size": 886560, "sector": "ETF", "shares": 2000000 },
+          { "ticker": "QQQ", "companyName": "INVESCO QQQ TR", "size": 738840, "sector": "ETF", "shares": 2000000 },
+          { "ticker": "EXPE", "companyName": "EXPEDIA GROUP INC", "size": 10939, "sector": "Consumer Discretionary", "shares": 100000 },
+          { "ticker": "CHTR", "companyName": "CHARTER COMMUNICATIONS INC N", "size": 9184, "sector": "Communication Services", "shares": 25000 },
+          { "ticker": "GNRC", "companyName": "GENERAC HLDGS INC", "size": 8202, "sector": "Industrials", "shares": 55000 },
+          { "ticker": "CI", "companyName": "THE CIGNA GROUP", "size": 7716, "sector": "Healthcare", "shares": 27500 },
+          { "ticker": "CVS", "companyName": "CVS HEALTH CORP", "size": 6913, "sector": "Healthcare", "shares": 100000 },
+          { "ticker": "MGM", "companyName": "MGM RESORTS INTERNATIONAL", "size": 6588, "sector": "Consumer Discretionary", "shares": 150000 },
+          { "ticker": "STLA.MI", "companyName": "STELLANTIS N.V", "size": 5700, "sector": "Consumer Discretionary", "shares": 325000 },
+          { "ticker": "VTLE", "companyName": "VITAL ENERGY INC", "size": 5643, "sector": "Energy", "shares": 125000 }
+        ],
+        "Q3": [
+          { "ticker": "SOXX", "companyName": "ISHARES TR", "size": 47365, "sector": "ETF", "shares": 100000 },
+          { "ticker": "BKNG", "companyName": "BOOKING HOLDINGS INC", "size": 7709, "sector": "Consumer Discretionary", "shares": 2500 },
+          { "ticker": "STLA.MI", "companyName": "STELLANTIS N.V", "size": 7652, "sector": "Consumer Discretionary", "shares": 400000 },
+          { "ticker": "NXST", "companyName": "NEXSTAR MEDIA GROUP INC", "size": 6975, "sector": "Communication Services", "shares": 48651 },
+          { "ticker": "SBLK", "companyName": "STAR BULK CARRIERS CORP.", "size": 4820, "sector": "Industrials", "shares": 250000 },
+          { "ticker": "BKNG", "companyName": "BOOKING HOLDINGS INC", "size": 4625, "sector": "Consumer Discretionary", "shares": 1500 },
+          { "ticker": "BABA", "companyName": "ALIBABA GROUP HLDG LTD", "size": 4337, "sector": "Technology", "shares": 50000 },
+          { "ticker": "EURN.BR", "companyName": "EURONAV NV", "size": 4107, "sector": "Energy", "shares": 250000 },
+          { "ticker": "JD", "companyName": "JD.COM INC", "size": 3641, "sector": "Technology", "shares": 125000 },
+          { "ticker": "HPP", "companyName": "HUDSON PAC PPTYS INC", "size": 2660, "sector": "Real Estate", "shares": 400000 }
+        ],
+        "Q4": [
+          { "ticker": "BABA", "companyName": "ALIBABA GROUP HLDG LTD", "size": 5813, "sector": "Technology", "shares": 75000 },
+          { "ticker": "JD", "companyName": "JD.COM INC", "size": 5778, "sector": "Technology", "shares": 200000 },
+          { "ticker": "HCA", "companyName": "HCA HEALTHCARE INC", "size": 5413, "sector": "Healthcare", "shares": 20000 },
+          { "ticker": "ORCL", "companyName": "ORACLE CORP", "size": 5271, "sector": "Technology", "shares": 50000 },
+          { "ticker": "C", "companyName": "CITIGROUP INC", "size": 5144, "sector": "Financials", "shares": 100000 },
+          { "ticker": "CVS", "companyName": "CVS HEALTH CORP", "size": 5132, "sector": "Healthcare", "shares": 65000 },
+          { "ticker": "NXST", "companyName": "NEXSTAR MEDIA GROUP INC", "size": 5094, "sector": "Communication Services", "shares": 32500 },
+          { "ticker": "GOOGL", "companyName": "ALPHABET INC", "size": 4889, "sector": "Technology", "shares": 35000 },
+          { "ticker": "SBLK", "companyName": "STAR BULK CARRIERS CORP.", "size": 4681, "sector": "Industrials", "shares": 220208 },
+          { "ticker": "AMZN", "companyName": "AMAZON COM INC", "size": 4558, "sector": "Consumer Discretionary", "shares": 30000 }
+        ]
+      }
+    }
+  }
+}

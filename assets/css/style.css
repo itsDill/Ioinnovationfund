@@ -111,6 +111,14 @@ section {
     padding: 40px 0;
 }
 
+.destination img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 10px;  /* Adds space between the image and the text */
+}
+
+
 .hero {
     text-align: center;
 }

@@ -68,11 +68,18 @@
 
   </style>
 </head>
+<select id="quarterSelect">
+  <option value="Q1">Q1</option>
+  <option value="Q2">Q2</option>
+  <option value="Q3">Q3</option>
+  <option value="Q4">Q4</option>
+</select>
+
 <body>
   <div id="controls">
     <select id="hedgeFundSelect">
-      <option value="1">Bridgewater Associates</option>
-      <option value="2">Renaissance Technologies</option>
+      <option value="1">Berkshire Hathaway Inc</option>
+      <option value="2">Scion Asset Management, LLC</option>
       <option value="3">Two Sigma</option>
     </select>
     <select id="dataFilterSelect">
@@ -80,90 +87,96 @@
       <option value="top10">Top 10 Holdings</option>
     </select>
     <select id="yearSelect">
-      <option value="2022">2022</option>
-      <option value="2021">2021</option>
-      <option value="2020">2020</option>
+      <option value="2025">2025</option>
+      <option value="2024">2024</option>
+      <option value="2023">2023</option>
     </select>
   </div>
   <div id="visualization"></div>
 
   <script>
   d3.json('headgefunddata.json').then(function (hedgeFundsData) {
-    const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
-    const dropdown = document.getElementById("hedgeFundSelect");
-    const dataFilter = document.getElementById("dataFilterSelect");
-    const yearSelect = document.getElementById("yearSelect");
-    const visualization = d3.select("#visualization");
-    const tooltip = d3.select("body").append("div").attr("class", "tooltip");
+  const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+  const dropdown = document.getElementById("hedgeFundSelect");
+  const dataFilter = document.getElementById("dataFilterSelect");
+  const yearSelect = document.getElementById("yearSelect");
+  const quarterSelect = document.getElementById("quarterSelect");
+  const visualization = d3.select("#visualization");
+  const tooltip = d3.select("body").append("div").attr("class", "tooltip");
 
-    dropdown.addEventListener("change", updateVisualization);
-    dataFilter.addEventListener("change", updateVisualization);
-    yearSelect.addEventListener("change", updateVisualization);
+  // Add event listeners
+  dropdown.addEventListener("change", updateVisualization);
+  dataFilter.addEventListener("change", updateVisualization);
+  yearSelect.addEventListener("change", updateVisualization);
+  quarterSelect.addEventListener("change", updateVisualization);
 
+  function updateVisualization() {
+    const hedgeFundId = dropdown.value;
+    const filter = dataFilter.value;
+    const year = yearSelect.value;
+    const quarter = quarterSelect.value;
 
-    function updateVisualization() {
-      const hedgeFundId = dropdown.value;
-      const filter = dataFilter.value;
-      const year = yearSelect.value;
-      const holdingsData = hedgeFundsData[hedgeFundId].data[year];
-      renderVisual(holdingsData, filter);
+    // Retrieve the selected quarter's data
+    const holdingsData = hedgeFundsData[hedgeFundId].data[year][quarter] || [];
+    renderVisual(holdingsData, filter);
+  }
+
+  function renderVisual(data, filter) {
+    let filteredData = filter === "top5" ? data.slice(0, 5) : data.slice(0, 10);
+    visualization.html(""); // Clear previous visualization
+
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const svg = visualization.append("svg").attr("width", width).attr("height", height);
+
+    const maxSize = Math.max(...filteredData.map(d => d.size));
+    const sizeScale = d3.scaleSqrt().domain([0, maxSize]).range([20, 100]);
+
+    const simulation = d3.forceSimulation(filteredData)
+      .force("x", d3.forceX(width / 2).strength(0.05))
+      .force("y", d3.forceY(height / 2).strength(0.05))
+      .force("collide", d3.forceCollide(d => sizeScale(d.size) + 5))
+      .on("tick", ticked);
+
+    const nodes = svg.selectAll(".circle")
+      .data(filteredData)
+      .enter().append("g")
+      .attr("class", "circle")
+      .on("mouseover", (event, d) => {
+        tooltip.style("opacity", 1)
+          .html(`
+            <div class="company-name">${d.companyName}</div>
+            <div>Ticker: ${d.ticker}</div>
+            <div>Sector: ${d.sector}</div>
+            <div>Shares: ${d.shares}</div>
+            <div>Size: $${d.size.toLocaleString()}</div>
+            <div>Date Bought: ${d.dateBought}</div>
+            <div>Date Sold: ${d.dateSold}</div>
+          `)
+          .style("left", `${event.pageX + 10}px`)
+          .style("top", `${event.pageY + 10}px`);
+      })
+      .on("mouseout", () => tooltip.style("opacity", 0));
+
+    nodes.append("circle")
+      .attr("r", d => sizeScale(d.size))
+      .style("fill", d => colorScale(d.sector));
+
+    nodes.append("text")
+      .attr("text-anchor", "middle")
+      .attr("dy", 5)
+      .text(d => d.companyName)
+      .style("fill", "white")
+      .style("font-size", "12px");
+
+    function ticked() {
+      nodes.attr("transform", d => `translate(${d.x}, ${d.y})`);
     }
+  }
 
-    function renderVisual(data, filter) {
-      let filteredData = filter === "top5" ? data.slice(0, 5) : data.slice(0, 10);
-      visualization.html(""); // Clear previous visualization
+  updateVisualization();
+});
 
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      const svg = visualization.append("svg").attr("width", width).attr("height", height);
-
-      const maxSize = Math.max(...filteredData.map(d => d.size));
-      const sizeScale = d3.scaleSqrt().domain([0, maxSize]).range([20, 100]);
-
-      const simulation = d3.forceSimulation(filteredData)
-        .force("x", d3.forceX(width / 2).strength(0.05))
-        .force("y", d3.forceY(height / 2).strength(0.05))
-        .force("collide", d3.forceCollide(d => sizeScale(d.size) + 5))
-        .on("tick", ticked);
-
-      const nodes = svg.selectAll(".circle")
-        .data(filteredData)
-        .enter().append("g")
-        .attr("class", "circle")
-        .on("mouseover", (event, d) => {
-          tooltip.style("opacity", 1)
-            .html(`
-              <div class="company-name">${d.companyName}</div>
-              <div>Ticker: ${d.ticker}</div>
-              <div>Sector: ${d.sector}</div>
-              <div>Shares: ${d.shares}</div>
-              <div>Size: $${d.size.toLocaleString()}</div>
-              <div>Date Bought: ${d.dateBought}</div>
-              <div>Date Sold: ${d.dateSold}</div>
-            `)
-            .style("left", `${event.pageX + 10}px`)
-            .style("top", `${event.pageY + 10}px`);
-        })
-        .on("mouseout", () => tooltip.style("opacity", 0));
-
-      nodes.append("circle")
-        .attr("r", d => sizeScale(d.size))
-        .style("fill", d => colorScale(d.sector));
-
-      nodes.append("text")
-        .attr("text-anchor", "middle")
-        .attr("dy", 5)
-        .text(d => d.companyName)
-        .style("fill", "white")
-        .style("font-size", "12px");
-
-      function ticked() {
-        nodes.attr("transform", d => `translate(${d.x}, ${d.y})`);
-      }
-    }
-
-    updateVisualization();
-  });
 </script>
 
 </body>
