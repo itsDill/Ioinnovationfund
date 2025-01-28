@@ -3,88 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VC Portfolio - Contact</title>
+    <title>VC Portfolio - Tools</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
 
-        header {
+
+        /* Wheel Container */
+        .wheel-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 50px auto;
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
-            padding: 10px 20px;
-            background: #000;
-            color: #fff;
-        }
-        header .logo img {
-            max-height: 50px;
-        }
-        nav ul {
-            list-style: none;
-            display: flex;
-            margin: 0;
-            padding: 0;
-        }
-        nav ul li {
-            margin: 0 10px;
-        }
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-
         }
 
-        .content {
-            padding: 20px;
-            text-align: center;
-        }
-        .tools {
-            display: flex;
-            justify-content: space-around;
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 1200px;
-        }
+        /* Tool Boxes */
         .tool-box {
-            width: 30%;
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
             background: #f4f4f4;
             border: 1px solid #ddd;
-            border-radius: 8px;
             padding: 20px;
             text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            cursor: pointer;
         }
 
-        .tool-box:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
         .tool-box h3 {
             margin-bottom: 10px;
-            font-size: 18px;
+            font-size: 15px;
             color: #333;
         }
+
         .tool-box p {
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
         }
-        footer {
-            background: #333;
-            color: #fff;
-            padding: 10px 20px;
-            text-align: center;
-        }
-        footer .social-media a {
-            color: #fff;
-            margin: 0 10px;
-            text-decoration: none;
+
+        .tool-box.active {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            z-index: 10;
         }
 
 
@@ -112,22 +81,32 @@
         <p>At iO, we focus on providing cutting-edge tools and insights to help investors make informed decisions. Our tools are designed to simplify the complexity of financial data and make it accessible for everyone.</p>
     </div>
 
-    <div class="tools">
-        <div class="tool-box">
+    <!-- Wheel Container -->
+    <div class="wheel-container" id="wheel-container">
+        <div class="tool-box" data-index="0">
             <a href="13F filings.html">
             <h3>13F Visualizer</h3>
             <p>Analyze institutional holdings with ease and gain deeper insights into the strategies of top hedge funds.</p>
         </div>
-
-        <div class="tool-box">
+        <div class="tool-box" data-index="1">
             <a href=".html">
             <h3>Quick Reads</h3>
             <p>Quickly extract key financial and operational information from annual reports.</p>
         </div>
-        <div class="tool-box">
+        <div class="tool-box" data-index="2">
             <a href=".html">
             <h3>Data Visualizations</h3>
             <p>Streamline quarterly report analysis to focus on what's most important for your investment decisions.</p>
+        </div>
+        <div class="tool-box" data-index="3">
+            <a href=".html">
+            <h3>Market Trends</h3>
+            <p>Stay updated with the latest market trends and insights.</p>
+        </div>
+        <div class="tool-box" data-index="4">
+            <a href=".html">
+            <h3>Portfolio Analyzer</h3>
+            <p>Analyze and optimize your investment portfolio with advanced tools.</p>
         </div>
     </div>
 
@@ -140,6 +119,92 @@
         <p>&copy; 2024 [Your VC Company]. All rights reserved.</p>
     </footer>
 
-    <script src="assets/js/script.js"></script>
+    <script>
+        const wheelContainer = document.getElementById('wheel-container');
+        const toolBoxes = document.querySelectorAll('.tool-box');
+        const totalBoxes = toolBoxes.length;
+        const radius = 150; // Radius of the invisible circle
+        let angle = 0; // Current rotation angle
+        let isDragging = false;
+        let startX = 0;
+        let momentum = 0;
+        let lastTime = 0;
+
+        // Position toolboxes in a circle
+        function positionBoxes() {
+            toolBoxes.forEach((box, index) => {
+                const boxAngle = (index * (360 / totalBoxes) + angle) % 360;
+                const radians = (boxAngle * Math.PI) / 180;
+                const x = Math.cos(radians) * radius;
+                const y = Math.sin(radians) * radius;
+                box.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        }
+
+        // Rotate the wheel
+        function rotateWheel(deltaX) {
+            angle += deltaX * 0.5; // Adjust rotation speed
+            positionBoxes();
+        }
+
+        // Highlight the top box
+        function highlightTopBox() {
+            const activeIndex = Math.round((360 - angle % 360) / (360 / totalBoxes)) % totalBoxes;
+            toolBoxes.forEach((box, index) => {
+                if (index === activeIndex) {
+                    box.classList.add('active');
+                } else {
+                    box.classList.remove('active');
+                }
+            });
+        }
+
+        // Momentum-based scrolling
+        function animate(time) {
+            if (!lastTime) lastTime = time;
+            const deltaTime = time - lastTime;
+            lastTime = time;
+
+            if (Math.abs(momentum) > 0.1) {
+                angle += momentum * deltaTime * 0.01; // Adjust momentum speed
+                positionBoxes();
+                momentum *= 0.95; // Decay momentum
+            } else {
+                momentum = 0;
+                highlightTopBox();
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        // Mouse/Touch Interaction
+        wheelContainer.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            momentum = 0;
+        });
+
+        wheelContainer.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const deltaX = e.clientX - startX;
+                rotateWheel(deltaX);
+                momentum = deltaX; // Track momentum
+                startX = e.clientX;
+            }
+        });
+
+        wheelContainer.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        wheelContainer.addEventListener('mouseleave', () => {
+            isDragging = false;
+        });
+
+        // Initialize
+        positionBoxes();
+        highlightTopBox();
+        requestAnimationFrame(animate);
+    </script>
 </body>
 </html>
