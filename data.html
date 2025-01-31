@@ -8,11 +8,29 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* General Styles */
 
+
+        .content {
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .content h1 {
+            font-size: 48px;
+            margin: 10px 0;
+        }
+
+        .content p {
+            font-size: 18px;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
 
         /* Wheel Container */
         .wheel-container {
-            position: relative;
+            position: center;
             width: 400px;
             height: 400px;
             margin: 50px auto;
@@ -27,36 +45,79 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background: #f4f4f4;
-            border: 1px solid #ddd;
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 15px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            transition: transform 0.5s ease, box-shadow 0.5s ease, background 0.3s ease;
             cursor: pointer;
+            backdrop-filter: blur(5px);
         }
 
         .tool-box h3 {
-            margin-bottom: 10px;
-            font-size: 15px;
-            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+            color: #fff;
         }
 
         .tool-box p {
-            font-size: 12px;
-            color: #666;
+            font-size: 10px;
+            color: #ccc;
+            line-height: 1.2;
+        }
+
+        .tool-box:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
         .tool-box.active {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transform: scale(1.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
             z-index: 10;
         }
 
+        /* Ensure link text inside tool boxes matches the design */
+        .tool-box a {
+            text-decoration: none; /* Remove underline */
+            color: inherit; /* Inherit text color from parent */
+        }
 
+        .tool-box a:hover {
+            color: inherit; /* Ensure hover color matches the design */
+        }
+
+        /* Center the top box */
+        .tool-box[data-index="0"] {
+            transform: translate(0, -170px) scale(1.2); /* Raised slightly */
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            margin-top: 50px;
+        }
+
+        footer .social-media {
+            margin-bottom: 10px;
+        }
+
+        footer .social-media a {
+            color: #00bcd4;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        footer p {
+            font-size: 14px;
+            color: #ccc;
+        }
     </style>
 </head>
 <body>
@@ -69,14 +130,11 @@
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="data.html" class="active">Tools</a></li>
-                <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="content">
-        <h1>IO</h1>
-        <h1>.</h1>
         <h1>iO</h1>
         <p>At iO, we focus on providing cutting-edge tools and insights to help investors make informed decisions. Our tools are designed to simplify the complexity of financial data and make it accessible for everyone.</p>
     </div>
@@ -85,28 +143,33 @@
     <div class="wheel-container" id="wheel-container">
         <div class="tool-box" data-index="0">
             <a href="13F filings.html">
-            <h3>13F Visualizer</h3>
-            <p>Analyze institutional holdings with ease and gain deeper insights into the strategies of top hedge funds.</p>
+                <h3>13F Visualizer</h3>
+                <p>Analyze institutional holdings with ease and gain deeper insights into the strategies of top hedge funds.</p>
+            </a>
         </div>
         <div class="tool-box" data-index="1">
             <a href=".html">
-            <h3>Quick Reads</h3>
-            <p>Quickly extract key financial and operational information from annual reports.</p>
+                <h3>Quick Reads</h3>
+                <p>Quickly extract key financial and operational information from annual reports.</p>
+            </a>
         </div>
         <div class="tool-box" data-index="2">
             <a href=".html">
-            <h3>Data Visualizations</h3>
-            <p>Streamline quarterly report analysis to focus on what's most important for your investment decisions.</p>
+                <h3>Data Visualizations</h3>
+                <p>Streamline quarterly report analysis to focus on what's most important for your investment decisions.</p>
+            </a>
         </div>
         <div class="tool-box" data-index="3">
             <a href=".html">
-            <h3>Learn</h3>
-            <p>Start from scratch or refresh your memory with games and quizzes.</p>
+                <h3>Learn</h3>
+                <p>Start from scratch or refresh your memory with games and quizzes.</p>
+            </a>
         </div>
         <div class="tool-box" data-index="4">
             <a href=".html">
-            <h3>AI Portfolio Analyzer</h3>
-            <p>Analyze and optimize your investment portfolio with advanced AI tools.</p>
+                <h3>Market Signals</h3>
+                <p>Identify key market trends and signals to make timely and informed investment decisions.</p>
+            </a>
         </div>
     </div>
 
