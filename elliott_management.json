@@ -1,0 +1,744 @@
+{
+  "data": {
+    "2023": {
+      "Q1": [
+        {
+          "companyName": "AT&T Inc",
+          "ticker": "T",
+          "sector": "Communication Services",
+          "shares": 10000000,
+          "size": 200000000,
+          "dateBought": "2023-01-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "eBay Inc",
+          "ticker": "EBAY",
+          "sector": "Consumer Discretionary",
+          "shares": 8000000,
+          "size": 400000000,
+          "dateBought": "2023-02-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Twitter Inc",
+          "ticker": "TWTR",
+          "sector": "Communication Services",
+          "shares": 5000000,
+          "size": 250000000,
+          "dateBought": "2023-03-05",
+          "dateSold": null
+        },
+        {
+          "companyName": "Pinterest Inc",
+          "ticker": "PINS",
+          "sector": "Communication Services",
+          "shares": 4000000,
+          "size": 100000000,
+          "dateBought": "2023-01-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "SoftBank Group Corp",
+          "ticker": "SFTBY",
+          "sector": "Technology",
+          "shares": 3000000,
+          "size": 150000000,
+          "dateBought": "2023-02-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "Samsung Electronics Co Ltd",
+          "ticker": "SSNLF",
+          "sector": "Technology",
+          "shares": 2500000,
+          "size": 125000000,
+          "dateBought": "2023-03-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Alibaba Group Holding Ltd",
+          "ticker": "BABA",
+          "sector": "Consumer Discretionary",
+          "shares": 2000000,
+          "size": 200000000,
+          "dateBought": "2023-01-25",
+          "dateSold": null
+        },
+        {
+          "companyName": "Dell Technologies Inc",
+          "ticker": "DELL",
+          "sector": "Technology",
+          "shares": 1500000,
+          "size": 100000000,
+          "dateBought": "2023-02-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "Marvell Technology Inc",
+          "ticker": "MRVL",
+          "sector": "Technology",
+          "shares": 1000000,
+          "size": 50000000,
+          "dateBought": "2023-03-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "HP Inc",
+          "ticker": "HPQ",
+          "sector": "Technology",
+          "shares": 800000,
+          "size": 30000000,
+          "dateBought": "2023-01-30",
+          "dateSold": null
+        }
+      ],
+      "Q2": [
+        {
+          "companyName": "AT&T Inc",
+          "ticker": "T",
+          "sector": "Communication Services",
+          "shares": 11000000,
+          "size": 220000000,
+          "dateBought": "2023-01-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "eBay Inc",
+          "ticker": "EBAY",
+          "sector": "Consumer Discretionary",
+          "shares": 8500000,
+          "size": 425000000,
+          "dateBought": "2023-02-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Twitter Inc",
+          "ticker": "TWTR",
+          "sector": "Communication Services",
+          "shares": 5500000,
+          "size": 275000000,
+          "dateBought": "2023-03-05",
+          "dateSold": null
+        },
+        {
+          "companyName": "Pinterest Inc",
+          "ticker": "PINS",
+          "sector": "Communication Services",
+          "shares": 4500000,
+          "size": 112500000,
+          "dateBought": "2023-01-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "SoftBank Group Corp",
+          "ticker": "SFTBY",
+          "sector": "Technology",
+          "shares": 3200000,
+          "size": 160000000,
+          "dateBought": "2023-02-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "Samsung Electronics Co Ltd",
+          "ticker": "SSNLF",
+          "sector": "Technology",
+          "shares": 2700000,
+          "size": 135000000,
+          "dateBought": "2023-03-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Alibaba Group Holding Ltd",
+          "ticker": "BABA",
+          "sector": "Consumer Discretionary",
+          "shares": 2200000,
+          "size": 220000000,
+          "dateBought": "2023-01-25",
+          "dateSold": null
+        },
+        {
+          "companyName": "Dell Technologies Inc",
+          "ticker": "DELL",
+          "sector": "Technology",
+          "shares": 1600000,
+          "size": 110000000,
+          "dateBought": "2023-02-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "Marvell Technology Inc",
+          "ticker": "MRVL",
+          "sector": "Technology",
+          "shares": 1100000,
+          "size": 55000000,
+          "dateBought": "2023-03-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "HP Inc",
+          "ticker": "HPQ",
+          "sector": "Technology",
+          "shares": 900000,
+          "size": 33000000,
+          "dateBought": "2023-01-30",
+          "dateSold": null
+        }
+      ],
+      "Q3": [
+        {
+          "companyName": "AT&T Inc",
+          "ticker": "T",
+          "sector": "Communication Services",
+          "shares": 12000000,
+          "size": 240000000,
+          "dateBought": "2023-01-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "eBay Inc",
+          "ticker": "EBAY",
+          "sector": "Consumer Discretionary",
+          "shares": 9000000,
+          "size": 450000000,
+          "dateBought": "2023-02-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Twitter Inc",
+          "ticker": "TWTR",
+          "sector": "Communication Services",
+          "shares": 6000000,
+          "size": 300000000,
+          "dateBought": "2023-03-05",
+          "dateSold": null
+        },
+        {
+          "companyName": "Pinterest Inc",
+          "ticker": "PINS",
+          "sector": "Communication Services",
+          "shares": 5000000,
+          "size": 125000000,
+          "dateBought": "2023-01-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "SoftBank Group Corp",
+          "ticker": "SFTBY",
+          "sector": "Technology",
+          "shares": 3500000,
+          "size": 175000000,
+          "dateBought": "2023-02-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "Samsung Electronics Co Ltd",
+          "ticker": "SSNLF",
+          "sector": "Technology",
+          "shares": 3000000,
+          "size": 150000000,
+          "dateBought": "2023-03-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Alibaba Group Holding Ltd",
+          "ticker": "BABA",
+          "sector": "Consumer Discretionary",
+          "shares": 2500000,
+          "size": 250000000,
+          "dateBought": "2023-01-25",
+          "dateSold": null
+        },
+        {
+          "companyName": "Dell Technologies Inc",
+          "ticker": "DELL",
+          "sector": "Technology",
+          "shares": 1800000,
+          "size": 120000000,
+          "dateBought": "2023-02-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "Marvell Technology Inc",
+          "ticker": "MRVL",
+          "sector": "Technology",
+          "shares": 1200000,
+          "size": 60000000,
+          "dateBought": "2023-03-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "HP Inc",
+          "ticker": "HPQ",
+          "sector": "Technology",
+          "shares": 1000000,
+          "size": 36000000,
+          "dateBought": "2023-01-30",
+          "dateSold": null
+        }
+      ],
+      "Q4": [
+        {
+          "companyName": "AT&T Inc",
+          "ticker": "T",
+          "sector": "Communication Services",
+          "shares": 13000000,
+          "size": 260000000,
+          "dateBought": "2023-01-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "eBay Inc",
+          "ticker": "EBAY",
+          "sector": "Consumer Discretionary",
+          "shares": 9500000,
+          "size": 475000000,
+          "dateBought": "2023-02-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Twitter Inc",
+          "ticker": "TWTR",
+          "sector": "Communication Services",
+          "shares": 6500000,
+          "size": 325000000,
+          "dateBought": "2023-03-05",
+          "dateSold": null
+        },
+        {
+          "companyName": "Pinterest Inc",
+          "ticker": "PINS",
+          "sector": "Communication Services",
+          "shares": 5500000,
+          "size": 137500000,
+          "dateBought": "2023-01-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "SoftBank Group Corp",
+          "ticker": "SFTBY",
+          "sector": "Technology",
+          "shares": 3800000,
+          "size": 190000000,
+          "dateBought": "2023-02-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "Samsung Electronics Co Ltd",
+          "ticker": "SSNLF",
+          "sector": "Technology",
+          "shares": 3200000,
+          "size": 160000000,
+          "dateBought": "2023-03-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Alibaba Group Holding Ltd",
+          "ticker": "BABA",
+          "sector": "Consumer Discretionary",
+          "shares": 2700000,
+          "size": 270000000,
+          "dateBought": "2023-01-25",
+          "dateSold": null
+        },
+        {
+          "companyName": "Dell Technologies Inc",
+          "ticker": "DELL",
+          "sector": "Technology",
+          "shares": 2000000,
+          "size": 130000000,
+          "dateBought": "2023-02-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "Marvell Technology Inc",
+          "ticker": "MRVL",
+          "sector": "Technology",
+          "shares": 1300000,
+          "size": 65000000,
+          "dateBought": "2023-03-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "HP Inc",
+          "ticker": "HPQ",
+          "sector": "Technology",
+          "shares": 1100000,
+          "size": 39000000,
+          "dateBought": "2023-01-30",
+          "dateSold": null
+        }
+      ]
+    },
+    "2024": {
+      "Q1": [
+        {
+          "companyName": "AT&T Inc",
+          "ticker": "T",
+          "sector": "Communication Services",
+          "shares": 14000000,
+          "size": 280000000,
+          "dateBought": "2023-01-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "eBay Inc",
+          "ticker": "EBAY",
+          "sector": "Consumer Discretionary",
+          "shares": 10000000,
+          "size": 500000000,
+          "dateBought": "2023-02-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Twitter Inc",
+          "ticker": "TWTR",
+          "sector": "Communication Services",
+          "shares": 7000000,
+          "size": 350000000,
+          "dateBought": "2023-03-05",
+          "dateSold": null
+        },
+        {
+          "companyName": "Pinterest Inc",
+          "ticker": "PINS",
+          "sector": "Communication Services",
+          "shares": 6000000,
+          "size": 150000000,
+          "dateBought": "2023-01-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "SoftBank Group Corp",
+          "ticker": "SFTBY",
+          "sector": "Technology",
+          "shares": 4000000,
+          "size": 200000000,
+          "dateBought": "2023-02-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "Samsung Electronics Co Ltd",
+          "ticker": "SSNLF",
+          "sector": "Technology",
+          "shares": 3500000,
+          "size": 175000000,
+          "dateBought": "2023-03-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Alibaba Group Holding Ltd",
+          "ticker": "BABA",
+          "sector": "Consumer Discretionary",
+          "shares": 3000000,
+          "size": 300000000,
+          "dateBought": "2023-01-25",
+          "dateSold": null
+        },
+        {
+          "companyName": "Dell Technologies Inc",
+          "ticker": "DELL",
+          "sector": "Technology",
+          "shares": 2200000,
+          "size": 140000000,
+          "dateBought": "2023-02-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "Marvell Technology Inc",
+          "ticker": "MRVL",
+          "sector": "Technology",
+          "shares": 1400000,
+          "size": 70000000,
+          "dateBought": "2023-03-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "HP Inc",
+          "ticker": "HPQ",
+          "sector": "Technology",
+          "shares": 1200000,
+          "size": 42000000,
+          "dateBought": "2023-01-30",
+          "dateSold": null
+        }
+      ],
+      "Q2": [
+        {
+          "companyName": "AT&T Inc",
+          "ticker": "T",
+          "sector": "Communication Services",
+          "shares": 15000000,
+          "size": 300000000,
+          "dateBought": "2023-01-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "eBay Inc",
+          "ticker": "EBAY",
+          "sector": "Consumer Discretionary",
+          "shares": 10500000,
+          "size": 525000000,
+          "dateBought": "2023-02-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Twitter Inc",
+          "ticker": "TWTR",
+          "sector": "Communication Services",
+          "shares": 7500000,
+          "size": 375000000,
+          "dateBought": "2023-03-05",
+          "dateSold": null
+        },
+        {
+          "companyName": "Pinterest Inc",
+          "ticker": "PINS",
+          "sector": "Communication Services",
+          "shares": 6500000,
+          "size": 162500000,
+          "dateBought": "2023-01-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "SoftBank Group Corp",
+          "ticker": "SFTBY",
+          "sector": "Technology",
+          "shares": 4200000,
+          "size": 210000000,
+          "dateBought": "2023-02-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "Samsung Electronics Co Ltd",
+          "ticker": "SSNLF",
+          "sector": "Technology",
+          "shares": 3700000,
+          "size": 185000000,
+          "dateBought": "2023-03-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Alibaba Group Holding Ltd",
+          "ticker": "BABA",
+          "sector": "Consumer Discretionary",
+          "shares": 3200000,
+          "size": 320000000,
+          "dateBought": "2023-01-25",
+          "dateSold": null
+        },
+        {
+          "companyName": "Dell Technologies Inc",
+          "ticker": "DELL",
+          "sector": "Technology",
+          "shares": 2400000,
+          "size": 150000000,
+          "dateBought": "2023-02-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "Marvell Technology Inc",
+          "ticker": "MRVL",
+          "sector": "Technology",
+          "shares": 1500000,
+          "size": 75000000,
+          "dateBought": "2023-03-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "HP Inc",
+          "ticker": "HPQ",
+          "sector": "Technology",
+          "shares": 1300000,
+          "size": 45000000,
+          "dateBought": "2023-01-30",
+          "dateSold": null
+        }
+      ],
+      "Q3": [
+        {
+          "companyName": "AT&T Inc",
+          "ticker": "T",
+          "sector": "Communication Services",
+          "shares": 16000000,
+          "size": 320000000,
+          "dateBought": "2023-01-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "eBay Inc",
+          "ticker": "EBAY",
+          "sector": "Consumer Discretionary",
+          "shares": 11000000,
+          "size": 550000000,
+          "dateBought": "2023-02-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Twitter Inc",
+          "ticker": "TWTR",
+          "sector": "Communication Services",
+          "shares": 8000000,
+          "size": 400000000,
+          "dateBought": "2023-03-05",
+          "dateSold": null
+        },
+        {
+          "companyName": "Pinterest Inc",
+          "ticker": "PINS",
+          "sector": "Communication Services",
+          "shares": 7000000,
+          "size": 175000000,
+          "dateBought": "2023-01-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "SoftBank Group Corp",
+          "ticker": "SFTBY",
+          "sector": "Technology",
+          "shares": 4500000,
+          "size": 225000000,
+          "dateBought": "2023-02-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "Samsung Electronics Co Ltd",
+          "ticker": "SSNLF",
+          "sector": "Technology",
+          "shares": 4000000,
+          "size": 200000000,
+          "dateBought": "2023-03-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Alibaba Group Holding Ltd",
+          "ticker": "BABA",
+          "sector": "Consumer Discretionary",
+          "shares": 3500000,
+          "size": 350000000,
+          "dateBought": "2023-01-25",
+          "dateSold": null
+        },
+        {
+          "companyName": "Dell Technologies Inc",
+          "ticker": "DELL",
+          "sector": "Technology",
+          "shares": 2600000,
+          "size": 160000000,
+          "dateBought": "2023-02-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "Marvell Technology Inc",
+          "ticker": "MRVL",
+          "sector": "Technology",
+          "shares": 1600000,
+          "size": 80000000,
+          "dateBought": "2023-03-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "HP Inc",
+          "ticker": "HPQ",
+          "sector": "Technology",
+          "shares": 1400000,
+          "size": 48000000,
+          "dateBought": "2023-01-30",
+          "dateSold": null
+        }
+      ],
+      "Q4": [
+        {
+          "companyName": "AT&T Inc",
+          "ticker": "T",
+          "sector": "Communication Services",
+          "shares": 17000000,
+          "size": 340000000,
+          "dateBought": "2023-01-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "eBay Inc",
+          "ticker": "EBAY",
+          "sector": "Consumer Discretionary",
+          "shares": 11500000,
+          "size": 575000000,
+          "dateBought": "2023-02-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Twitter Inc",
+          "ticker": "TWTR",
+          "sector": "Communication Services",
+          "shares": 8500000,
+          "size": 425000000,
+          "dateBought": "2023-03-05",
+          "dateSold": null
+        },
+        {
+          "companyName": "Pinterest Inc",
+          "ticker": "PINS",
+          "sector": "Communication Services",
+          "shares": 7500000,
+          "size": 187500000,
+          "dateBought": "2023-01-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "SoftBank Group Corp",
+          "ticker": "SFTBY",
+          "sector": "Technology",
+          "shares": 4800000,
+          "size": 240000000,
+          "dateBought": "2023-02-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "Samsung Electronics Co Ltd",
+          "ticker": "SSNLF",
+          "sector": "Technology",
+          "shares": 4200000,
+          "size": 210000000,
+          "dateBought": "2023-03-10",
+          "dateSold": null
+        },
+        {
+          "companyName": "Alibaba Group Holding Ltd",
+          "ticker": "BABA",
+          "sector": "Consumer Discretionary",
+          "shares": 3800000,
+          "size": 380000000,
+          "dateBought": "2023-01-25",
+          "dateSold": null
+        },
+        {
+          "companyName": "Dell Technologies Inc",
+          "ticker": "DELL",
+          "sector": "Technology",
+          "shares": 2800000,
+          "size": 170000000,
+          "dateBought": "2023-02-20",
+          "dateSold": null
+        },
+        {
+          "companyName": "Marvell Technology Inc",
+          "ticker": "MRVL",
+          "sector": "Technology",
+          "shares": 1700000,
+          "size": 85000000,
+          "dateBought": "2023-03-15",
+          "dateSold": null
+        },
+        {
+          "companyName": "HP Inc",
+          "ticker": "HPQ",
+          "sector": "Technology",
+          "shares": 1500000,
+          "size": 51000000,
+          "dateBought": "2023-01-30",
+          "dateSold": null
+        }
+      ]
+    }
+  }
+}
