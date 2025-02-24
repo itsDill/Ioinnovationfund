@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Annual Report Summaries</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* General Styles */
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #1e1e1e;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+    }
+    header .logo img {
+      max-width: 150px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav ul li a.active {
+      color: #ff6f00;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #1e1e1e;
+      margin-bottom: 20px;
+    }
+    /* Filter/Search Bar */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .filter-bar input,
+    .filter-bar select {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    /* Bubble Cards */
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .report-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .report-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .report-card h2 {
+      color: #ff6f00;
+      margin-top: 0;
+    }
+    .report-card p {
+      line-height: 1.5;
+      color: #666;
+    }
+    .report-card .meta {
+      font-size: 14px;
+      color: #999;
+      margin-top: 10px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      color: #ccc;
+      margin-top: 40px;
+    }
+    footer .social-media a {
+      margin: 0 10px;
+      color: #00bcd4;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="assets/images/DALL·E_Logo.webp" alt="VC Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="data.html">Tools</a></li>
+        <li><a href="learn.html">Learn</a></li>
+        <li><a href="annual_report.html" class="active">Annual Reports</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h1>Annual Report Summaries</h1>
+
+    <!-- Filter/Search Bar -->
+    <div class="filter-bar">
+      <input type="text" id="searchInput" placeholder="Search companies..." />
+      <select id="regionFilter">
+        <option value="all">All Regions</option>
+        <option value="Americas">Americas</option>
+        <option value="Europe">Europe</option>
+        <option value="Asia">Asia</option>
+      </select>
+      <select id="sizeFilter">
+        <option value="all">All Sizes</option>
+        <option value="small">Small Cap</option>
+        <option value="mid">Mid Cap</option>
+        <option value="large">Large Cap</option>
+      </select>
+    </div>
+
+    <!-- Report Bubbles -->
+    <div class="report-grid" id="reportGrid">
+      <!-- Example report cards -->
+      <div class="report-card" data-name="Alpha Inc." data-region="Americas" data-size="large">
+        <h2>Alpha Inc.</h2>
+        <p>An in-depth summary of Alpha Inc.'s annual performance, highlighting key growth areas and operational strategies.</p>
+        <div class="meta">Region: Americas | Large Cap</div>
+      </div>
+      <div class="report-card" data-name="Beta Corp." data-region="Europe" data-size="mid">
+        <h2>Beta Corp.</h2>
+        <p>Key insights into Beta Corp.'s annual report, including revenue trends and market challenges.</p>
+        <div class="meta">Region: Europe | Mid Cap</div>
+      </div>
+      <div class="report-card" data-name="Gamma Ltd." data-region="Asia" data-size="small">
+        <h2>Gamma Ltd.</h2>
+        <p>Explore Gamma Ltd.'s annual report summary with a focus on innovation, cost management, and future outlook.</p>
+        <div class="meta">Region: Asia | Small Cap</div>
+      </div>
+      <div class="report-card" data-name="Delta Holdings" data-region="Americas" data-size="mid">
+        <h2>Delta Holdings</h2>
+        <p>Discover the critical insights from Delta Holdings' latest annual report, emphasizing operational efficiency and market trends.</p>
+        <div class="meta">Region: Americas | Mid Cap</div>
+      </div>
+      <div class="report-card" data-name="Epsilon PLC" data-region="Europe" data-size="large">
+        <h2>Epsilon PLC</h2>
+        <p>An overview of Epsilon PLC's annual performance, with a focus on strategic initiatives and financial highlights.</p>
+        <div class="meta">Region: Europe | Large Cap</div>
+      </div>
+      <!-- Add more report cards as needed -->
+    </div>
+  </div>
+
+  <footer>
+    <div class="social-media">
+      <a href="https://twitter.com/yourprofile" target="_blank">Twitter</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+      <a href="https://facebook.com/yourprofile" target="_blank">Facebook</a>
+    </div>
+    <p>&copy; 2024 [Your VC Company]. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Filter functionality
+    const searchInput = document.getElementById('searchInput');
+    const regionFilter = document.getElementById('regionFilter');
+    const sizeFilter = document.getElementById('sizeFilter');
+    const reportGrid = document.getElementById('reportGrid');
+    const reportCards = reportGrid.getElementsByClassName('report-card');
+
+    function filterReports() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedRegion = regionFilter.value;
+      const selectedSize = sizeFilter.value;
+
+      Array.from(reportCards).forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        const region = card.getAttribute('data-region');
+        const size = card.getAttribute('data-size');
+
+        const matchesSearch = name.includes(searchTerm);
+        const matchesRegion = (selectedRegion === 'all') || (region === selectedRegion);
+        const matchesSize = (selectedSize === 'all') || (size === selectedSize);
+
+        if(matchesSearch && matchesRegion && matchesSize) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', filterReports);
+    regionFilter.addEventListener('change', filterReports);
+    sizeFilter.addEventListener('change', filterReports);
+  </script>
+</body>
+</html>

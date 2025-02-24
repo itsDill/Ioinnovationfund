@@ -1,56 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learn - iO</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-        /* Reuse existing CSS */
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>iO Learn – Financial Insights & Tips</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #121212;
+      color: #fff;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #1e1e1e;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header .logo img {
+      max-width: 150px;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      margin-left: 20px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav ul li a.active {
+      color: #ff6f00;
+    }
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    .post {
+      border-bottom: 1px solid #333;
+      padding-bottom: 20px;
+      margin-bottom: 20px;
+    }
+    .post:last-child {
+      border-bottom: none;
+    }
+    .post h2 {
+      color: #ff6f00;
+    }
+    .post p {
+      color: #ccc;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #333;
+      margin-top: 40px;
+    }
+    footer .social-media a {
+      margin: 0 10px;
+      color: #00bcd4;
+      text-decoration: none;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <img src="assets/images/DALL·E 2024-10-14 01.56.20 - A professional logo design for 'Io Innovation Fund,' incorporating a subtle play on 'I' and 'O' resembling '1' and '0' to reference computer code, whi.webp" alt="VC Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="data.html">Tools</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <div class="logo">
+      <img src="assets/images/DALL·E_Logo.webp" alt="VC Logo">
+    </div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="data.html">Tools</a></li>
+        <li><a href="learn.html" class="active">Learn</a></li>
+        <li><a href="annual_report.html">Annual Report Tool</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <div class="content">
-        <h1>Learn</h1>
-        <p>Start from scratch or refresh your memory with games and quizzes designed to make learning about investing fun and engaging.</p>
+  <div class="container">
+    <h1>Learn Financial Insights</h1>
+    <p>Discover articles, tips, and guides to help you understand financial filings, leverage strategies, trading tips, and more.</p>
 
-        <div class="tool-description">
-            <h2>Interactive Learning</h2>
-            <p>Explore our interactive games and quizzes to master key concepts in investing and finance.</p>
-        </div>
-
-        <div class="tool-features">
-            <h2>Features</h2>
-            <ul>
-                <li>Interactive quizzes on financial concepts</li>
-                <li>Games to simulate investment scenarios</li>
-                <li>Progress tracking and rewards</li>
-            </ul>
-        </div>
+    <!-- Sample Blog Posts -->
+    <div class="post">
+      <h2>What is a 13F Filing?</h2>
+      <p>An introductory guide to 13F filings – learn what they are, why they matter, and how to use them to gain insights into institutional holdings.</p>
+      <a href="#">Read More</a>
     </div>
 
-    <footer>
-        <div class="social-media">
-            <a href="https://twitter.com/yourprofile" target="_blank">Twitter</a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-            <a href="https://facebook.com/yourprofile" target="_blank">Facebook</a>
-        </div>
-        <p>&copy; 2024 [Your VC Company]. All rights reserved.</p>
-    </footer>
+    <div class="post">
+      <h2>Mastering Leverage: Strategies and Risks</h2>
+      <p>Learn how to harness the power of leverage in your investments, while understanding the potential risks involved. This article covers practical strategies and risk management tips.</p>
+      <a href="#">Read More</a>
+    </div>
+
+    <div class="post">
+      <h2>Beginner Trading Tips</h2>
+      <p>If you're new to trading, this post offers a step-by-step guide to get started with the basics of market trends, technical analysis, and sound trading practices.</p>
+      <a href="#">Read More</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="social-media">
+      <a href="https://twitter.com/yourprofile" target="_blank">Twitter</a>
+      <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+      <a href="https://facebook.com/yourprofile" target="_blank">Facebook</a>
+    </div>
+    <p>&copy; 2024 [Your VC Company]. All rights reserved.</p>
+  </footer>
 </body>
 </html>
