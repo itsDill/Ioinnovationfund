@@ -3,99 +3,912 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IO Innovation Fund provides cutting-edge finance tools and insights for data-driven investment decisions.">
     <title>IO Innovation Fund - Finance Tools & Insights</title>
-    <link rel="stylesheet" href="assets/css/style.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary-color: #0f172a;
+            --accent-color: #38bdf8;
+            --text-color: #1e293b;
+            --light-text: #64748b;
+            --background-color: #f8fafc;
+            --card-color: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --radius: 8px;
+            --max-width: 1200px;
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--card-color);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            height: var(--header-height);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+        }
+
+        nav ul li a {
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        nav ul li a.active {
+            color: var(--primary-color);
+        }
+
+        nav ul li a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        /* Main Content Styles */
+        main {
+            margin-top: var(--header-height);
+            padding-bottom: 50px;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI1MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiIGlkPSJhIj48c3RvcCBzdG9wLW9wYWNpdHk9Ii41IiBvZmZzZXQ9IjAlIi8+PHN0b3Agc3RvcC1vcGFjaXR5PSIwIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBkPSJNMTQ0MCA1MDBjLTI5My0xNi02MjctNTQtMTQ0MCAwVjBjODQwLTE1LjcgMTEwNy02LjMgMTQ0MCAweiIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==');
+            background-size: cover;
+            background-position: bottom;
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats-bar {
+            background-color: var(--card-color);
+            padding: 20px 0;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 0 20px;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 60px 0;
+        }
+
+        section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 15px auto 0;
+        }
+
+        /* Tool Cards */
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .tool-card {
+            background-color: var(--card-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .tool-image {
+            height: 160px;
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tool-image i {
+            font-size: 48px;
+            color: var(--accent-color);
+        }
+
+        .tool-content {
+            padding: 25px;
+        }
+
+        .tool-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .tool-card p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .tool-link i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .tool-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Blog & Guides */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-post, .how-to-guide {
+            background-color: var(--card-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+
+        .post-image {
+            height: 180px;
+            background-color: #e5e7eb;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .post-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-post:hover .post-image img, .how-to-guide:hover .post-image img {
+            transform: scale(1.05);
+        }
+
+        .post-date {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--accent-color);
+            color: white;
+            padding: 5px 10px;
+            border-radius: var(--radius);
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .post-content {
+            padding: 25px;
+        }
+
+        .post-category {
+            display: inline-block;
+            padding: 4px 8px;
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary-color);
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .blog-post h3, .how-to-guide h3 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .blog-post p, .how-to-guide p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .read-more i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+
+        /* CTA Section */
+        .cta {
+            background-color: var(--secondary-color);
+            color: white;
+            text-align: center;
+            padding: 80px 0;
+        }
+
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+
+        .cta h2::after {
+            background-color: var(--accent-color);
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+
+        .newsletter-form {
+            max-width: 500px;
+            margin: 30px auto 0;
+            display: flex;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--radius) 0 0 var(--radius);
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 var(--radius) var(--radius) 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background-color: #0ea5e9;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background-color: #f1f5f9;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: var(--card-color);
+            border-radius: var(--radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 60px;
+            color: rgba(37, 99, 235, 0.1);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+            background-color: #e5e7eb;
+        }
+
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+
+        .author-info p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            color: white;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #cbd5e1;
+            transition: color 0.3s ease;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-media a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-media a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .stats-container {
+                flex-wrap: wrap;
+            }
+
+            .stat-item {
+                width: 50%;
+                margin-bottom: 20px;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            .newsletter-form input {
+                border-radius: var(--radius) var(--radius) 0 0;
+                margin-bottom: 1px;
+            }
+
+            .newsletter-form button {
+                border-radius: 0 0 var(--radius) var(--radius);
+                padding: 12px;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background-color: var(--card-color);
+                box-shadow: var(--shadow);
+            }
+
+            nav.active {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            nav ul li {
+                margin: 0;
+                margin-bottom: 15px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        @media (max-width: 576px) {
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .stat-item {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
-        <div class="logo">
-            <img src="assets/images/DALL·E 2024-10-14 01.56.20 - A professional logo design for 'Io Innovation Fund,' incorporating a subtle play on 'I' and 'O' resembling '1' and '0' to reference computer code, whi.webp" alt="IO Innovation Fund Logo">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="assets/images/DALL·E 2024-10-14 01.56.20 - A professional logo design for 'Io Innovation Fund,' incorporating a subtle play on 'I' and 'O' resembling '1' and '0' to reference computer code, whi.webp" alt="IO Innovation Fund Logo">
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="data.html">Tools</a></li>
+                    <li><a href="blog.html">Insights</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
         </div>
-        <nav>
-            <ul>
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="data.html">Tools</a></li>
-            </ul>
-        </nav>
     </header>
 
     <main>
         <!-- Hero Section -->
         <section class="hero">
-            <div class="hero-content">
+            <div class="container hero-content">
                 <h1>Empower Your Financial Decisions</h1>
                 <p>Unlock the power of data-driven insights with our free cutting-edge finance tools and reports. Stay ahead in the market with precision and confidence.</p>
-                <a href="data.html" class="cta-button">Explore Tools</a>
+                <a href="data.html" class="btn">Explore Tools <i class="fas fa-arrow-right"></i></a>
             </div>
         </section>
 
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="container stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-label">Hedge Funds Tracked</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">User Satisfaction</div>
+                </div>
+            </div>
+        </div>
+
         <!-- Featured Tools Section -->
         <section class="featured-tools">
-            <h2>Featured Tools</h2>
-            <div class="tool-grid">
-                <div class="tool-card">
-                    <img src="assets/images/13f-icon.png" alt="13F Filings Icon">
-                    <h3>13F Filings Analyzer</h3>
-                    <p>Track and analyze hedge fund filings with ease. Gain insights into top holdings and market trends.</p>
-                    <a href="13F-filings.html" class="tool-link">Learn More</a>
+            <div class="container">
+                <h2>Powerful Financial Tools</h2>
+                <p class="section-description" style="text-align: center; max-width: 700px; margin: -20px auto 30px; color: var(--light-text);">
+                    Access professional-grade financial analysis tools designed to give you an edge in today's markets.
+                </p>
+                <div class="tool-grid">
+                    <div class="tool-card">
+                        <div class="tool-image">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="tool-content">
+                            <h3>13F Filings Analyzer</h3>
+                            <p>Track and analyze hedge fund filings with ease. Gain insights into top holdings and market trends.</p>
+                            <a href="13F-filings.html" class="tool-link">Learn More <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-image">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="tool-content">
+                            <h3>Annual Reports Summaries</h3>
+                            <p>Get AI-powered summaries of annual reports to quickly understand company performance and outlook.</p>
+                            <a href="market-signals.html" class="tool-link">Learn More <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-image">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="tool-content">
+                            <h3>Data Visualizer</h3>
+                            <p>Transform complex financial data into interactive, easy-to-understand visuals for better decision-making.</p>
+                            <a href="data-visualizer.html" class="tool-link">Learn More <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="tool-card">
-                    <img src="assets/images/signals-icon.png" alt="Market Signals Icon">
-                    <h3>Market Signals</h3>
-                    <p>Receive real-time market signals to make informed trading decisions.</p>
-                    <a href="market-signals.html" class="tool-link">Learn More</a>
-                </div>
-                <div class="tool-card">
-                    <img src="assets/images/visualization-icon.png" alt="Data Visualization Icon">
-                    <h3>Data Visualizer</h3>
-                    <p>Transform complex financial data into interactive, easy-to-understand visuals.</p>
-                    <a href="data-visualizer.html" class="tool-link">Learn More</a>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="testimonials">
+            <div class="container">
+                <h2>What Our Users Say</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>The 13F Analyzer has completely transformed how I research potential investments. I can now see what the top funds are buying in minutes instead of hours of manual research.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="/api/placeholder/50/50" alt="User Avatar">
+                            </div>
+                            <div class="author-info">
+                                <h4>Sarah Johnson</h4>
+                                <p>Individual Investor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>As a financial advisor, I need reliable data I can trust. IO Innovation Fund's tools have become an essential part of my research process when building client portfolios.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="/api/placeholder/50/50" alt="User Avatar">
+                            </div>
+                            <div class="author-info">
+                                <h4>Michael Chen</h4>
+                                <p>Financial Advisor</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>The data visualization tools have helped me present complex financial concepts to my clients in a way that's easy to understand. A game-changer for my practice.</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">
+                                <img src="/api/placeholder/50/50" alt="User Avatar">
+                            </div>
+                            <div class="author-info">
+                                <h4>Jessica Williams</h4>
+                                <p>Wealth Manager</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Blog & How-To Guides Section -->
         <section class="blog-guides">
-            <h2>Latest Insights & How-To Guides</h2>
-            <div class="content-grid">
-                <div class="blog-post">
-                    <h3>Understanding 13F Filings: A Beginner's Guide</h3>
-                    <p>Learn how to interpret hedge fund filings and use them to inform your investment strategy.</p>
-                    <a href="blog-post-1.html" class="read-more">Read More</a>
+            <div class="container">
+                <h2>Latest Insights & How-To Guides</h2>
+                <div class="content-grid">
+                    <div class="blog-post">
+                        <div class="post-image">
+                            <img src="/api/placeholder/400/200" alt="Blog Post Image">
+                            <div class="post-date">Mar 2, 2025</div>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Investment</span>
+                            <h3>Understanding 13F Filings: A Beginner's Guide</h3>
+                            <p>Learn how to interpret hedge fund filings and use them to inform your investment strategy.</p>
+                            <a href="blog-post-1.html" class="read-more">Read More <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="blog-post">
+                        <div class="post-image">
+                            <img src="/api/placeholder/400/200" alt="Blog Post Image">
+                            <div class="post-date">Feb 28, 2025</div>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Strategy</span>
+                            <h3>5 Tips for Using Market Signals Effectively</h3>
+                            <p>Discover how to leverage market signals to maximize your trading success.</p>
+                            <a href="blog-post-2.html" class="read-more">Read More <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                    <div class="how-to-guide">
+                        <div class="post-image">
+                            <img src="/api/placeholder/400/200" alt="How-To Guide Image">
+                            <div class="post-date">Feb 20, 2025</div>
+                        </div>
+                        <div class="post-content">
+                            <span class="post-category">Tutorial</span>
+                            <h3>How to Use Our Data Visualizer</h3>
+                            <p>A step-by-step guide to creating stunning financial data visualizations.</p>
+                            <a href="how-to-guide-1.html" class="read-more">Read More <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="blog-post">
-                    <h3>5 Tips for Using Market Signals Effectively</h3>
-                    <p>Discover how to leverage market signals to maximize your trading success.</p>
-                    <a href="blog-post-2.html" class="read-more">Read More</a>
-                </div>
-                <div class="how-to-guide">
-                    <h3>How to Use Our Data Visualizer</h3>
-                    <p>A step-by-step guide to creating stunning financial data visualizations.</p>
-                    <a href="how-to-guide-1.html" class="read-more">Read More</a>
+                <div style="text-align: center; margin-top: 40px;">
+                    <a href="blog.html" class="btn btn-outline">View All Articles</a>
                 </div>
             </div>
         </section>
 
         <!-- Call-to-Action Section -->
         <section class="cta">
-            <h2>Ready to Take Control of Your Financial Future?</h2>
-            <p>Join thousands of users who trust IO Innovation Fund for accurate, real-time financial insights.</p>
-            <a href="signup.html" class="cta-button">Sign Up Now</a>
+            <div class="container">
+                <h2>Ready to Take Control of Your Financial Future?</h2>
+                <p>Join thousands of users who trust IO Innovation Fund for accurate, real-time financial insights.</p>
+                <a href="signup.html" class="btn">Sign Up Now <i class="fas fa-user-plus"></i></a>
+
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Enter your email address">
+                    <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                </div>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <div class="social-media">
-            <a href="https://twitter.com/yourprofile" target="_blank">X</a>
-            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-            <a href="https://facebook.com/yourprofile" target="_blank">Facebook</a>
+   <footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p style="color: #cbd5e1; margin-bottom: 20px;">IO Innovation Fund provides cutting-edge financial tools to help investors make data-driven decisions.</p>
+                <div class="social-media">
+                    <a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://facebook.com/yourprofile" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/services">Our Services</a></li>
+                    <li><a href="/portfolio">Portfolio</a></li>
+                    <li><a href="/insights">Market Insights</a></li>
+                    <li><a href="/resources">Resources</a></li>
+                    <li><a href="/contact">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Finance Street, New York, NY 10001</p>
+                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
+                <p><i class="fas fa-envelope"></i> info@ioinnovationfund.com</p>
+            </div>
         </div>
-        <p>&copy; 2024 IO Innovation Fund. All rights reserved.</p>
-    </footer>
-
-    <script src="assets/js/script.js"></script>
-</body>
-</html>
+        <div class="footer-bottom">
+            <p>&copy; 2025 IO Innovation Fund. All Rights Reserved.</p>
+            <div class="footer-links">
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/disclaimer">Disclaimer</a>
+            </div>
+        </div>
+    </div>
+</footer>

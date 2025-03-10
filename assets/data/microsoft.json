@@ -1,0 +1,16 @@
+{
+    "company": "Microsoft Corp.",
+    "year": 2023,
+    "financials": {
+        "revenue": 211.5,
+        "net_income": 72.7,
+        "total_assets": 411.1,
+        "total_liabilities": 183.4,
+        "eps": 9.45
+    },
+    "highlights": [
+        "Azure cloud revenue grew by 35%",
+        "Acquired Activision Blizzard for $68.7 billion",
+        "Strong demand for AI-driven enterprise solutions"
+    ]
+}
