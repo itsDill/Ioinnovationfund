@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Ellington Farm | Creighton, KZN</title>
+    <meta name="description" content="View photos of Ellington Farm in Creighton, KZN - our premium beef cattle, sheep, and beautiful farmland in South Africa.">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f8f8;
+        }
+
+        /* Header styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo img {
+            width: 50px;  /* Adjust size as needed */
+            height: 50px; /* Maintain aspect ratio */
+            border-radius: 50%; /* Optional: make logo circular */
+            margin-right: 15px;
+            object-fit: cover; /* Ensures image fills without distortion */
+        }
+
+        .logo span {
+            color: #F2C94C; /* Optional: keep yellow accent if desired */
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a:hover {
+            color: #F2C94C; /* Yellow accent color */
+        }
+
+        .nav-links a.active {
+            color: #F2C94C; /* Yellow accent color */
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #F2C94C; /* Yellow accent color */
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* Page header */
+        .page-header {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/470184164_1095479192025432_3794097561832373849_n.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background-color: #f1f1f1;
+            padding: 15px 0;
+        }
+
+        .breadcrumb-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .breadcrumb a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: #F2C94C; /* Yellow accent color */
+        }
+
+        .breadcrumb span {
+            color: #999;
+            margin: 0 10px;
+        }
+
+        /* Gallery Styles */
+        .gallery-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .gallery-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .filter-btn {
+            background: none;
+            border: 2px solid #F2C94C;
+            color: #333;
+            padding: 8px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #F2C94C;
+            color: #fff;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            height: 280px;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+            padding: 20px;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            background-color: #F2C94C;
+            color: #333;
+            padding: 6px 12px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 40px;
+            overflow: auto;
+        }
+
+        .lightbox-content {
+            position: relative;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .lightbox-caption {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .lightbox-caption h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .lightbox-caption p {
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            color: #F2C94C;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+        }
+
+        .lightbox-nav:hover {
+            background-color: #F2C94C;
+            color: #333;
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        /* CTA section */
+        .cta-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1200/600');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-content p {
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #F2C94C; /* Yellow accent color */
+            color: #333;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #e6b93b;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 60px 0 30px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 30px;
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        .footer-logo span {
+            color: #F2C94C; /* Yellow accent color */
+        }
+
+        .footer-about p {
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        .social-links {
+            display: flex;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: #F2C94C; /* Yellow accent color */
+            color: #333;
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #F2C94C; /* Yellow accent color */
+        }
+
+        .copyright {
+            text-align: center;
+            color: #aaa;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 40px;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+                font-size: 1.5rem;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 80%;
+                height: 100vh;
+                background-color: white;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 30px;
+                transition: all 0.5s ease;
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .nav-links li {
+                margin: 15px 0;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .filter-btn {
+                margin-bottom: 10px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .lightbox {
+                padding: 20px;
+            }
+
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="navbar">
+            <a href="gallery.html" class="logo">
+    <img src="images/309347711_401127105503918_7622046856155154688_n.jpg" alt="Ellington Farm Logo" loading="lazy">
+    <span>Ellington Farm</span>
+</a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html" class="active">Gallery</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="hamburger">☰</div>
+        </div>
+    </header>
+
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1>Our Farm Gallery</h1>
+        <p>Browse through images of our livestock, farm life, and the beautiful landscapes of Ellington Farm</p>
+    </section>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-content">
+            <a href="index.html">Home</a> <span>›</span> Gallery
+        </div>
+    </div>
+
+    <!-- Gallery Section -->
+    <section class="gallery-container">
+        <div class="section-title">
+            <h2>Photo Gallery</h2>
+            <p>Showcasing our premium livestock and the scenic beauty of our farm in Creighton, KwaZulu-Natal</p>
+        </div>
+
+
+        <!-- Gallery Grid -->
+        <div class="gallery-grid">
+            <!-- Cattle Images -->
+            <div class="gallery-item" data-category="cattle">
+                <img src="assets/images/img.png" alt="Premium Beef Cattle" class="gallery-img">
+                <div class="gallery-overlay">
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="cattle">
+                <img src="assets/images/img_1.png" alt="Cattle Herd" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Cattle Herd</h3>
+                    <p>A portion of our cattle herd grazing in the lush KZN pastures</p>
+                    <a href="#" class="view-btn" data-lightbox="2">View Larger</a>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="cattle">
+                <img src="assets/images/Pasted Graphic 16.png" alt="Brahman Bull" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Brahman Bull</h3>
+                    <p>One of our top performing Brahman bulls</p>
+                    <a href="#" class="view-btn" data-lightbox="3">View Larger</a>
+                </div>
+            </div>
+
+            <!-- Sheep Images -->
+            <div class="gallery-item" data-category="sheep">
+                <img src="images/309347711_401127105503918_7622046856155154688_n.jpg" alt="Merino Sheep" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Merino Sheep</h3>
+                    <p>Our Merino sheep known for their excellent wool quality</p>
+                    <a href="#" class="view-btn" data-lightbox="4">View Larger</a>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="sheep">
+                <img src="images/470154399_1095992775307407_4056095284902481240_n (1).jpg" alt="Dorper Lambs" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Dorper Lambs</h3>
+                    <p>Young Dorper lambs in their first weeks on the farm</p>
+                    <a href="#" class="view-btn" data-lightbox="5">View Larger</a>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="sheep">
+                <img src="images/470170674_1095479932025358_1166187987941446594_n.jpg" alt="Sheep Flock" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Sheep Flock</h3>
+                    <p>Our flock of sheep grazing on the hillsides</p>
+                    <a href="#" class="view-btn" data-lightbox="6">View Larger</a>
+                </div>
+            </div>
+
+            <!-- Farm Scenery Images -->
+            <div class="gallery-item" data-category="farm">
+                <img src="images/482062801_958417113108245_3158894003114658268_n.jpg" alt="Farm Landscape" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Farm Landscape</h3>
+                    <p>The rolling hills and lush pastures of Ellington Farm</p>
+                    <a href="#" class="view-btn" data-lightbox="7">View Larger</a>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="farm">
+                <img src="images/482240660_962272706056019_4305608556234607063_n.jpg" alt="Morning Mist" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Morning Mist</h3>
+                    <p>Early morning mist over the farm valley</p>
+                    <a href="#" class="view-btn" data-lightbox="8">View Larger</a>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="farm">
+                <img src="images/484557215_962272966055993_8219850403350660359_n.jpg" alt="Farm Buildings" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Farm Buildings</h3>
+                    <p>The main homestead and farm buildings</p>
+                    <a href="#" class="view-btn" data-lightbox="9">View Larger</a>
+                </div>
+            </div>
+
+            <!-- Team Images -->
+            <div class="gallery-item" data-category="team">
+                <img src="images/486329492_970872491862707_6160727074379241913_n.jpg" alt="Farm Owner" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Robert Ellington</h3>
+                    <p>Farm owner inspecting the cattle herd</p>
+                    <a href="#" class="view-btn" data-lightbox="10">View Larger</a>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="team">
+                <img src="images/bonsmara.png" alt="Farm Team" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Farm Team</h3>
+                    <p>Our dedicated team of farm workers during cattle weighing</p>
+                    <a href="#" class="view-btn" data-lightbox="11">View Larger</a>
+                </div>
+            </div>
+
+            <div class="gallery-item" data-category="team">
+                <img src="images/brahman.jpg" alt="Livestock Specialist" class="gallery-img">
+                <div class="gallery-overlay">
+                    <h3>Sarah Ellington</h3>
+                    <p>Our livestock specialist checking animal health</p>
+                    <a href="#" class="view-btn" data-lightbox="12">View Larger</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-img">
+            <div class="lightbox-caption">
+                <h3></h3>
+                <p></p>
+            </div>
+            <div class="lightbox-close">&times;</div>
+            <div class="lightbox-nav lightbox-prev"><i class="fas fa-chevron-left"></i></div>
+            <div class="lightbox-nav lightbox-next"><i class="fas fa-chevron-right"></i></div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Visit Our Farm</h2>
+            <p>Contact us today to arrange a visit to Ellington Farm and see our premium livestock in person.</p>
+            <a href="#" class="cta-button">Contact Us</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">Ellington <span>Farm</span></div>
+                <p>Premium livestock farm specializing in quality beef cattle and sheep with delivery services available throughout KwaZulu-Natal.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#">Cattle</a></li>
+                    <li><a href="#">Sheep</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Livestock</h4>
+                <ul>
+                    <li><a href="#">Beef Cattle</a></li>
+                    <li><a href="#">Weaned Calves</a></li>
+                    <li><a href="#">Sheep</a></li>
+                    <li><a href="#">Transport Services</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Ellington Farm. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navLinks = document.querySelector('.nav-links');
+
+            hamburger.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+            });
+
+            // Gallery filtering
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+
+                    // Get filter value
+                    const filterValue = button.getAttribute('data-filter');
+
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Lightbox functionality
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.querySelector('.lightbox-img');
+            const lightboxCaption = document.querySelector('.lightbox-caption');
+            const lightboxTitle = document.querySelector('.lightbox-caption h3');
+            const lightboxDesc = document.querySelector('.lightbox-caption p');
+            const lightboxClose = document.querySelector('.lightbox-close');
+            const lightboxPrev = document.querySelector('.lightbox-prev');
+            const lightboxNext = document.querySelector('.lightbox-next');
+            const viewButtons = document.querySelectorAll('.view-btn');
+
+            let currentIndex = 0;
+            let galleryArray = [];
+
+            // Create gallery array from gallery items
+            galleryItems.forEach(item => {
+                const imgSrc = item.querySelector('.gallery-img').getAttribute('src');
+                const title = item.querySelector('.gallery-overlay h3').textContent;
+                const desc = item.querySelector('.gallery-overlay p').textContent;
+
+                galleryArray.push({
+                    src: imgSrc,
+                    title: title,
+                    desc: desc
+                });
+            });
+
+            // Open lightbox
+            viewButtons.forEach((btn, index) => {
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    currentIndex = parseInt(this.getAttribute('data-lightbox')) - 1;
+                    openLightbox(currentIndex);
+                });
+            });
+
+            // Close lightbox
+            lightboxClose.addEventListener('click', () => {
+                lightbox.style.display = 'none';
+            });
+
+            // Click outside to close
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
+                    lightbox.style.display = 'none';
+                }
+            });
+
+            // Navigate through lightbox
+            lightboxPrev.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + galleryArray.length) % galleryArray.length;
+                updateLightbox(currentIndex);
+            });
+
+            lightboxNext.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % galleryArray.length;lightboxNext.addEventListener('click', () => {
+    currentIndex = (currentIndex + 1) % galleryArray.length;
+    updateLightbox(currentIndex);
+});
+
+// Function to open lightbox
+function openLightbox(index) {
+    updateLightbox(index);
+    lightbox.style.display = 'block';
+}
+
+// Function to update lightbox content
+function updateLightbox(index) {
+    const item = galleryArray[index];
+    lightboxImg.setAttribute('src', item.src);
+    lightboxImg.setAttribute('alt', item.title);
+    lightboxTitle.textContent = item.title;
+    lightboxDesc.textContent = item.desc;
+}
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+    if (lightbox.style.display === 'block') {
+        if (e.key === 'ArrowLeft') {
+            currentIndex = (currentIndex - 1 + galleryArray.length) % galleryArray.length;
+            updateLightbox(currentIndex);
+        } else if (e.key === 'ArrowRight') {
+            currentIndex = (currentIndex + 1) % galleryArray.length;
+            updateLightbox(currentIndex);
+        } else if (e.key === 'Escape') {
+            lightbox.style.display = 'none';
+        }
+    }
+});
