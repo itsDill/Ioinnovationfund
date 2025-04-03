@@ -1,0 +1,133 @@
+{
+  "accounts": {
+    "audition": {
+      "name": "$25,000 Audition Account",
+      "initialValue": 25000,
+      "currentValue": 25000,
+      "status": "Audition Phase",
+      "statusClass": "status-audition",
+      "containerClass": "account-audition",
+      "tradingSets": [
+        {
+          "setId": 1,
+          "lotSize": 0.1,
+          "maxLossPerTrade": 10,
+          "trades": [
+            {
+              "id": 1,
+              "date": "2023-11-15",
+              "symbol": "EURUSD",
+              "type": "buy",
+              "quantity": 0.1,
+              "entryPrice": 1.0850,
+              "exitPrice": 1.0880,
+              "profitLoss": 30,
+              "status": "closed"
+            },
+            {
+              "id": 2,
+              "date": "2023-11-16",
+              "symbol": "GBPUSD",
+              "type": "sell",
+              "quantity": 0.1,
+              "entryPrice": 1.2410,
+              "exitPrice": 1.2380,
+              "profitLoss": 30,
+              "status": "closed"
+            }
+          ],
+          "totalProfitLoss": 60,
+          "completed": false,
+          "recommendation": "In progress - 3 more trades needed"
+        }
+      ],
+      "progressRules": {
+        "progress": 50,
+        "repeat": 0,
+        "reduce": 0
+      },
+      "stats": {
+        "totalPL": 60,
+        "plChange": 0.24,
+        "winRate": 100,
+        "winRateChange": 0,
+        "progressGoal": 0.24,
+        "daysRemaining": 30,
+        "riskReward": "1:3",
+        "riskRewardChange": 0,
+        "maxDrawdown": 0
+      }
+    },
+    "funded": {
+      "name": "$1,000 Funded Account",
+      "initialValue": 1000,
+      "currentValue": 1000,
+      "status": "Funded",
+      "statusClass": "status-funded",
+      "containerClass": "account-funded",
+      "tradingSets": [
+        {
+          "setId": 1,
+          "lotSize": 0.01,
+          "maxLossPerTrade": 5,
+          "trades": [],
+          "totalProfitLoss": 0,
+          "completed": false,
+          "recommendation": "Start trading - 5 trades needed"
+        }
+      ],
+      "progressRules": {
+        "progress": 25,
+        "repeat": 0,
+        "reduce": 0
+      },
+      "stats": {
+        "totalPL": 0,
+        "plChange": 0,
+        "winRate": 0,
+        "winRateChange": 0,
+        "progressGoal": 0,
+        "daysRemaining": "N/A",
+        "riskReward": "1:0",
+        "riskRewardChange": 0,
+        "maxDrawdown": 0
+      }
+    },
+    "small": {
+      "name": "$100 Starter Account",
+      "initialValue": 100,
+      "currentValue": 100,
+      "status": "Training",
+      "statusClass": "status-training",
+      "containerClass": "account-small",
+      "tradingSets": [
+        {
+          "setId": 1,
+          "lotSize": 0.001,
+          "maxLossPerTrade": 1,
+          "trades": [],
+          "totalProfitLoss": 0,
+          "completed": false,
+          "recommendation": "Start trading - 5 trades needed"
+        }
+      ],
+      "progressRules": {
+        "progress": 5,
+        "repeat": 0,
+        "reduce": 0
+      },
+      "stats": {
+        "totalPL": 0,
+        "plChange": 0,
+        "winRate": 0,
+        "winRateChange": 0,
+        "progressGoal": 0,
+        "daysRemaining": "N/A",
+        "riskReward": "1:0",
+        "riskRewardChange": 0,
+        "maxDrawdown": 0
+      }
+    }
+  },
+  "tradingHistory": []
+}
