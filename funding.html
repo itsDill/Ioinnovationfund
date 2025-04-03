@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trader Dashboard | IO Innovation Fund</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css" rel="stylesheet">
     <style>
@@ -16,8 +16,6 @@
             --card-hover: #1c2136;
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
-            --gradient-start: #00bcd4;
-            --gradient-end: #3f51b5;
             --positive: #4caf50;
             --negative: #f44336;
             --audition-phase: #ff9800;
@@ -46,7 +44,6 @@
             padding: 0 20px;
         }
 
-        /* Header - Enhanced with glass morphism */
         .dashboard-header {
             background-color: rgba(12, 14, 20, 0.8);
             backdrop-filter: blur(12px);
@@ -72,16 +69,14 @@
         .logo img {
             height: 38px;
             margin-right: 12px;
-            filter: drop-shadow(0 0 4px rgba(0, 188, 212, 0.5));
         }
 
         .logo h1 {
             font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
         }
 
         .user-menu {
@@ -89,17 +84,29 @@
             align-items: center;
         }
 
-        .user-menu img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-            border: 2px solid var(--primary-color);
+        .account-selector {
+            position: relative;
+            margin-right: 20px;
         }
 
-        .user-menu .user-name {
-            margin-right: 15px;
-            font-weight: 500;
+        .account-selector select {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 10px 40px 10px 15px;
+            font-size: 14px;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .account-selector i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--primary-color);
         }
 
         .logout-btn {
@@ -117,7 +124,6 @@
             background-color: rgba(0, 188, 212, 0.1);
         }
 
-        /* Sidebar - Enhanced with active indicator and hover effects */
         .dashboard-layout {
             display: flex;
             min-height: calc(100vh - 70px);
@@ -128,7 +134,6 @@
             background-color: var(--card-bg);
             padding: 30px 0;
             border-right: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .nav-menu {
@@ -154,7 +159,6 @@
             margin-right: 12px;
             width: 20px;
             text-align: center;
-            font-size: 18px;
         }
 
         .nav-menu a:hover, .nav-menu a.active {
@@ -163,12 +167,10 @@
         }
 
         .nav-menu a.active {
-            background: linear-gradient(90deg, rgba(0, 188, 212, 0.2), rgba(63, 81, 181, 0.05));
             border-left: 3px solid var(--primary-color);
             font-weight: 500;
         }
 
-        /* Main Content - Enhanced spacing and typography */
         .main-content {
             flex: 1;
             padding: 30px;
@@ -179,25 +181,21 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .page-header h2 {
             font-size: 26px;
             font-weight: 600;
-            background: linear-gradient(45deg, #ffffff, #b0b0b0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
         }
 
         .date-selector {
             display: flex;
             align-items: center;
             background-color: var(--card-bg);
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             padding: 10px 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         }
 
         .date-selector select {
@@ -209,36 +207,26 @@
             cursor: pointer;
         }
 
-        /* Stats Cards - Enhanced with modern styling and transitions */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-bottom: 35px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .stat-card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 24px;
+            padding: 20px;
             box-shadow: var(--card-shadow);
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
-            background-color: var(--card-hover);
         }
 
         .stat-card h3 {
             font-size: 15px;
             color: var(--text-secondary);
-            margin-bottom: 14px;
-            font-weight: 500;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
         }
@@ -246,23 +234,18 @@
         .stat-card h3 i {
             margin-right: 8px;
             color: var(--primary-color);
-            opacity: 0.8;
         }
 
         .stat-value {
-            font-size: 30px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 8px;
-            background: linear-gradient(45deg, #ffffff, #e0e0e0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
         }
 
         .stat-change {
             display: flex;
             align-items: center;
             font-size: 14px;
-            padding: 4px 0;
         }
 
         .stat-change.positive {
@@ -271,221 +254,6 @@
 
         .stat-change.negative {
             color: var(--negative);
-        }
-
-        .stat-change i {
-            margin-right: 5px;
-        }
-
-        /* Decoration for stat cards */
-        .stat-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 30%;
-            height: 4px;
-            background: linear-gradient(90deg, transparent, var(--primary-color));
-            opacity: 0.5;
-        }
-
-        /* Charts - Enhanced with better shadows and borders */
-        .charts-container {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 24px;
-            margin-bottom: 35px;
-        }
-
-        .chart-card {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 24px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .chart-card:hover {
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-        }
-
-        .chart-card h3 {
-            margin-bottom: 24px;
-            font-size: 18px;
-            color: var(--text-primary);
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-        }
-
-        .chart-card h3 i {
-            margin-right: 10px;
-            color: var(--primary-color);
-        }
-
-        .chart-container {
-            height: 320px;
-            position: relative;
-        }
-
-        /* Recent Trades - Enhanced with better spacing and hover effects */
-        .recent-trades {
-            background-color: var(--card-bg);
-            border-radius: var(--border-radius);
-            padding: 24px;
-            box-shadow: var(--card-shadow);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 35px;
-        }
-
-        .recent-trades h3 {
-            margin-bottom: 24px;
-            font-size: 18px;
-            color: var(--text-primary);
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .recent-trades h3 i {
-            margin-right: 10px;
-            color: var(--primary-color);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 14px 16px;
-            text-align: left;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        th {
-            font-weight: 500;
-            color: var(--text-secondary);
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        tbody tr {
-            transition: background-color 0.3s;
-        }
-
-        tbody tr:hover {
-            background-color: rgba(255, 255, 255, 0.03);
-        }
-
-        .positive {
-            color: var(--positive);
-        }
-
-        .negative {
-            color: var(--negative);
-        }
-
-        .trade-type {
-            display: inline-block;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .trade-type.buy {
-            background-color: rgba(76, 175, 80, 0.15);
-            color: var(--positive);
-            border: 1px solid rgba(76, 175, 80, 0.3);
-        }
-
-        .trade-type.sell {
-            background-color: rgba(244, 67, 54, 0.15);
-            color: var(--negative);
-            border: 1px solid rgba(244, 67, 54, 0.3);
-        }
-
-        /* Account selector - Enhanced with better styling */
-        .account-selector {
-            position: relative;
-            margin-right: 20px;
-        }
-
-        .account-selector select {
-            background-color: rgba(21, 24, 36, 0.8);
-            color: var(--text-primary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 10px 40px 10px 15px;
-            font-size: 14px;
-            appearance: none;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s;
-        }
-
-        .account-selector select:hover {
-            border-color: rgba(0, 188, 212, 0.5);
-            box-shadow: 0 4px 12px rgba(0, 188, 212, 0.15);
-        }
-
-        .account-selector i {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            pointer-events: none;
-            color: var(--primary-color);
-        }
-
-        /* Account status indicators - Enhanced with better colors */
-        .account-status {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 12px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .status-audition {
-            background-color: rgba(255, 152, 0, 0.15);
-            color: #ffb74d;
-            border: 1px solid rgba(255, 152, 0, 0.3);
-        }
-
-        .status-funded {
-            background-color: rgba(76, 175, 80, 0.15);
-            color: #81c784;
-            border: 1px solid rgba(76, 175, 80, 0.3);
-        }
-
-        .status-training {
-            background-color: rgba(156, 39, 176, 0.15);
-            color: #ce93d8;
-            border: 1px solid rgba(156, 39, 176, 0.3);
-        }
-
-        /* Account-specific card styles */
-        .account-audition .stat-card {
-            border-left: 4px solid var(--audition-phase);
-        }
-
-        .account-funded .stat-card {
-            border-left: 4px solid var(--funded-phase);
-        }
-
-        .account-small .stat-card {
-            border-left: 4px solid var(--small-account);
         }
 
         .account-value {
@@ -501,257 +269,113 @@
             color: var(--primary-color);
         }
 
-        .account-value span {
-            color: var(--text-primary);
+        .account-status {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
             font-weight: 600;
+            margin-left: 10px;
         }
 
-        /* Trading System Card */
-        .trading-system-card {
+        .status-audition {
+            background-color: rgba(255, 152, 0, 0.15);
+            color: #ffb74d;
+        }
+
+        .status-funded {
+            background-color: rgba(76, 175, 80, 0.15);
+            color: #81c784;
+        }
+
+        .status-training {
+            background-color: rgba(156, 39, 176, 0.15);
+            color: #ce93d8;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .chart-card {
             background-color: var(--card-bg);
             border-radius: var(--border-radius);
-            padding: 24px;
+            padding: 20px;
             box-shadow: var(--card-shadow);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 35px;
-            position: relative;
-            overflow: hidden;
         }
 
-        .trading-system-card h3 {
+        .chart-card h3 {
             margin-bottom: 20px;
             font-size: 18px;
-            color: var(--text-primary);
-            font-weight: 600;
             display: flex;
             align-items: center;
         }
 
-        .trading-system-card h3 i {
+        .chart-card h3 i {
             margin-right: 10px;
             color: var(--primary-color);
         }
 
-        .trading-set-info {
-            margin-bottom: 24px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        .chart-container {
+            height: 300px;
         }
 
-        .trading-set-info p {
-            margin-bottom: 10px;
+        .recent-trades {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+        }
+
+        .recent-trades h3 {
+            margin-bottom: 20px;
+            font-size: 18px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
         }
 
-        .trading-set-info p span:first-child {
-            color: var(--text-secondary);
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .trading-set-info p span:last-child {
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        th {
             font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 14px;
         }
 
-        .recommendation-box {
-            background-color: rgba(0, 188, 212, 0.1);
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 188, 212, 0.3);
-            margin-top: 15px;
+        tbody tr:hover {
+            background-color: rgba(255, 255, 255, 0.03);
         }
 
-        .recommendation-progress {
-            background-color: rgba(76, 175, 80, 0.1);
-            border: 1px solid rgba(76, 175, 80, 0.3);
+        .trade-type {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
-        .recommendation-repeat {
-            background-color: rgba(255, 152, 0, 0.1);
-            border: 1px solid rgba(255, 152, 0, 0.3);
-        }
-
-        .recommendation-reduce {
-            background-color: rgba(244, 67, 54, 0.1);
-            border: 1px solid rgba(244, 67, 54, 0.3);
-        }
-
-        .recommendation-box h4 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-            font-size: 16px;
-        }
-
-        .recommendation-progress h4 {
+        .trade-type.buy {
+            background-color: rgba(76, 175, 80, 0.15);
             color: var(--positive);
         }
 
-        .recommendation-repeat h4 {
-            color: var(--audition-phase);
-        }
-
-        .recommendation-reduce h4 {
+        .trade-type.sell {
+            background-color: rgba(244, 67, 54, 0.15);
             color: var(--negative);
-        }
-
-        .recommendation-box p {
-            font-size: 15px;
-            line-height: 1.5;
-        }
-
-        .action-button {
-            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 30px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 188, 212, 0.3);
-            margin-top: 15px;
-            display: inline-block;
-        }
-
-        .action-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 188, 212, 0.4);
-        }
-
-        /* Add Trade Form */
-        .add-trade-form {
-            display: none;
-            margin-top: 20px;
-            background-color: rgba(21, 24, 36, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 188, 212, 0.2);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px 15px;
-            background-color: rgba(12, 14, 20, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--text-primary);
-        }
-
-        .form-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .form-buttons button {
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .submit-button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-        }
-
-        .cancel-button {
-            background-color: transparent;
-            color: var(--text-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .submit-button:hover {
-            background-color: var(--secondary-color);
-        }
-
-        .cancel-button:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-        }
-
-        /* Progress Rules Display */
-        .progress-rules {
-            margin-top: 20px;
-            background-color: rgba(21, 24, 36, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 188, 212, 0.2);
-        }
-
-        .progress-rules h4 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .rule-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .rule-item:last-child {
-            border-bottom: none;
-        }
-
-        .rule-name {
-            color: var(--text-secondary);
-        }
-
-        .rule-value {
-            font-weight: 500;
-        }
-
-        /* Badge for number of trades */
-        .trade-count {
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 20px;
-            padding: 2px 8px;
-            margin-left: 10px;
-        }
-
-        /* Progress bar */
-        .progress-bar-container {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            height: 10px;
-            width: 100%;
-            margin-top: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            border-radius: 10px;
-            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-            transition: width 0.5s ease;
-        }
-
-        /* Responsive improvements */
-        @media (max-width: 1200px) {
-            .charts-container {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
         }
 
         @media (max-width: 768px) {
@@ -778,25 +402,8 @@
             .nav-menu a {
                 padding: 10px 15px;
                 white-space: nowrap;
-                border-left: none;
-                border-bottom: 3px solid transparent;
                 border-radius: 20px;
                 margin-right: 0;
-            }
-
-            .nav-menu a:hover, .nav-menu a.active {
-                border-left: none;
-                border-bottom: none;
-            }
-
-            .nav-menu a.active {
-                background: rgba(0, 188, 212, 0.15);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
             }
 
             .page-header {
@@ -808,9 +415,26 @@
                 margin-top: 15px;
                 width: 100%;
             }
+        }
+
+        @media (max-width: 600px) {
+            .charts-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .user-menu {
+                margin-top: 15px;
+                width: 100%;
+                justify-content: space-between;
+            }
 
             .account-selector {
-                margin-bottom: 15px;
+                margin-right: 0;
                 width: 100%;
             }
 
@@ -824,19 +448,16 @@
     <header class="dashboard-header">
         <div class="container header-content">
             <div class="logo">
-                <img src="/api/placeholder/80/80" alt="IO Innovation Fund Logo">
+                <img src="logo.svg" alt="IO Innovation Fund Logo">
                 <h1>IO Innovation Fund</h1>
             </div>
             <div class="user-menu">
                 <div class="account-selector">
                     <select id="accountSelect">
-                        <option value="audition">$25,000 Audition Account</option>
-                        <option value="funded">$1,000 Funded Account</option>
-                        <option value="small">$100 Starter Account</option>
+                        <option value="">Loading accounts...</option>
                     </select>
                     <i class="fas fa-chevron-down"></i>
                 </div>
-                <span class="user-name">Trader Dashboard</span>
                 <button class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
@@ -850,10 +471,8 @@
                 <li><a href="#" class="active"><i class="fas fa-chart-line"></i> Dashboard</a></li>
                 <li><a href="#"><i class="fas fa-exchange-alt"></i> Trades</a></li>
                 <li><a href="#"><i class="fas fa-wallet"></i> Portfolio</a></li>
-                <li><a href="#"><i class="fas fa-chart-pie"></i> Analytics</a></li>
                 <li><a href="#"><i class="fas fa-bell"></i> Alerts</a></li>
                 <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-                <li><a href="#"><i class="fas fa-file-alt"></i> Reports</a></li>
             </ul>
         </aside>
 
@@ -864,8 +483,8 @@
                         <h2>Trader Performance Dashboard</h2>
                         <div class="account-value">
                             <i class="fas fa-wallet"></i>
-                            Account Value: <span id="accountValue">$25,000</span>
-                            <span class="account-status status-audition" id="accountStatus">Audition Phase</span>
+                            Account Value: <span id="accountValue">$0</span>
+                            <span class="account-status" id="accountStatus">Loading...</span>
                         </div>
                     </div>
                     <div class="date-selector">
@@ -875,142 +494,12 @@
                             <option value="30" selected>Last 30 Days</option>
                             <option value="90">Last Quarter</option>
                             <option value="365">Last Year</option>
-                            <option value="custom">Custom Range</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Trading System Card -->
-                <div class="trading-system-card">
-                    <h3><i class="fas fa-cogs"></i> Trading System</h3>
-                    <div class="trading-set-info">
-                        <p>
-                            <span>Current Set:</span>
-                            <span id="currentSet">Set #1</span>
-                        </p>
-                        <p>
-                            <span>Lot Size:</span>
-                            <span id="lotSize">0.1</span>
-                        </p>
-                        <p>
-                            <span>Max Loss Per Trade:</span>
-                            <span id="maxLossPerTrade">$10</span>
-                        </p>
-                        <p>
-                            <span>Trades in Current Set:</span>
-                            <span id="tradesInSet">0/5</span>
-                        </p>
-                        <p>
-                            <span>Current Set P/L:</span>
-                            <span id="currentSetPL">$0</span>
-                        </p>
-                        <div class="progress-bar-container">
-                            <div class="progress-bar" id="tradeProgressBar" style="width: 0%"></div>
-                        </div>
-                    </div>
-
-                    <div class="progress-rules">
-                        <h4>Progress Rules:</h4>
-                        <div class="rule-item">
-                            <span class="rule-name">Progress (Increase lot size):</span>
-                            <span class="rule-value" id="progressRule">+$50 or more</span>
-                        </div>
-                        <div class="rule-item">
-                            <span class="rule-name">Repeat (Same lot size):</span>
-                            <span class="rule-value" id="repeatRule">$0 to +$49.99</span>
-                        </div>
-                        <div class="rule-item">
-                            <span class="rule-name">Reduce (Decrease lot size):</span>
-                            <span class="rule-value" id="reduceRule">Less than $0</span>
-                        </div>
-                    </div>
-
-                    <div class="recommendation-box" id="recommendationBox"><h4>Current Recommendation</h4>
-                        <p id="recommendationText">Start trading - you need to complete 5 trades in this set.</p>
-                    </div>
-
-                    <button class="action-button" id="addTradeBtn">
-                        <i class="fas fa-plus-circle"></i> Add New Trade
-                    </button>
-
-                    <div class="add-trade-form" id="addTradeForm">
-                        <div class="form-group">
-                            <label for="tradeDate">Date</label>
-                            <input type="date" id="tradeDate" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="tradeSymbol">Symbol</label>
-                            <input type="text" id="tradeSymbol" placeholder="e.g. EURUSD" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="tradeType">Type</label>
-                            <select id="tradeType" required>
-                                <option value="buy">Buy</option>
-                                <option value="sell">Sell</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="tradeQuantity">Quantity (Lot Size)</label>
-                            <input type="number" id="tradeQuantity" step="0.01" required readonly>
-                        </div>
-                        <div class="form-group">
-                            <label for="tradeEntryPrice">Entry Price</label>
-                            <input type="number" id="tradeEntryPrice" step="0.00001" placeholder="Entry price" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="tradeExitPrice">Exit Price</label>
-                            <input type="number" id="tradeExitPrice" step="0.00001" placeholder="Exit price" required>
-                        </div>
-                        <div class="form-buttons">
-                            <button class="cancel-button" id="cancelTradeBtn">Cancel</button>
-                            <button class="submit-button" id="submitTradeBtn">Add Trade</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="stats-grid account-audition" id="statsContainer">
-                    <div class="stat-card">
-                        <h3><i class="fas fa-chart-line"></i> Total Profit/Loss</h3>
-                        <div class="stat-value" id="totalPL">$0</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> <span id="plChange">0%</span> vs last period
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <h3><i class="fas fa-trophy"></i> Win Rate</h3>
-                        <div class="stat-value" id="winRate">0%</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> <span id="winRateChange">0%</span> vs last period
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <h3><i class="fas fa-bullseye"></i> Progress to Goal</h3>
-                        <div class="stat-value" id="progressGoal">0%</div>
-                        <div class="stat-change" id="goalStatusText">
-                            <i class="fas fa-bullseye"></i> Goal not set
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <h3><i class="fas fa-hourglass-half"></i> Completed Sets</h3>
-                        <div class="stat-value" id="completedSets">0</div>
-                        <div class="stat-change">
-                            <i class="fas fa-clock"></i> <span id="accountPhase">in audition phase</span>
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <h3><i class="fas fa-balance-scale"></i> Risk/Reward Ratio</h3>
-                        <div class="stat-value" id="riskReward">0:0</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-arrow-up"></i> <span id="riskRewardChange">0</span> vs target
-                        </div>
-                    </div>
-                    <div class="stat-card">
-                        <h3><i class="fas fa-percentage"></i> Max Drawdown</h3>
-                        <div class="stat-value" id="maxDrawdown">0%</div>
-                        <div class="stat-change positive">
-                            <i class="fas fa-check-circle"></i> <span id="drawdownStatus">No data yet</span>
-                        </div>
-                    </div>
+                <div class="stats-grid" id="statsContainer">
+                    <!-- Stats will be populated by JavaScript -->
                 </div>
 
                 <div class="charts-container">
@@ -1031,7 +520,7 @@
                 <div class="recent-trades">
                     <h3>
                         <div><i class="fas fa-exchange-alt"></i> Recent Trades</div>
-                        <div id="currentSetLabel" class="account-status status-audition">Set #1</div>
+                        <div class="account-status" id="currentSetLabel">Loading...</div>
                     </h3>
                     <table>
                         <thead>
@@ -1043,11 +532,12 @@
                                 <th>Entry</th>
                                 <th>Exit</th>
                                 <th>P/L</th>
-                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody id="recentTradesBody">
-                            <!-- Trade rows will be added dynamically -->
+                            <tr>
+                                <td colspan="7" style="text-align: center;">Loading trade data...</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1057,300 +547,172 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script>
-        // Trading System Data Structure
-        let tradingData = {
-            accounts: {
-                audition: {
-                    name: "$25,000 Audition Account",
-                    initialValue: 25000,
-                    currentValue: 25000,
-                    status: "Audition Phase",
-                    statusClass: "status-audition",
-                    containerClass: "account-audition",
-                    tradingSets: [
-                        {
-                            setId: 1,
-                            lotSize: 0.1,
-                            maxLossPerTrade: 10,
-                            trades: [],
-                            totalProfitLoss: 0,
-                            completed: false,
-                            recommendation: "Start trading - 5 trades needed"
-                        }
-                    ],
-                    progressRules: {
-                        progress: 50,
-                        repeat: 0,
-                        reduce: 0
-                    },
-                    stats: {
-                        totalPL: 0,
-                        plChange: 0,
-                        winRate: 0,
-                        winRateChange: 0,
-                        progressGoal: 0,
-                        completedSets: 0,
-                        riskReward: "0:0",
-                        riskRewardChange: 0,
-                        maxDrawdown: 0
-                    }
-                },
-                funded: {
-                    name: "$1,000 Funded Account",
-                    initialValue: 1000,
-                    currentValue: 1000,
-                    status: "Funded",
-                    statusClass: "status-funded",
-                    containerClass: "account-funded",
-                    tradingSets: [
-                        {
-                            setId: 1,
-                            lotSize: 0.01,
-                            maxLossPerTrade: 5,
-                            trades: [],
-                            totalProfitLoss: 0,
-                            completed: false,
-                            recommendation: "Start trading - 5 trades needed"
-                        }
-                    ],
-                    progressRules: {
-                        progress: 25,
-                        repeat: 0,
-                        reduce: 0
-                    },
-                    stats: {
-                        totalPL: 0,
-                        plChange: 0,
-                        winRate: 0,
-                        winRateChange: 0,
-                        progressGoal: 0,
-                        completedSets: 0,
-                        riskReward: "0:0",
-                        riskRewardChange: 0,
-                        maxDrawdown: 0
-                    }
-                },
-                small: {
-                    name: "$100 Starter Account",
-                    initialValue: 100,
-                    currentValue: 100,
-                    status: "Training",
-                    statusClass: "status-training",
-                    containerClass: "account-small",
-                    tradingSets: [
-                        {
-                            setId: 1,
-                            lotSize: 0.001,
-                            maxLossPerTrade: 1,
-                            trades: [],
-                            totalProfitLoss: 0,
-                            completed: false,
-                            recommendation: "Start trading - 5 trades needed"
-                        }
-                    ],
-                    progressRules: {
-                        progress: 5,
-                        repeat: 0,
-                        reduce: 0
-                    },
-                    stats: {
-                        totalPL: 0,
-                        plChange: 0,
-                        winRate: 0,
-                        winRateChange: 0,
-                        progressGoal: 0,
-                        completedSets: 0,
-                        riskReward: "0:0",
-                        riskRewardChange: 0,
-                        maxDrawdown: 0
-                    }
-                }
-            },
-            currentAccount: "audition"
-        };
-
         // DOM Elements
         const accountSelect = document.getElementById('accountSelect');
         const accountValue = document.getElementById('accountValue');
         const accountStatus = document.getElementById('accountStatus');
         const statsContainer = document.getElementById('statsContainer');
-
-        const currentSet = document.getElementById('currentSet');
-        const lotSize = document.getElementById('lotSize');
-        const maxLossPerTrade = document.getElementById('maxLossPerTrade');
-        const tradesInSet = document.getElementById('tradesInSet');
-        const currentSetPL = document.getElementById('currentSetPL');
-        const tradeProgressBar = document.getElementById('tradeProgressBar');
-
-        const progressRule = document.getElementById('progressRule');
-        const repeatRule = document.getElementById('repeatRule');
-        const reduceRule = document.getElementById('reduceRule');
-
-        const recommendationBox = document.getElementById('recommendationBox');
-        const recommendationText = document.getElementById('recommendationText');
-
-        const addTradeBtn = document.getElementById('addTradeBtn');
-        const addTradeForm = document.getElementById('addTradeForm');
-        const cancelTradeBtn = document.getElementById('cancelTradeBtn');
-        const submitTradeBtn = document.getElementById('submitTradeBtn');
-
-        const tradeDate = document.getElementById('tradeDate');
-        const tradeSymbol = document.getElementById('tradeSymbol');
-        const tradeType = document.getElementById('tradeType');
-        const tradeQuantity = document.getElementById('tradeQuantity');
-        const tradeEntryPrice = document.getElementById('tradeEntryPrice');
-        const tradeExitPrice = document.getElementById('tradeExitPrice');
-
-        const totalPL = document.getElementById('totalPL');
-        const plChange = document.getElementById('plChange');
-        const winRate = document.getElementById('winRate');
-        const winRateChange = document.getElementById('winRateChange');
-        const progressGoal = document.getElementById('progressGoal');
-        const goalStatusText = document.getElementById('goalStatusText');
-        const completedSets = document.getElementById('completedSets');
-        const accountPhase = document.getElementById('accountPhase');
-        const riskReward = document.getElementById('riskReward');
-        const riskRewardChange = document.getElementById('riskRewardChange');
-        const maxDrawdown = document.getElementById('maxDrawdown');
-        const drawdownStatus = document.getElementById('drawdownStatus');
-
-        const currentSetLabel = document.getElementById('currentSetLabel');
         const recentTradesBody = document.getElementById('recentTradesBody');
+        const currentSetLabel = document.getElementById('currentSetLabel');
+        const timePeriodSelect = document.getElementById('timePeriod');
 
         // Charts
         let profitLossChart;
         let tradeDistributionChart;
 
+        // Trading Data
+        let tradingData = {};
+
         // Initialize Dashboard
-        function initDashboard() {
-            // Set today's date as default
-            tradeDate.value = new Date().toISOString().split('T')[0];
+        async function initDashboard() {
+            // Load data from trades.json
+            try {
+                const response = await fetch('trades.json');
+                tradingData = await response.json();
 
-            // Set up event listeners
-            accountSelect.addEventListener('change', changeAccount);
-            addTradeBtn.addEventListener('click', showAddTradeForm);
-            cancelTradeBtn.addEventListener('click', hideAddTradeForm);
-            submitTradeBtn.addEventListener('click', submitTrade);
+                // Populate account selector
+                populateAccountSelector();
 
-            // Initialize charts
-            initCharts();
+                // Initialize charts
+                initCharts();
 
-            // Load the default account
-            loadAccount(tradingData.currentAccount);
+                // Load the first account by default
+                if (tradingData.accounts && Object.keys(tradingData.accounts).length > 0) {
+                    const firstAccount = Object.keys(tradingData.accounts)[0];
+                    loadAccount(firstAccount);
+                }
+            } catch (error) {
+                console.error('Error loading trading data:', error);
+                alert('Failed to load trading data. Please try again later.');
+            }
         }
 
-        // Change Account
-        function changeAccount() {
-            tradingData.currentAccount = accountSelect.value;
-            loadAccount(tradingData.currentAccount);
+        // Populate Account Selector
+        function populateAccountSelector() {
+            accountSelect.innerHTML = '';
+
+            for (const [key, account] of Object.entries(tradingData.accounts)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = account.name;
+                accountSelect.appendChild(option);
+            }
+
+            accountSelect.addEventListener('change', (e) => {
+                loadAccount(e.target.value);
+            });
         }
 
-        // Load Account
+        // Load Account Data
         function loadAccount(accountKey) {
             const account = tradingData.accounts[accountKey];
+            if (!account) return;
 
             // Update account info
             accountValue.textContent = formatCurrency(account.currentValue);
             accountStatus.textContent = account.status;
-            accountStatus.className = `account-status ${account.statusClass}`;
-            statsContainer.className = `stats-grid ${account.containerClass}`;
+            accountStatus.className = `account-status status-${account.statusClass}`;
 
             // Get current trading set
             const currentTradingSet = account.tradingSets[account.tradingSets.length - 1];
 
-            // Update trading system info
-            currentSet.textContent = `Set #${currentTradingSet.setId}`;
-            lotSize.textContent = currentTradingSet.lotSize;
-            maxLossPerTrade.textContent = formatCurrency(currentTradingSet.maxLossPerTrade);
-            tradesInSet.textContent = `${currentTradingSet.trades.length}/5`;
-            currentSetPL.textContent = formatCurrency(currentTradingSet.totalProfitLoss);
-
-            // Update progress bar
-            const progressPercentage = (currentTradingSet.trades.length / 5) * 100;
-            tradeProgressBar.style.width = `${progressPercentage}%`;
-
-            // Update progress rules
-            progressRule.textContent = `+${formatCurrency(account.progressRules.progress)} or more`;
-            repeatRule.textContent = `${formatCurrency(account.progressRules.repeat)} to +${formatCurrency(account.progressRules.progress - 0.01)}`;
-            reduceRule.textContent = `Less than ${formatCurrency(account.progressRules.reduce)}`;
-
-            // Update recommendation
-            updateRecommendation(account, currentTradingSet);
-
-            // Update statistics
-            totalPL.textContent = formatCurrency(account.stats.totalPL);
-            plChange.textContent = `${account.stats.plChange}%`;
-            winRate.textContent = `${account.stats.winRate}%`;
-            winRateChange.textContent = `${account.stats.winRateChange}%`;
-            progressGoal.textContent = `${account.stats.progressGoal}%`;
-            completedSets.textContent = account.stats.completedSets;
-            accountPhase.textContent = `in ${account.status.toLowerCase()}`;
-            riskReward.textContent = account.stats.riskReward;
-            riskRewardChange.textContent = account.stats.riskRewardChange;
-            maxDrawdown.textContent = `${account.stats.maxDrawdown}%`;
+            // Update stats
+            updateStats(account);
 
             // Update trades table
             updateTradesTable(currentTradingSet);
-
-            // Set form quantity to current lot size
-            tradeQuantity.value = currentTradingSet.lotSize;
 
             // Update charts
             updateCharts(account);
 
             // Update current set label
             currentSetLabel.textContent = `Set #${currentTradingSet.setId}`;
-            currentSetLabel.className = `account-status ${account.statusClass}`;
+            currentSetLabel.className = `account-status status-${account.statusClass}`;
         }
 
-        // Update recommendation
-        function updateRecommendation(account, tradingSet) {
-            // Default class
-            recommendationBox.className = 'recommendation-box';
+        // Update Stats Cards
+        function updateStats(account) {
+            statsContainer.innerHTML = '';
 
-            if (tradingSet.trades.length < 5) {
-                // Still need more trades
-                recommendationText.textContent = `Complete ${5 - tradingSet.trades.length} more trades to get a recommendation.`;
-            } else {
-                // Set is complete, provide recommendation
-                if (tradingSet.totalProfitLoss >= account.progressRules.progress) {
-                    // Progress - increase lot size
-                    recommendationBox.className = 'recommendation-box recommendation-progress';
-                    recommendationText.textContent = `PROGRESS: Increase lot size to ${(tradingSet.lotSize * 2).toFixed(3)} for the next set.`;
-                } else if (tradingSet.totalProfitLoss >= account.progressRules.repeat) {
-                    // Repeat - keep same lot size
-                    recommendationBox.className = 'recommendation-box recommendation-repeat';
-                    recommendationText.textContent = `REPEAT: Continue with the current lot size of ${tradingSet.lotSize} for the next set.`;
-                } else {
-                    // Reduce - decrease lot size
-                    recommendationBox.className = 'recommendation-box recommendation-reduce';
-                    recommendationText.textContent = `REDUCE: Decrease lot size to ${(tradingSet.lotSize / 2).toFixed(3)} for the next set.`;
+            const stats = [
+                {
+                    title: 'Total Profit/Loss',
+                    icon: 'fas fa-chart-line',
+                    value: formatCurrency(account.stats.totalPL),
+                    change: `${account.stats.plChange}% vs last period`,
+                    changeClass: account.stats.plChange >= 0 ? 'positive' : 'negative'
+                },
+                {
+                    title: 'Win Rate',
+                    icon: 'fas fa-trophy',
+                    value: `${account.stats.winRate}%`,
+                    change: `${account.stats.winRateChange}% vs last period`,
+                    changeClass: account.stats.winRateChange >= 0 ? 'positive' : 'negative'
+                },
+                {
+                    title: 'Progress to Goal',
+                    icon: 'fas fa-bullseye',
+                    value: `${account.stats.progressGoal}%`,
+                    change: account.stats.progressGoal >= 100 ? 'Goal achieved' : 'Goal in progress',
+                    changeClass: account.stats.progressGoal >= 100 ? 'positive' : ''
+                },
+                {
+                    title: 'Completed Sets',
+                    icon: 'fas fa-hourglass-half',
+                    value: account.stats.completedSets,
+                    change: `in ${account.status.toLowerCase()}`,
+                    changeClass: ''
+                },
+                {
+                    title: 'Risk/Reward Ratio',
+                    icon: 'fas fa-balance-scale',
+                    value: account.stats.riskReward,
+                    change: `${account.stats.riskRewardChange} vs target`,
+                    changeClass: account.stats.riskRewardChange >= 0 ? 'positive' : 'negative'
+                },
+                {
+                    title: 'Max Drawdown',
+                    icon: 'fas fa-percentage',
+                    value: `${account.stats.maxDrawdown}%`,
+                    change: account.stats.maxDrawdown > 10 ? 'High risk' : 'Within limits',
+                    changeClass: account.stats.maxDrawdown > 10 ? 'negative' : 'positive'
                 }
-            }
+            ];
+
+            stats.forEach(stat => {
+                const statCard = document.createElement('div');
+                statCard.className = 'stat-card';
+                statCard.innerHTML = `
+                    <h3><i class="${stat.icon}"></i> ${stat.title}</h3>
+                    <div class="stat-value">${stat.value}</div>
+                    <div class="stat-change ${stat.changeClass}">
+                        ${stat.changeClass.includes('positive') ? '<i class="fas fa-arrow-up"></i>' : ''}
+                        ${stat.changeClass.includes('negative') ? '<i class="fas fa-arrow-down"></i>' : ''}
+                        ${stat.change}
+                    </div>
+                `;
+                statsContainer.appendChild(statCard);
+            });
         }
 
-        // Update trades table
+        // Update Trades Table
         function updateTradesTable(tradingSet) {
-            // Clear the table
             recentTradesBody.innerHTML = '';
 
-            // Add trades in reverse order (newest first)
-            const trades = [...tradingSet.trades].reverse();
-
-            if (trades.length === 0) {
-                // No trades yet
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td colspan="8" style="text-align: center;">No trades recorded yet. Add your first trade to get started.</td>
+            if (tradingSet.trades.length === 0) {
+                recentTradesBody.innerHTML = `
+                    <tr>
+                        <td colspan="7" style="text-align: center;">No trades recorded yet.</td>
+                    </tr>
                 `;
-                recentTradesBody.appendChild(row);
                 return;
             }
 
-            // Add each trade to the table
-            trades.forEach(trade => {
-                const row = document.createElement('tr');
+            // Show most recent trades first
+            const recentTrades = [...tradingSet.trades].reverse().slice(0, 10);
 
+            recentTrades.forEach(trade => {
+                const row = document.createElement('tr');
                 const profitLossClass = trade.profitLoss >= 0 ? 'positive' : 'negative';
                 const profitLossPrefix = trade.profitLoss >= 0 ? '+' : '';
 
@@ -1362,9 +724,7 @@
                     <td>${trade.entryPrice}</td>
                     <td>${trade.exitPrice}</td>
                     <td class="${profitLossClass}">${profitLossPrefix}${formatCurrency(trade.profitLoss)}</td>
-                    <td>${trade.status}</td>
                 `;
-
                 recentTradesBody.appendChild(row);
             });
         }
@@ -1384,53 +744,26 @@
                         backgroundColor: 'rgba(0, 188, 212, 0.1)',
                         borderWidth: 3,
                         fill: true,
-                        tension: 0.4,
-                        pointBackgroundColor: '#ffffff',
-                        pointBorderColor: '#00bcd4',
-                        pointRadius: 4,
-                        pointHoverRadius: 6
+                        tension: 0.4
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     plugins: {
-                        legend: {
-                            display: false
-                        },
+                        legend: { display: false },
                         tooltip: {
-                            backgroundColor: 'rgba(21, 24, 36, 0.9)',
-                            titleFont: {
-                                size: 14
-                            },
-                            bodyFont: {
-                                size: 14
-                            },
                             callbacks: {
-                                label: function(context) {
-                                    return `P/L: ${formatCurrency(context.raw)}`;
-                                }
+                                label: (context) => `P/L: ${formatCurrency(context.raw)}`
                             }
                         }
                     },
                     scales: {
-                        x: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.05)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        },
+                        x: { grid: { color: 'rgba(255, 255, 255, 0.05)' } },
                         y: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.05)'
-                            },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
                             ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)',
-                                callback: function(value) {
-                                    return formatCurrency(value);
-                                }
+                                callback: (value) => formatCurrency(value)
                             }
                         }
                     }
@@ -1456,38 +789,21 @@
                     plugins: {
                         legend: {
                             position: 'bottom',
-                            labels: {
-                                padding: 20,
-                                color: 'rgba(255, 255, 255, 0.7)',
-                                font: {
-                                    size: 14
-                                }
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(21, 24, 36, 0.9)',
-                            titleFont: {
-                                size: 14
-                            },
-                            bodyFont: {
-                                size: 14
-                            }
+                            labels: { color: 'rgba(255, 255, 255, 0.7)' }
                         }
                     }
                 }
             });
         }
 
-        // Update Charts
+        // Update Charts with Account Data
         function updateCharts(account) {
             // Flatten all trades from all sets
             const allTrades = account.tradingSets.flatMap(set => set.trades);
 
             if (allTrades.length === 0) {
-                // No trades yet
                 profitLossChart.data.labels = [];
                 profitLossChart.data.datasets[0].data = [];
-
                 tradeDistributionChart.data.datasets[0].data = [0, 0];
 
                 profitLossChart.update();
@@ -1523,155 +839,18 @@
             tradeDistributionChart.update();
         }
 
-        // Show Add Trade Form
-        function showAddTradeForm() {
-            addTradeForm.style.display = 'block';
-            addTradeBtn.style.display = 'none';
+        // Format Currency
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(value);
         }
 
-        // Hide Add Trade Form
-        function hideAddTradeForm() {
-            addTradeForm.style.display = 'none';
-            addTradeBtn.style.display = 'inline-block';
-        }
-
-        // Submit Trade
-        function submitTrade() {
-            // Get the current account and trading set
-            const account = tradingData.accounts[tradingData.currentAccount];
-            const currentTradingSet = account.tradingSets[account.tradingSets.length - 1];
-
-            // Calculate P/L
-            const quantity = parseFloat(tradeQuantity.value);
-            const entryPrice = parseFloat(tradeEntryPrice.value);
-            const exitPrice = parseFloat(tradeExitPrice.value);
-
-            let pips;
-            if (tradeType.value === 'buy') {
-                pips = exitPrice - entryPrice;
-            } else {
-                pips = entryPrice - exitPrice;
-            }
-
-            // For Forex, typical pip value calculation (simplified)
-            // For most pairs, 1 pip = 0.0001, with exceptions like JPY pairs
-            const isJpyPair = tradeSymbol.value.toUpperCase().includes('JPY');
-            const pipMultiplier = isJpyPair ? 0.01 : 0.0001;
-            const pipsDecimal = pips / pipMultiplier;
-
-            // Typical pip value calculation for forex
-            // 10 USD per pip for 1.0 lot, so 0.1 lot = 1 USD per pip
-            const pipValue = quantity * 10;
-            const profitLoss = pipsDecimal * pipValue;
-
-            // Create the trade object
-            const newTrade = {
-                id: Date.now(),
-                date: tradeDate.value,
-                symbol: tradeSymbol.value.toUpperCase(),
-                type: tradeType.value,
-                quantity: quantity,
-                entryPrice: entryPrice,
-                exitPrice: exitPrice,
-                profitLoss: profitLoss,
-                status: 'closed'
-            };
-
-            // Add the trade to the current set
-            currentTradingSet.trades.push(newTrade);
-
-            // Update the set's total P/L
-            currentTradingSet.totalProfitLoss += profitLoss;
-
-            // Update account statistics
-            updateAccountStats(account);
-
-            // Check if the set is complete (5 trades)
-            if (currentTradingSet.trades.length >= 5) {
-                currentTradingSet.completed = true;
-
-                // Determine the recommendation
-                if (currentTradingSet.totalProfitLoss >= account.progressRules.progress) {
-                    // Progress - create new set with double lot size
-                    const newLotSize = currentTradingSet.lotSize * 2;
-                    createNewTradingSet(account, newLotSize);
-                } else if (currentTradingSet.totalProfitLoss >= account.progressRules.repeat) {
-                    // Repeat - create new set with same lot size
-                    createNewTradingSet(account, currentTradingSet.lotSize);
-                } else {
-                    // Reduce - create new set with half lot size
-                    const newLotSize = currentTradingSet.lotSize / 2;
-                    createNewTradingSet(account, newLotSize);
-                }
-            }
-
-            // Update the UI
-            loadAccount(tradingData.currentAccount);
-
-            // Reset and hide the form
-            resetTradeForm();
-            hideAddTradeForm();
-
-            // Save data to localStorage
-            saveData();
-        }
-
-        // Create New Trading Set
-        function createNewTradingSet(account, newLotSize) {
-            const newSetId = account.tradingSets.length + 1;
-
-            // Create the new trading set
-            const newSet = {
-                setId: newSetId,
-                lotSize: parseFloat(newLotSize.toFixed(3)),
-                maxLossPerTrade: account.tradingSets[0].maxLossPerTrade,
-                trades: [],
-                totalProfitLoss: 0,
-                completed: false,
-                recommendation: "Start trading - 5 trades needed"
-            };
-
-            // Add the new set to the account
-            account.tradingSets.push(newSet);
-
-            // Update completed sets count
-            account.stats.completedSets += 1;
-        }
-
-        // Update Account Statistics
-        function updateAccountStats(account) {
-            // Flatten all trades from all sets
-            const allTrades = account.tradingSets.flatMap(set => set.trades);
-
-            if (allTrades.length === 0) return;
-
-            // Calculate total P/L
-            const totalPL = allTrades.reduce((sum, trade) => sum + trade.profitLoss, 0);
-            account.stats.totalPL = totalPL;
-
-            // Calculate win rate
-            const winningTrades = allTrades.filter(trade => trade.profitLoss > 0).length;
-            account.stats.winRate = Math.round((winningTrades / allTrades.length) * 100);
-
-            // Calculate progress to goal (percentage of initial account)
-            account.stats.progressGoal = ((totalPL / account.initialValue) * 100).toFixed(2);
-
-            // Update current account value
-            account.currentValue = account.initialValue + totalPL;
-
-            // Calculate risk/reward ratio
-            const totalWinAmount = allTrades
-                .filter(trade => trade.profitLoss > 0)
-                .reduce((sum, trade) => sum + trade.profitLoss, 0);
-
-            const totalLossAmount = Math.abs(allTrades
-                .filter(trade => trade.profitLoss < 0)
-                .reduce((sum, trade) => sum + trade.profitLoss, 0));
-
-            if (totalLossAmount > 0 && winningTrades > 0) {
-                const avgWin = totalWinAmount / winningTrades;
-                const avgLoss = totalLossAmount / (allTrades.length - winningTrades);
-
-                if (avgLoss > 0) {
-                    const ratio = (avgWin / avgLoss).toFixed(1);
-                    account
+        // Initialize the dashboard when the page loads
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>

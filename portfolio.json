@@ -1,0 +1,49 @@
+{
+  "accounts": {
+    "audition": {
+      "name": "$25,000 Audition Account",
+      "currentValue": 25320.50,
+      "positions": [
+        {
+          "symbol": "EURUSD",
+          "type": "long",
+          "quantity": 0.1,
+          "entryPrice": 1.10500,
+          "currentPrice": 1.10850
+        },
+        {
+          "symbol": "GBPUSD",
+          "type": "short",
+          "quantity": 0.05,
+          "entryPrice": 1.30200,
+          "currentPrice": 1.29950
+        }
+      ],
+      "stats": {
+        "totalPL": 320.50,
+        "winRate": 65,
+        "riskReward": "1.5:1",
+        "maxDrawdown": 4.2
+      }
+    },
+    "funded": {
+      "name": "$1,000 Funded Account",
+      "currentValue": 1025.75,
+      "positions": [
+        {
+          "symbol": "USDJPY",
+          "type": "long",
+          "quantity": 0.01,
+          "entryPrice": 109.500,
+          "currentPrice": 109.850
+        }
+      ],
+      "stats": {
+        "totalPL": 25.75,
+        "winRate": 58,
+        "riskReward": "1.2:1",
+        "maxDrawdown": 2.8
+      }
+    }
+  }
+}
