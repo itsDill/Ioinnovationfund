@@ -3,26 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trader Dashboard | IO Innovation Fund</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <title>Alerts | IO Innovation Fund</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css" rel="stylesheet">
     <style>
         :root {
             --primary-color: #00bcd4;
             --secondary-color: #0097a7;
             --dark-bg: #0c0e14;
             --card-bg: #151824;
-            --card-hover: #1c2136;
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
-            --gradient-start: #00bcd4;
-            --gradient-end: #3f51b5;
             --positive: #4caf50;
             --negative: #f44336;
-            --audition-phase: #ff9800;
-            --funded-phase: #4caf50;
-            --small-account: #9c27b0;
+            --warning: #ff9800;
             --border-radius: 10px;
             --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
         }
@@ -46,7 +40,6 @@
             padding: 0 20px;
         }
 
-        /* Header - Enhanced with glass morphism */
         .dashboard-header {
             background-color: rgba(12, 14, 20, 0.8);
             backdrop-filter: blur(12px);
@@ -54,7 +47,6 @@
             top: 0;
             z-index: 1000;
             padding: 15px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
@@ -72,34 +64,44 @@
         .logo img {
             height: 38px;
             margin-right: 12px;
-            filter: drop-shadow(0 0 4px rgba(0, 188, 212, 0.5));
         }
 
         .logo h1 {
             font-size: 24px;
             font-weight: 700;
-            background: linear-gradient(45deg, var(--gradient-start), var(--gradient-end));
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-shadow: 0 0 20px rgba(0, 188, 212, 0.3);
         }
 
         .user-menu {
             display: flex;
             align-items: center;
+            gap: 15px;
         }
 
-        .user-menu img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 10px;
-            border: 2px solid var(--primary-color);
+        .account-selector {
+            position: relative;
         }
 
-        .user-menu .user-name {
-            margin-right: 15px;
-            font-weight: 500;
+        .account-selector select {
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            padding: 10px 35px 10px 15px;
+            font-size: 14px;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .account-selector i {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--primary-color);
         }
 
         .logout-btn {
@@ -108,16 +110,12 @@
             color: var(--text-secondary);
             cursor: pointer;
             transition: color 0.3s;
-            padding: 8px 12px;
-            border-radius: 6px;
         }
 
         .logout-btn:hover {
             color: var(--primary-color);
-            background-color: rgba(0, 188, 212, 0.1);
         }
 
-        /* Sidebar - Enhanced with active indicator and hover effects */
         .dashboard-layout {
             display: flex;
             min-height: calc(100vh - 70px);
@@ -128,7 +126,6 @@
             background-color: var(--card-bg);
             padding: 30px 0;
             border-right: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .nav-menu {
@@ -154,7 +151,6 @@
             margin-right: 12px;
             width: 20px;
             text-align: center;
-            font-size: 18px;
         }
 
         .nav-menu a:hover, .nav-menu a.active {
@@ -163,9 +159,149 @@
         }
 
         .nav-menu a.active {
-            background: linear-gradient(90deg, rgba(0, 188, 212, 0.2), rgba(63, 81, 181, 0.05));
             border-left: 3px solid var(--primary-color);
             font-weight: 500;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            background-color: var(--dark-bg);
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .page-header h2 {
+            font-size: 26px;
+            font-weight: 600;
+        }
+
+        .alert-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .alert-button {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .alert-button:hover {
+            background-color: rgba(0, 188, 212, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .alert-button.active {
+            background-color: rgba(0, 188, 212, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .alert-card {
+            background-color: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .alert-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .alert-title {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .alert-badge {
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-info {
+            background-color: rgba(0, 188, 212, 0.15);
+            color: var(--primary-color);
+        }
+
+        .badge-warning {
+            background-color: rgba(255, 152, 0, 0.15);
+            color: var(--warning);
+        }
+
+        .badge-danger {
+            background-color: rgba(244, 67, 54, 0.15);
+            color: var(--negative);
+        }
+
+        .badge-success {
+            background-color: rgba(76, 175, 80, 0.15);
+            color: var(--positive);
+        }
+
+        .alert-time {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .alert-content {
+            margin-bottom: 15px;
+        }
+
+        .alert-symbol {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .alert-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .alert-action-btn {
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .alert-action-btn.primary {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+        }
+
+        .alert-action-btn.secondary {
+            background-color: transparent;
+            color: var(--text-secondary);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .no-alerts {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-secondary);
         }
 
         @media (max-width: 768px) {
@@ -190,194 +326,38 @@
             }
 
             .nav-menu a {
-                padding: 10px 15px;
                 white-space: nowrap;
-                border-left: none;
-                border-bottom: 3px solid transparent;
                 border-radius: 20px;
                 margin-right: 0;
-            }
-
-            .nav-menu a:hover, .nav-menu a.active {
-                border-left: none;
-                border-bottom: none;
-            }
-
-            .nav-menu a.active {
-                background: rgba(0, 188, 212, 0.15);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
             }
 
             .page-header {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 15px;
             }
 
-            .date-selector {
-                margin-top: 15px;
+            .alert-actions {
                 width: 100%;
+                justify-content: flex-start;
             }
-
-            .account-selector {
-                margin-bottom: 15px;
-                width: 100%;
-            }
-
-            .account-selector select {
-                width: 100%;
-            }
-
-            /* Add Trade Form */
-        .add-trade-form {
-            display: none;
-            margin-top: 20px;
-            background-color: rgba(21, 24, 36, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 188, 212, 0.2);
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--text-secondary);
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 10px 15px;
-            background-color: rgba(12, 14, 20, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: var(--text-primary);
-        }
-
-        .form-buttons {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
-
-        .form-buttons button {
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .submit-button {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-        }
-
-        .cancel-button {
-            background-color: transparent;
-            color: var(--text-secondary);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .submit-button:hover {
-            background-color: var(--secondary-color);
-        }
-
-        .cancel-button:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            color: var(--text-primary);
-        }
-
-        /* Progress Rules Display */
-        .progress-rules {
-            margin-top: 20px;
-            background-color: rgba(21, 24, 36, 0.9);
-            padding: 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(0, 188, 212, 0.2);
-        }
-
-        .progress-rules h4 {
-            color: var(--primary-color);
-            margin-bottom: 15px;
-        }
-
-        .rule-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .rule-item:last-child {
-            border-bottom: none;
-        }
-
-        .rule-name {
-            color: var(--text-secondary);
-        }
-
-        .rule-value {
-            font-weight: 500;
-        }
-
-        /* Badge for number of trades */
-        .trade-count {
-            background-color: var(--primary-color);
-            color: white;
-            font-size: 12px;
-            font-weight: bold;
-            border-radius: 20px;
-            padding: 2px 8px;
-            margin-left: 10px;
-        }
-
-        /* Progress bar */
-        .progress-bar-container {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            height: 10px;
-            width: 100%;
-            margin-top: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            border-radius: 10px;
-            background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
-            transition: width 0.5s ease;
-        }
         }
     </style>
-
 </head>
 <body>
     <header class="dashboard-header">
         <div class="container header-content">
             <div class="logo">
-                <img src="/api/placeholder/80/80" alt="IO Innovation Fund Logo">
+                <img src="logo.svg" alt="IO Innovation Fund Logo">
                 <h1>IO Innovation Fund</h1>
             </div>
             <div class="user-menu">
                 <div class="account-selector">
                     <select id="accountSelect">
-                        <option value="audition">$25,000 Audition Account</option>
-                        <option value="funded">$1,000 Funded Account</option>
-                        <option value="small">$100 Starter Account</option>
+                        <option value="">Loading accounts...</option>
                     </select>
                     <i class="fas fa-chevron-down"></i>
                 </div>
-                <span class="user-name">Trader Dashboard</span>
                 <button class="logout-btn">
                     <i class="fas fa-sign-out-alt"></i> Logout
                 </button>
@@ -388,12 +368,206 @@
     <div class="dashboard-layout">
         <aside class="sidebar">
             <ul class="nav-menu">
-                <li><a href="#" class="fas fa-chart-line"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-exchange-alt"></i> Trades</a></li>
-                <li><a href="#"><i class="active"><i class="fas fa-wallet"></i> Portfolio</a></li>
-                <li><a href="#"><i class="fas fa-chart-pie"></i> Analytics</a></li>
-                <li><a href="#"><i class="fas fa-bell"></i> Alerts</a></li>
-                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
-                <li><a href="#"><i class="fas fa-file-alt"></i> Reports</a></li>
+                <li><a href="dashboard.html"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="trades.html"><i class="fas fa-exchange-alt"></i> Trades</a></li>
+                <li><a href="portfolio.html"><i class="fas fa-wallet"></i> Portfolio</a></li>
+                <li><a href="#" class="active"><i class="fas fa-bell"></i> Alerts</a></li>
+                <li><a href="settings.html"><i class="fas fa-cog"></i> Settings</a></li>
             </ul>
         </aside>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="page-header">
+                    <h2>Alerts Center</h2>
+                    <div class="alert-actions">
+                        <button class="alert-button active" data-filter="all">
+                            <i class="fas fa-bell"></i> All Alerts
+                        </button>
+                        <button class="alert-button" data-filter="price">
+                            <i class="fas fa-chart-line"></i> Price Alerts
+                        </button>
+                        <button class="alert-button" data-filter="system">
+                            <i class="fas fa-cogs"></i> System Alerts
+                        </button>
+                    </div>
+                </div>
+
+                <div id="alertsContainer">
+                    <!-- Alerts will be loaded here -->
+                    <div class="no-alerts">
+                        <i class="fas fa-bell-slash" style="font-size: 24px; margin-bottom: 10px;"></i>
+                        <p>Loading alerts...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // DOM Elements
+        const accountSelect = document.getElementById('accountSelect');
+        const alertsContainer = document.getElementById('alertsContainer');
+        const filterButtons = document.querySelectorAll('.alert-button');
+
+        // Trading Data
+        let tradingData = {};
+        let currentAccount = '';
+        let currentFilter = 'all';
+
+        // Initialize Dashboard
+        async function initDashboard() {
+            try {
+                const response = await fetch('alerts.json');
+                tradingData = await response.json();
+
+                // Populate account selector
+                populateAccountSelector();
+
+                // Set up event listeners
+                filterButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        filterButtons.forEach(b => b.classList.remove('active'));
+                        btn.classList.add('active');
+                        currentFilter = btn.dataset.filter;
+                        loadAlerts(currentAccount);
+                    });
+                });
+
+                // Load the first account by default
+                if (tradingData.accounts && Object.keys(tradingData.accounts).length > 0) {
+                    currentAccount = Object.keys(tradingData.accounts)[0];
+                    loadAlerts(currentAccount);
+                }
+            } catch (error) {
+                console.error('Error loading alerts data:', error);
+                alertsContainer.innerHTML = `
+                    <div class="no-alerts">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 24px; margin-bottom: 10px;"></i>
+                        <p>Failed to load alerts. Please try again later.</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Populate Account Selector
+        function populateAccountSelector() {
+            accountSelect.innerHTML = '';
+
+            for (const [key, account] of Object.entries(tradingData.accounts)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = account.name;
+                accountSelect.appendChild(option);
+            }
+
+            accountSelect.addEventListener('change', (e) => {
+                currentAccount = e.target.value;
+                loadAlerts(currentAccount);
+            });
+        }
+
+        // Load Alerts
+        function loadAlerts(accountKey) {
+            const account = tradingData.accounts[accountKey];
+            if (!account) return;
+
+            let alerts = account.alerts;
+
+            // Apply filter
+            if (currentFilter !== 'all') {
+                alerts = alerts.filter(alert => alert.type === currentFilter);
+            }
+
+            // Sort by date (newest first)
+            alerts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            // Update alerts container
+            if (alerts.length === 0) {
+                alertsContainer.innerHTML = `
+                    <div class="no-alerts">
+                        <i class="fas fa-bell-slash" style="font-size: 24px; margin-bottom: 10px;"></i>
+                        <p>No ${currentFilter === 'all' ? '' : currentFilter + ' '}alerts found</p>
+                    </div>
+                `;
+                return;
+            }
+
+            alertsContainer.innerHTML = '';
+            alerts.forEach(alert => {
+                const alertCard = document.createElement('div');
+                alertCard.className = 'alert-card';
+
+                // Determine badge class based on alert severity
+                let badgeClass = 'badge-info';
+                if (alert.severity === 'high') badgeClass = 'badge-danger';
+                else if (alert.severity === 'medium') badgeClass = 'badge-warning';
+                else if (alert.severity === 'low') badgeClass = 'badge-success';
+
+                alertCard.innerHTML = `
+                    <div class="alert-card-header">
+                        <div class="alert-title">
+                            <span class="alert-badge ${badgeClass}">${alert.severity}</span>
+                            ${alert.title}
+                        </div>
+                        <div class="alert-time">${formatTime(alert.timestamp)}</div>
+                    </div>
+                    <div class="alert-content">
+                        ${alert.message}
+                        ${alert.symbol ? `<span class="alert-symbol">${alert.symbol}</span>` : ''}
+                    </div>
+                    <div class="alert-actions">
+                        <button class="alert-action-btn secondary" data-id="${alert.id}">
+                            <i class="fas fa-times"></i> Dismiss
+                        </button>
+                        ${alert.action ? `
+                        <button class="alert-action-btn primary" data-id="${alert.id}">
+                            <i class="fas fa-${alert.action.icon}"></i> ${alert.action.text}
+                        </button>
+                        ` : ''}
+                    </div>
+                `;
+
+                alertsContainer.appendChild(alertCard);
+            });
+
+            // Add event listeners to action buttons
+            document.querySelectorAll('.alert-action-btn').forEach(btn => {
+                btn.addEventListener('click', () => handleAlertAction(btn.dataset.id, btn.classList.contains('primary')));
+            });
+        }
+
+        // Handle Alert Actions
+        function handleAlertAction(alertId, isPrimary) {
+            // In a real app, this would communicate with a backend
+            console.log(`Action on alert ${alertId}: ${isPrimary ? 'primary' : 'secondary'}`);
+
+            // Remove the alert from the UI
+            const alertCard = document.querySelector(`.alert-action-btn[data-id="${alertId}"]`)?.closest('.alert-card');
+            if (alertCard) {
+                alertCard.style.opacity = '0';
+                setTimeout(() => alertCard.remove(), 300);
+            }
+
+            // Show message if no alerts left
+            if (document.querySelectorAll('.alert-card').length === 0) {
+                alertsContainer.innerHTML = `
+                    <div class="no-alerts">
+                        <i class="fas fa-check-circle" style="font-size: 24px; margin-bottom: 10px; color: var(--positive);"></i>
+                        <p>All alerts handled!</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Format Time
+        function formatTime(timestamp) {
+            const date = new Date(timestamp);
+            return date.toLocaleString();
+        }
+
+        // Initialize the dashboard when the page loads
+        document.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>

@@ -3,25 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="IO Innovation Fund provides cutting-edge finance tools and insights for data-driven investment decisions.">
-    <title>IO Innovation Fund - Finance Tools & Insights</title>
+    <meta name="description" content="iO Web Solutions provides professional website development, SEO optimization, and security services.">
+    <title>iO Web Solutions - Website Development, SEO & Security</title>
     <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-color: #00bcd4;
-            --secondary-color: #0097a7;
+            --primary-color: #2563eb;
+            --secondary-color: #1d4ed8;
             --dark-bg: #121212;
-            --card-bg: #1e1e1e;
-            --text-primary: #ffffff;
-            --text-secondary: #b0b0b0;
-            --gradient-start: #00bcd4;
-            --gradient-end: #3f51b5;
+            --light-bg: #f8fafc;
+            --card-bg-dark: #1e1e1e;
+            --card-bg-light: #ffffff;
+            --text-primary-dark: #ffffff;
+            --text-secondary-dark: #b0b0b0;
+            --text-primary-light: #1e293b;
+            --text-secondary-light: #64748b;
+            --gradient-start: #2563eb;
+            --gradient-end: #1d4ed8;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3);
+            --border-color-dark: rgba(255, 255, 255, 0.1);
+            --border-color-light: rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+            --transition: all 0.3s ease;
+            --header-height: 80px;
         }
 
-       * {
+        /* Light mode variables */
+        [data-theme="light"] {
+            --background-color: var(--light-bg);
+            --text-primary: var(--text-primary-light);
+            --text-secondary: var(--text-secondary-light);
+            --card-bg: var(--card-bg-light);
+            --border-color: var(--border-color-light);
+            --shadow: var(--shadow);
+        }
+
+        /* Dark mode variables */
+        [data-theme="dark"] {
+            --background-color: var(--dark-bg);
+            --text-primary: var(--text-primary-dark);
+            --text-secondary: var(--text-secondary-dark);
+            --card-bg: var(--card-bg-dark);
+            --border-color: var(--border-color-dark);
+            --shadow: var(--shadow-dark);
+        }
+
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -29,16 +62,21 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--dark-bg);
+            background-color: var(--background-color);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+
+        .text-center {
+            text-align: center;
         }
 
         header {
@@ -48,7 +86,11 @@
             top: 0;
             z-index: 1000;
             padding: 20px 0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: var(--shadow);
+        }
+
+        [data-theme="light"] header {
+            background-color: rgba(248, 250, 252, 0.9);
         }
 
         .header-content {
@@ -79,10 +121,11 @@
         nav ul {
             display: flex;
             list-style: none;
+            align-items: center;
         }
 
         nav ul li {
-            margin-left: 30px;
+            margin-left: 20px;
         }
 
         nav ul li a {
@@ -90,7 +133,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 16px;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             position: relative;
         }
 
@@ -108,10 +151,62 @@
             background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
         }
 
+        .theme-switch {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: var(--radius);
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+        }
+
+        .theme-switch i {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-left: 20px;
+        }
+
+        /* Hero Section */
         .hero {
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
-            background-image: radial-gradient(circle at 50% 50%, rgba(0, 188, 212, 0.1), transparent 70%);
+            background-image: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.1), transparent 70%);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            border: 5px solid var(--primary-color);
+            box-shadow: var(--shadow);
         }
 
         .hero h1 {
@@ -127,63 +222,43 @@
             font-size: 18px;
             color: var(--text-secondary);
             max-width: 700px;
-            margin: 0 auto 50px;
-        }
-
-        /* Main Content Styles */
-        main {
-            margin-top: var(--header-height);
-            padding-bottom: 50px;
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTQ0MCIgaGVpZ2h0PSI1MDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiIGlkPSJhIj48c3RvcCBzdG9wLW9wYWNpdHk9Ii41IiBvZmZzZXQ9IjAlIi8+PHN0b3Agc3RvcC1vcGFjaXR5PSIwIiBvZmZzZXQ9IjEwMCUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBkPSJNMTQ0MCA1MDBjLTI5My0xNi02MjctNTQtMTQ0MCAwVjBjODQwLTE1LjcgMTEwNy02LjMgMTQ0MCAweiIgZmlsbD0idXJsKCNhKSIvPjwvc3ZnPg==');
-            background-size: cover;
-            background-position: bottom;
-            opacity: 0.3;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
             margin-bottom: 30px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Stats Bar */
         .stats-bar {
-            background-color: var(--card-color);
+            background-color: var(--card-bg);
             padding: 20px 0;
             box-shadow: var(--shadow);
             margin-bottom: 50px;
+            border: 1px solid var(--border-color);
         }
 
         .stats-container {
@@ -204,42 +279,13 @@
         }
 
         .stat-label {
-            color: var(--light-text);
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
-        /* Button Styles */
-        .btn {
-            display: inline-block;
-            padding: 12px 24px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: var(--radius);
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .btn:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        /* Section Styles */
+        /* Services Section */
         section {
-            padding: 60px 0;
+            padding: 80px 0;
         }
 
         section h2 {
@@ -247,6 +293,7 @@
             font-size: 2.2rem;
             margin-bottom: 40px;
             position: relative;
+            color: var(--primary-color);
         }
 
         section h2::after {
@@ -258,158 +305,124 @@
             margin: 15px auto 0;
         }
 
-        /* Tool Cards */
-        .tool-grid {
+        .section-description {
+            text-align: center;
+            max-width: 700px;
+            margin: -20px auto 30px;
+            color: var(--text-secondary);
+        }
+
+        .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
 
-        .tool-card {
-            background-color: var(--card-color);
+        .service-card {
+            background-color: var(--card-bg);
             border-radius: var(--radius);
-            overflow: hidden;
+            padding: 30px;
             box-shadow: var(--shadow);
-            transition: all 0.3s ease;
+            text-align: center;
+            transition: var(--transition);
             border: 1px solid var(--border-color);
         }
 
-        .tool-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
 
-        .tool-image {
-            height: 160px;
-            background-color: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tool-image i {
-            font-size: 48px;
-            color: var(--accent-color);
-        }
-
-        .tool-content {
-            padding: 25px;
-        }
-
-        .tool-card h3 {
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .tool-card p {
-            color: var(--light-text);
-            margin-bottom: 20px;
-        }
-
-        .tool-link {
-            display: inline-flex;
-            align-items: center;
-            font-weight: 600;
-        }
-
-        .tool-link i {
-            margin-left: 5px;
-            transition: transform 0.3s ease;
-        }
-
-        .tool-link:hover i {
-            transform: translateX(5px);
-        }
-
-        /* Blog & Guides */
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 30px;
-        }
-
-        .blog-post, .how-to-guide {
-            background-color: var(--card-color);
-            border-radius: var(--radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-
-        .post-image {
-            height: 180px;
-            background-color: #e5e7eb;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .post-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .blog-post:hover .post-image img, .how-to-guide:hover .post-image img {
-            transform: scale(1.05);
-        }
-
-        .post-date {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background-color: var(--accent-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: var(--radius);
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .post-content {
-            padding: 25px;
-        }
-
-        .post-category {
-            display: inline-block;
-            padding: 4px 8px;
-            background-color: rgba(37, 99, 235, 0.1);
+        .service-card i {
+            font-size: 3rem;
             color: var(--primary-color);
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            margin-bottom: 10px;
-        }
-
-        .blog-post h3, .how-to-guide h3 {
-            margin-bottom: 15px;
-            font-size: 1.3rem;
-        }
-
-        .blog-post p, .how-to-guide p {
-            color: var(--light-text);
             margin-bottom: 20px;
         }
 
-        .read-more {
-            display: inline-flex;
-            align-items: center;
-            font-weight: 600;
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: var(--text-primary);
         }
 
-        .read-more i {
-            margin-left: 5px;
-            transition: transform 0.3s ease;
+        .service-card p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
         }
 
-        .read-more:hover i {
-            transform: translateX(5px);
+        /* Pricing Section */
+        .pricing {
+            background-color: var(--card-bg);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            margin-bottom: 60px;
+        }
+
+        .pricing-card {
+            background-color: var(--background-color);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid var(--border-color);
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--primary-color);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
         }
 
         /* CTA Section */
         .cta {
-            background-color: var(--secondary-color);
+            background-color: var(--primary-color);
             color: white;
             text-align: center;
             padding: 80px 0;
@@ -418,10 +431,11 @@
         .cta h2 {
             font-size: 2.2rem;
             margin-bottom: 20px;
+            color: white;
         }
 
         .cta h2::after {
-            background-color: var(--accent-color);
+            background-color: white;
         }
 
         .cta p {
@@ -445,7 +459,7 @@
         }
 
         .newsletter-form button {
-            background-color: var(--accent-color);
+            background-color: var(--dark-bg);
             color: white;
             border: none;
             padding: 0 20px;
@@ -456,33 +470,110 @@
         }
 
         .newsletter-form button:hover {
-            background-color: #0ea5e9;
+            background-color: #000;
         }
 
-        /* Testimonials */
-        .testimonials {
-            background-color: #f1f5f9;
+        /* Tech Skills */
+        .tech-showcase {
+            text-align: center;
         }
 
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        .tech-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
             gap: 30px;
+            margin-top: 30px;
         }
 
-        .testimonial-card {
-            background-color: var(--card-color);
-            border-radius: var(--radius);
+        .tech-icon {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .tech-icon:hover {
+            transform: scale(1.2);
+            color: var(--secondary-color);
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--card-bg);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 50px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .contact-item h4 {
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .contact-item p {
+            color: var(--text-secondary);
+        }
+
+        .contact-form {
+            background-color: var(--background-color);
             padding: 30px;
+            border-radius: 10px;
             box-shadow: var(--shadow);
-            position: relative;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            background-color: var(--card-bg);
+            color: var(--text-primary);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
         }
 
         /* Footer */
         footer {
-            background-color: rgba(18, 18, 18, 0.9);
+            background-color: var(--card-bg);
             color: white;
             padding: 60px 0 30px;
+            border-top: 1px solid var(--border-color);
         }
 
         .footer-content {
@@ -493,7 +584,7 @@
         }
 
         .footer-column h3 {
-            color: white;
+            color: var(--text-primary);
             margin-bottom: 20px;
             font-size: 1.2rem;
         }
@@ -507,12 +598,13 @@
         }
 
         .footer-column ul li a {
-            color: #cbd5e1;
+            color: var(--text-secondary);
             transition: color 0.3s ease;
+            text-decoration: none;
         }
 
         .footer-column ul li a:hover {
-            color: white;
+            color: var(--primary-color);
         }
 
         .social-media {
@@ -527,29 +619,90 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: var(--background-color);
             border-radius: 50%;
-            color: white;
+            color: var(--text-primary);
             transition: all 0.3s ease;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
         }
 
         .social-media a:hover {
             background-color: var(--primary-color);
+            color: white;
             transform: translateY(-3px);
         }
 
         .footer-bottom {
             text-align: center;
             padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #000000;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-secondary);
             font-size: 0.9rem;
         }
 
+        .footer-links {
+            margin-top: 10px;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
         /* Responsive Styles */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 48px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background-color: var(--card-bg);
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: var(--shadow);
+                border: 1px solid var(--border-color);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0;
+                margin-bottom: 15px;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 36px;
             }
 
             .stats-container {
@@ -566,47 +719,22 @@
             }
 
             .newsletter-form input {
-                border-radius: var(--radius) var(--radius) 0 0;
-                margin-bottom: 1px;
+                border-radius: var(--radius);
+                margin-bottom: 10px;
             }
 
             .newsletter-form button {
-                border-radius: 0 0 var(--radius) var(--radius);
-                padding: 12px;
-            }
-
-            nav {
-                display: none;
-                position: absolute;
-                top: var(--header-height);
-                left: 0;
-                width: 100%;
-                background-color: var(--card-color);
-                box-shadow: var(--shadow);
-            }
-
-            nav.active {
-                display: block;
-            }
-
-            nav ul {
-                flex-direction: column;
-                padding: 20px;
-            }
-
-            nav ul li {
-                margin: 0;
-                margin-bottom: 15px;
-            }
-
-            .mobile-menu-btn {
-                display: block;
+                border-radius: var(--radius);
             }
         }
 
         @media (max-width: 576px) {
             section h2 {
                 font-size: 1.8rem;
+            }
+
+            .hero h1 {
+                font-size: 28px;
             }
 
             .hero p {
@@ -616,23 +744,39 @@
             .stat-item {
                 width: 100%;
             }
+
+            .btn {
+                display: block;
+                width: 100%;
+                margin-right: 0;
+                text-align: center;
+            }
         }
     </style>
 </head>
-<body>
+<body data-theme="dark">
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <img src="assets/images/DALL·E 2024-10-14 01.56.20 - A professional logo design for 'Io Innovation Fund,' incorporating a subtle play on 'I' and 'O' resembling '1' and '0' to reference computer code, whi.webp" alt="iO Innovation Fund Logo">
-                    <h1>iO Innovation Fund</h1>
+                    <img src="/api/placeholder/40/40" alt="iO Web Solutions Logo">
+                    <h1>iO Web Solutions</h1>
                 </div>
                 <nav>
-                    <ul>
-                        <li><a href="index.html" class="active">Home</a></li>
+                    <ul id="nav-menu">
+                        <li><a href="#home" class="active">Home</a></li>
+                        <li><a href="projects.html">Services</a></li>
                         <li><a href="blog.html">Blog</a></li>
-                        <li><a href="data.html">Tools</a></li>
+                        <li><a href="login.html">Client</a></li>
+                        <li>
+                            <div class="theme-switch" id="theme-switch">
+                                <i class="fas fa-moon"></i>
+                            </div>
+                        </li>
                     </ul>
+                    <div class="hamburger" id="hamburger">
+                        <i class="fas fa-bars"></i>
+                    </div>
                 </nav>
             </div>
         </div>
@@ -640,11 +784,21 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="container hero-content">
-                <h1>Empower Your Financial Decisions</h1>
-                <p>Unlock the power of data-driven insights with our free cutting-edge finance tools and reports. Stay ahead in the market with precision and confidence.</p>
-                <a href="login.html" class="btn">Explore Tools <i class="fas fa-arrow-right"></i></a>
+        <section id="home" class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1>Professional Web Solutions</h1>
+                        <p>We build fast, secure, and SEO-optimized websites that help your business grow online. Our comprehensive services cover everything from development to security and search engine optimization.</p>
+                        <div>
+                            <a href="#pricing" class="btn">View Pricing</a>
+                            <a href="#contact" class="btn btn-outline">Get a Quote</a>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <img src="/api/placeholder/400/400" alt="Web Development">
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -652,163 +806,324 @@
         <div class="stats-bar">
             <div class="container stats-container">
                 <div class="stat-item">
-                    <div class="stat-number">10,000+</div>
-                    <div class="stat-label">Active Users</div>
+                    <div class="stat-number">200+</div>
+                    <div class="stat-label">Websites Built</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">500+</div>
-                    <div class="stat-label">Hedge Funds Tracked</div>
+                    <div class="stat-number">100%</div>
+                    <div class="stat-label">Client Satisfaction</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-number">98%</div>
-                    <div class="stat-label">User Satisfaction</div>
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
                 </div>
             </div>
         </div>
 
-        <!-- Featured Tools Section -->
-        <section class="featured-tools">
+        <!-- Services Section -->
+        <section id="services" class="services">
             <div class="container">
-                <h2>Powerful Financial Tools</h2>
-                <p class="section-description" style="text-align: center; max-width: 700px; margin: -20px auto 30px; color: var(--light-text);">
-                    Access professional-grade financial analysis tools designed to give you an edge in today's markets.
-                </p>
-                <div class="tool-grid">
-                    <div class="tool-card">
-                        <div class="tool-image">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="tool-content">
-                            <h3>13F Filings Analyzer</h3>
-                            <p>Track and analyze hedge fund filings with ease. Gain insights into top holdings and market trends.</p>
-                            <a href="13F-filings.html" class="tool-link">Learn More <i class="fas fa-chevron-right"></i></a>
-                        </div>
+                <h2>Our Services</h2>
+                <p class="section-description">We offer comprehensive web solutions to meet all your online needs</p>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Website Development</h3>
+                        <p>Custom, responsive websites built with modern technologies for optimal performance and user experience.</p>
                     </div>
-                    <div class="tool-card">
-                        <div class="tool-image">
-                            <i class="fas fa-file-alt"></i>
-                        </div>
-                        <div class="tool-content">
-                            <h3>Annual Reports Summaries</h3>
-                            <p>Get AI-powered summaries of annual reports to quickly understand company performance and outlook.</p>
-                            <a href="market-signals.html" class="tool-link">Learn More <i class="fas fa-chevron-right"></i></a>
-                        </div>
+                    <div class="service-card">
+                        <i class="fas fa-search"></i>
+                        <h3>SEO Optimization</h3>
+                        <p>Improve your search rankings and online visibility with our proven SEO strategies and techniques.</p>
                     </div>
-                    <div class="tool-card">
-                        <div class="tool-image">
-                            <i class="fas fa-chart-pie"></i>
-                        </div>
-                        <div class="tool-content">
-                            <h3>Nasdaq Signals</h3>
-                            <p>Transform complex financial data into interactive, easy-to-understand signals for better decision-making.</p>
-                            <a href="data-visualizer.html" class="tool-link">Learn More <i class="fas fa-chevron-right"></i></a>
-                        </div>
+                    <div class="service-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Security Services</h3>
+                        <p>Protect your website from threats with our comprehensive security solutions and monitoring.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-
-        <!-- Blog & How-To Guides Section -->
-        <section class="blog-guides">
+        <!-- Pricing Section -->
+        <section id="pricing" class="pricing">
             <div class="container">
-                <h2>Latest Insights & How-To Guides</h2>
-                <div class="content-grid">
-                    <div class="blog-post">
-                        <div class="post-image">
-                            <img src="/api/placeholder/400/200" alt="Blog Post Image">
-                            <div class="post-date">Mar 2, 2025</div>
-                        </div>
-                        <div class="post-content">
-                            <span class="post-category">Investment</span>
-                            <h3>Understanding 13F Filings: A Beginner's Guide</h3>
-                            <p>Learn how to interpret hedge fund filings and use them to inform your investment strategy.</p>
-                            <a href="ellington.html" class="read-more">Read More <i class="fas fa-chevron-right"></i></a>
-                        </div>
+                <h2>Simple Pricing</h2>
+                <p class="section-description">Choose the package that fits your needs and budget</p>
+                <div class="pricing-grid">
+                    <div class="pricing-card">
+                        <h3>Basic Website</h3>
+                        <div class="price">$999<span> one-time</span></div>
+                        <ul class="pricing-features">
+                            <li>5 Page Custom Website</li>
+                            <li>Mobile Responsive Design</li>
+                            <li>Basic SEO Setup</li>
+                            <li>1 Month Support</li>
+                            <li>Contact Form</li>
+                        </ul>
+                        <a href="#contact" class="btn">Get Started</a>
                     </div>
-                    <div class="blog-post">
-                        <div class="post-image">
-                            <img src="/api/placeholder/400/200" alt="Blog Post Image">
-                            <div class="post-date">Feb 28, 2025</div>
-                        </div>
-                        <div class="post-content">
-                            <span class="post-category">Strategy</span>
-                            <h3>5 Tips for Using Market Signals Effectively</h3>
-                            <p>Discover how to leverage market signals to maximize your trading success.</p>
-                            <a href="blog-post-2.html" class="read-more">Read More <i class="fas fa-chevron-right"></i></a>
-                        </div>
+                    <div class="pricing-card popular">
+                        <div class="popular-badge">Most Popular</div>
+                        <h3>Website + SEO</h3>
+                        <div class="price">$1,999<span> one-time</span></div>
+                        <ul class="pricing-features">
+                            <li>Everything in Basic</li>
+                            <li>10 Page Website</li>
+                            <li>Advanced SEO Optimization</li>
+                            <li>3 Months SEO Support</li>
+                            <li>Google Analytics Setup</li>
+                        </ul>
+                        <a href="#contact" class="btn">Get Started</a>
                     </div>
-                    <div class="how-to-guide">
-                        <div class="post-image">
-                            <img src="/api/placeholder/400/200" alt="How-To Guide Image">
-                            <div class="post-date">Feb 20, 2025</div>
-                        </div>
-                        <div class="post-content">
-                            <span class="post-category">Tutorial</span>
-                            <h3>How to Use Our Data Visualizer</h3>
-                            <p>A step-by-step guide to creating stunning financial data visualizations.</p>
-                            <a href="login.html" class="read-more">Read More <i class="fas fa-chevron-right"></i></a>
-                        </div>
+                    <div class="pricing-card">
+                        <h3>Website + Security</h3>
+                        <div class="price">$1,799<span> one-time</span></div>
+                        <ul class="pricing-features">
+                            <li>Everything in Basic</li>
+                            <li>SSL Certificate</li>
+                            <li>Security Hardening</li>
+                            <li>6 Months Security Monitoring</li>
+                            <li>Malware Protection</li>
+                        </ul>
+                        <a href="#contact" class="btn">Get Started</a>
                     </div>
-                </div>
-                <div style="text-align: center; margin-top: 40px;">
-                    <a href="blog.html" class="btn btn-outline">View All Articles</a>
+                    <div class="pricing-card">
+                        <h3>Complete Package</h3>
+                        <div class="price">$2,999<span> one-time</span></div>
+                        <ul class="pricing-features">
+                            <li>Everything in Website + SEO</li>
+                            <li>Everything in Website + Security</li>
+                            <li>Up to 15 Pages</li>
+                            <li>1 Year Support</li>
+                            <li>Priority Updates</li>
+                        </ul>
+                        <a href="#contact" class="btn">Get Started</a>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Call-to-Action Section -->
+        <!-- Tech Skills -->
+        <section class="tech-showcase">
+            <div class="container">
+                <h2>Our Technology Stack</h2>
+                <p class="section-description">We use modern technologies to build fast, secure websites</p>
+                <div class="tech-icons">
+                    <i class="fab fa-html5 tech-icon" title="HTML5"></i>
+                    <i class="fab fa-css3-alt tech-icon" title="CSS3"></i>
+                    <i class="fab fa-js tech-icon" title="JavaScript"></i>
+                    <i class="fab fa-react tech-icon" title="React"></i>
+                    <i class="fab fa-node-js tech-icon" title="Node.js"></i>
+                    <i class="fas fa-database tech-icon" title="Databases"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
         <section class="cta">
             <div class="container">
-                <h2>Ready to Take Control of Your Financial Future?</h2>
-                <p>Join thousands of users who trust IO Innovation Fund for accurate, real-time financial insights.</p>
-                <a href="signup.html" class="btn">Sign Up Now <i class="fas fa-user-plus"></i></a>
+                <h2>Ready to Build Your Website?</h2>
+                <p>Get in touch today to discuss your project and get a free consultation</p>
+                <a href="#contact" class="btn">Contact Us Now</a>
+            </div>
+        </section>
 
-                <div class="newsletter-form">
-                    <input type="email" placeholder="Enter your email address">
-                    <button type="submit"><i class="fas fa-paper-plane"></i> Subscribe</button>
+        <!-- Contact Section -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <h2>Get In Touch</h2>
+                <p class="section-description">Have questions or ready to start your project? We're here to help</p>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h4>Email</h4>
+                                <p>info@iowebsolutions.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h4>Office</h4>
+                                <p>123 Web St, San Francisco, CA 94101</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
-   <footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-column">
-                <h3>About Us</h3>
-                <p style="color: #cbd5e1; margin-bottom: 20px;">IO Innovation Fund provides cutting-edge financial tools to help investors make data-driven decisions.</p>
-                <div class="social-media">
-                    <a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a>
-                    <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://facebook.com/yourprofile" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://instagram.com/yourprofile" target="_blank"><i class="fab fa-instagram"></i></a>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>iO Web Solutions</h3>
+                    <p>Professional web development, SEO, and security services to help your business succeed online.</p>
+                    <div class="social-media">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#">Website Development</a></li>
+                        <li><a href="#">SEO Optimization</a></li>
+                        <li><a href="#">Security Services</a></li>
+                        <li><a href="#">Maintenance</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-column">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="/services">Our Services</a></li>
-                    <li><a href="/portfolio">Portfolio</a></li>
-                    <li><a href="/insights">Market Insights</a></li>
-                    <li><a href="/resources">Resources</a></li>
-                    <li><a href="/contact">Contact Us</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Contact Info</h3>
-                <p><i class="fas fa-map-marker-alt"></i> 123 Finance Street, New York, NY 10001</p>
-                <p><i class="fas fa-phone"></i> (555) 123-4567</p>
-                <p><i class="fas fa-envelope"></i> info@ioinnovationfund.com</p>
+            <div class="footer-bottom">
+                <p>&copy; 2025 iO Web Solutions. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Sitemap</a>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 IO Innovation Fund. All Rights Reserved.</p>
-            <div class="footer-links">
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
-                <a href="/disclaimer">Disclaimer</a>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                navMenu.classList.remove('active');
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Active Link Highlighting
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Theme Toggle
+        const themeSwitch = document.getElementById('theme-switch');
+        const themeIcon = themeSwitch.querySelector('i');
+        const body = document.body;
+
+        // Check for saved theme preference or use preferred color scheme
+        const currentTheme = localStorage.getItem('theme') ||
+                            (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+
+        // Apply the current theme
+        body.setAttribute('data-theme', currentTheme);
+        updateThemeIcon(currentTheme);
+
+        themeSwitch.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            if (theme === 'dark') {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        }
+
+        // Form Submission
+        const contactForm = document.getElementById('contactForm');
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Here you would typically send the data to a server
+            console.log('Form submitted:', { name, email, message });
+
+            // Show success message
+            alert('Thank you for your message! We will get back to you soon.');
+
+            // Reset form
+            contactForm.reset();
+        });
+    </script>
+</body>
+</html>
