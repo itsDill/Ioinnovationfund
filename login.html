@@ -245,32 +245,38 @@
                 </button>
             </div>
 
-            <p class="register-link">
-                Don't have an account? <a href="funding.html">Sign up</a>
-            </p>
+
         </div>
     </div>
 
     <script>
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-            const correctEmail = "";
-    const correctPassword = "";
+    // Set your credentials here
+    const correctEmail = "dillynvermeulen@gmail.com";
+    const correctPassword = "12345";
 
     // Check if they match
     if (email === correctEmail && password === correctPassword) {
         // Successful login - redirect
-        window.location.href = "funding.html"; // Replace with your target page
+        window.location.href = "funding.html"; // Changed to dashboard.html
     } else {
-        // Show error message
-        document.getElementById('errorMessage').textContent = "Invalid email or password!";
+        // Create error message if it doesn't exist
+        let errorMessage = document.getElementById('errorMessage');
+        if (!errorMessage) {
+            errorMessage = document.createElement('div');
+            errorMessage.id = 'errorMessage';
+            errorMessage.style.color = '#f44336';
+            errorMessage.style.marginTop = '10px';
+            errorMessage.style.fontSize = '14px';
+            document.getElementById('loginForm').appendChild(errorMessage);
+        }
+        errorMessage.textContent = "Invalid email or password!";
     }
 });
-
-        });
     </script>
 </body>
 </html>
